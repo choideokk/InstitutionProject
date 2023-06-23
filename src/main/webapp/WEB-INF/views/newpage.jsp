@@ -4,10 +4,13 @@
 <!DOCTYPE html>
 <head>
     <title>New Page</title>
+    
 </head>
 <body>
-    <c:forEach var="value" items="${values}">
-		<p>${value.rsvtTime}</p>
-	</c:forEach>
+	<!-- <form action="reservationCalendar" method="post">  -->
+	<form action="Calendar" method="post">
+    	<input type="text" name="rsvfnm" value="Main Gym">
+    <button type="submit">조회하기</button>
+</form>
 </body>
 </html>

@@ -9,7 +9,7 @@ public class ReservationCalendarDto {
 	int rsvtNo;
 	Date rgsrDate;
 	Date deadDate;
-	String ddDate;
+	String dDate;
 	int rsvtTime;
 	String rsrcId;
 	String rsvfNm;

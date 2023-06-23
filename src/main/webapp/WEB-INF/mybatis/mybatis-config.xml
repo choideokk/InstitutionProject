@@ -10,7 +10,8 @@
     </settings>
 
     <typeAliases>
-<typeAlias type="com.fc.dto.reservationCalendar.ReservationCalendarDto" alias="ReservationCalendarDto"/>
+		<typeAlias type="com.fc.dto.reservationCalendar.ReservationCalendarDto" alias="ReservationCalendarDto"/>
+		<typeAlias type="com.fc.dto.board.BoardDto" alias="BoardDto"/>
     </typeAliases>
 
 </configuration>

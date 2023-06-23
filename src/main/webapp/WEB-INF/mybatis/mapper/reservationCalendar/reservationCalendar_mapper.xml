@@ -7,10 +7,13 @@
 <mapper namespace="reservationCalendar_mapper">
 	
 <select id="select_reservation_list" resultType="ReservationCalendarDto">
-    SELECT TO_CHAR(dDate, 'YYYYMMDD') AS ddDate,
-           rsvtTime
+    SELECT rsvtNo,
+           rsvtTime,
+           rsrcId,
+           status,
+           totalPeopleCnt
     FROM reservation_info
-    WHERE status = '1'
+    WHERE rsvfNm = #{rsvfnm} AND category = #{category} AND dDate = #{date}
 </select>
 	
 </mapper>

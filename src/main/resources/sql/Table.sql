@@ -70,14 +70,13 @@ CREATE TABLE facility_info_detail (
     status Number, -- 상태
     approval  VARCHAR2(2)   --담당자 승인여부
     );
-    
-
-   
    
    select * from reservation_info;
     
-    
-    
+   INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, dDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, participant_id4, status, approval) 
+VALUES (2, TO_DATE('2023-06-21','YYYY-MM-DD'), TO_DATE('2023-06-22','YYYY-MM-DD'), TO_DATE('2023-06-25','YYYY-MM-DD'), 1200, 'userId', 'Main Gym', 'Football', 4, 'participant1', 'participant2', 'participant3', 'participant4', 1, 'Y');
+ 
+  COMMIT;
     
     
 --회원정보테이블
@@ -113,7 +112,7 @@ CREATE TABLE MEMBER
     );
     
 
-
+select * from board_infos;
 
 
 
