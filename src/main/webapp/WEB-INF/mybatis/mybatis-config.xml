@@ -10,9 +10,7 @@
     </settings>
 
     <typeAliases>
- 									<!--예시-->
-<!--     	<typeAlias type="com.fc.dto.user.UserDto" alias="UserDto"/> -->
-<!--     	<typeAlias type="com.fc.dto.user.Boardto" alias="UserDto"/> -->
+		<typeAlias type="com.fc.dto.board.BoardDto" alias="BoardDto"/>
     </typeAliases>
 
 </configuration>

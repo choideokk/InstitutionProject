@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="board_mapper">
+
+	<insert id="insert_contents" parameterType="BoardDto">
+
+	insert into board_infos(title, content, writer) values (#{title}, #{content}, #{writer})
+
+
+	</insert>
+
+	
+	<select id="list_contents" resultType="BoardDto"  >
+		select postno,title,writer,
+		updatedate,changedate,viewcnt 
+		from board_infos		
+
+	</select> 
+	
+	<select id="list_view" resultType="BoardDto">
+		select postno,title,writer,content,
+		updatedate,changedate
+		from board_infos where postno=#{postno}
+
+	</select>
+	
+	
+	<select id="list_count" resultType="BoardDto">
+		update board_infos
+		set viewcnt = viewcnt + 1
+		where postno = #{bno}
+	</select>
+	
+ <update id="list_update" parameterType="BoardDto">
+		UPDATE board_infos
+		   SET TITLE    =   #{title},
+		   	   CONTENT  =   #{content},
+		   	   changedate = sysdate
+		 WHERE postno = #{postno} 
+	</update>
+	
+	
+	<delete id="list_delete" parameterType="int">
+		DELETE 
+		  FROM board_infos
+		 WHERE postno = #{postno}
+	</delete>
+	
+	
+
+
+
+
+</mapper>
