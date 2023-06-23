@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
- 	<h1>test page</h1>
-
+	<h3 style="color: red;">잘못된 페이지!!</h3>
 </body>
 </html>

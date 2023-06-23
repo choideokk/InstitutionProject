@@ -34,7 +34,7 @@ CREATE TABLE facility_info_detail (
 	usePrpse VARCHAR2(1000),
 	atpn VARCHAR2(1000),
 	lcInf VARCHAR2(1000),
-	area NUMBER(1000),
+	area NUMBER(38),
 	inqTag VARCHAR2(1000),
 	lossYn VARCHAR2(1000),
 	amt1 NUMBER(10),
@@ -53,58 +53,44 @@ CREATE TABLE facility_info_detail (
 	lcInsttNm VARCHAR2(1000)
 );
 
---예약정보테이블
---예약번호
---등록일
---마감일
---사용일
---시간 ( 09:00 ~ 10:00 이면 테이블상 9로 표시, 10:00~11:00이면 10으로 표시)
---등록 유저 (예약자)
---사용 시설
---종목 
---참가자
---모집인원
---상태
---담당자 승인
-    CREATE TABLE reservation_info (
-    rsvtNo Number,
-    rgsrDate Date,
-    deadDate Date,
-    dDate Date,
-    rsvtTime Number,
-    rsrcNm VARCHAR2(1000),
-    category VARCHAR2(500),
-    participant VARCHAR2(500),
-    totalPeopleCnt Number,
-    status Number,
-    approval  VARCHAR2(2)
+  CREATE TABLE reservation_info (
+    rsvtNo Number PRIMARY KEY,  --예약번호
+    rgsrDate Date,  --등록일
+    deadDate Date,  --마감일
+    dDate Date,  --사용하는 날
+    rsvtTime Number,   --사용하는 시간
+    rsrcId VARCHAR2(1000) UNIQUE,  -- 개설자 아이디
+    rsvfNm VARCHAR2(1000), --시설이름
+    category VARCHAR2(500),  -- 종목
+    totalPeopleCnt Number,  -- 참가 인원 숫자
+    participant_id1 VARCHAR2(100),  -- 참가자1
+    participant_id2 VARCHAR2(100),  -- 참가자2
+    participant_id3 VARCHAR2(100),  -- 참가자3
+    participant_id4 VARCHAR2(100),  --참가자4
+    status Number, -- 상태
+    approval  VARCHAR2(2)   --담당자 승인여부
     );
+   
+   select * from reservation_info;
     
-    DROP TABLE reservation_info;
-
-
+   INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, dDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, participant_id4, status, approval) 
+VALUES (2, TO_DATE('2023-06-21','YYYY-MM-DD'), TO_DATE('2023-06-22','YYYY-MM-DD'), TO_DATE('2023-06-25','YYYY-MM-DD'), 1200, 'userId', 'Main Gym', 'Football', 4, 'participant1', 'participant2', 'participant3', 'participant4', 1, 'Y');
+ 
+  COMMIT;
+    
+    
 --회원정보테이블
-CREATE TABLE "SCOTT"."MEMBER" 
-   ( "MEMBER_NO" NUMBER, 
-	"LOGIN_ID" VARCHAR2(30 BYTE), 
-	"PASSWORD" VARCHAR2(30 BYTE), 
-	"MEMBER_NAME" VARCHAR2(30 BYTE), 
-	"JOIN_DATE" DATE DEFAULT SYSDATE,
-    "USER_CODE" VARCHAR2(6 BYTE),
-    "POINT" NUMBER,
-    "REPORT_COUNT" NUMBER default 0
+CREATE TABLE MEMBER
+   ( MEMBER_NO NUMBER, 
+   LOGIN_ID VARCHAR2(30 BYTE), 
+   PASSWORD VARCHAR2(30 BYTE), 
+   MEMBER_NAME VARCHAR2(30 BYTE), 
+   JOIN_DATE DATE DEFAULT SYSDATE,
+   USER_CODE VARCHAR2(6 BYTE),
+    POINT NUMBER,
+    REPORT_COUNT NUMBER default 0
    );
-
-   COMMENT ON COLUMN "SCOTT"."MEMBER"."MEMBER_NO" IS '회원번호';
-   COMMENT ON COLUMN "SCOTT"."MEMBER"."LOGIN_ID" IS '로그인 아이디';
-   COMMENT ON COLUMN "SCOTT"."MEMBER"."PASSWORD" IS '로그인 비밀번호';
-   COMMENT ON COLUMN "SCOTT"."MEMBER"."MEMBER_NAME" IS '회원이름';
-   COMMENT ON COLUMN "SCOTT"."MEMBER"."JOIN_DATE" IS '가입날짜';
-   COMMENT ON COLUMN "SCOTT"."MEMBER"."USER_CODE" IS '유형';
-   COMMENT ON COLUMN "SCOTT"."MEMBER"."POINT" IS '포인트';
-   COMMENT ON COLUMN "SCOTT"."MEMBER"."REPORT_COUNT" IS '신고횟수';
-
-
+   
 --게시판테이블
 --글번호
 --작성자(아이디)
@@ -124,6 +110,15 @@ CREATE TABLE "SCOTT"."MEMBER"
         report Number,
         viewCnt Number
     );
+    
+
+select * from board_infos;
+
+
+
+
+
+
 
 
 --레슨테이블1
@@ -139,6 +134,9 @@ CREATE TABLE LESSON (
 		ON DELETE SET NULL,
   possible VARCHAR2(10) DEFAULT '예약가능' -- 예약 가능한 날
 );
+
+select *
+from LESSON;
 
 
 --레슨테이블2

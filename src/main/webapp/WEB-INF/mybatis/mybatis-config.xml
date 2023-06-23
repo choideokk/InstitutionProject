@@ -7,12 +7,14 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="jdbcTypeForNull" value="VARCHAR" />
+    	<setting name="callSettersOnNulls" value="true"/>
+    	<setting name="returnInstanceForEmptyRow" value="true"/>
     </settings>
 
     <typeAliases>
- 									<!--예시-->
-<!--     	<typeAlias type="com.fc.dto.user.UserDto" alias="UserDto"/> -->
-<!--     	<typeAlias type="com.fc.dto.user.Boardto" alias="UserDto"/> -->
+		<typeAlias type="com.fc.dto.facility.FacilityDto" alias="FacilityDto"/>
+<!--    <typeAlias type="com.fc.dto.user.UserDto" alias="UserDto"/> -->
+<!--    <typeAlias type="com.fc.dto.user.Boardto" alias="UserDto"/> -->
     </typeAliases>
 
 </configuration>
