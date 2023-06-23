@@ -34,12 +34,15 @@ public class MapController {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		try {
+			// list를 JSON으로
+			System.out.println(fcList);
 			jsonList = mapper.writeValueAsString(fcList);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		model.addAttribute("fcList", jsonList);
+		model.addAttribute("parsedList", jsonList);
+		model.addAttribute("fcList", fcList);
 		
 		return "map/map";
 	}

@@ -20,6 +20,25 @@ CREATE TABLE facility_info (
  imeFileUrlAddr VARCHAR2(1000)
 );
 
+INSERT INTO facility_info VALUES ('EE25M4616164', '실내체육관 (충청연수원)', '31048', '충남 천안시 서북구 직산읍 남산2길 41',
+'충청연수원', '36.882937', '127.173357', 'https://www.eshare.go.kr/UserPortal/Upv/156534/fileDetail.do?file_sn=1&thumb_yn=Y', 'http://www.eshare.go.kr/..');
+
+INSERT INTO facility_info VALUES ('EE25K0036224', '운동장 (충청연수원)', '31048', '충남 천안시 서북구 직산읍 남산2길 41',
+'충청연수원', '36.883234', '127.173284', 'https://www.eshare.go.kr/UserPortal/Upv/58312/fileDetail.do?file_sn=2&thumb_yn=Y', 'http://www.eshare.go.kr/..');
+
+INSERT INTO facility_info VALUES ('CD14K5813615', '입장 게이트볼장', '31056', '충청남도 천안시 서북구 입장면 기로리 354-8',
+'입장 게이트볼장', '36.909827', '127.242268', 'https://www.eshare.go.kr/UserPortal/Upv/58312/fileDetail.do?file_sn=2&thumb_yn=Y', 'http://www.eshare.go.kr/..');
+
+INSERT INTO facility_info VALUES ('CD13S0556367', '쌍용3동 게이트볼장', '31166', '충남 천안시 서북구 쌍용동 1281 쌍용3동',
+'쌍용3동 게이트볼장', '36.802257', '127.123708', 'https://www.eshare.go.kr/UserPortal/Upv/58312/fileDetail.do?file_sn=2&thumb_yn=Y', 'http://www.eshare.go.kr/..');
+
+INSERT INTO facility_info VALUES ('CD13S1300306', '직산 삼은공원 게이트볼장', '31035', '충남 천안시 서북구 직산읍 삼은리 510',
+'직산 삼은공원 게이트볼장', '36.882423', '127.157272', 'https://www.eshare.go.kr/UserPortal/Upv/58321/fileDetail.do?file_sn=1&thumb_yn=Y', 'http://www.eshare.go.kr/..');
+
+INSERT INTO facility_info VALUES ('ABCDEFG1234', '자원명', '12345', '서울특별시 용산구 한강대로1번길1', '2동 3호', 35.12345, 128.12345, 'https://www.eshare.go.kr/UserPortal/Upv/157195/fileDetail.do?file_sn=1&thumb_yn=Y', 'http://www.eshare.go.kr/..');
+INSERT INTO facility_info VALUES ('ABCDEFG1235', '자원명2', '54321', '서울 용산구 회나무로12길 27', '서울디지텍고등학교', 37.538999, 126.990544, 'https://www.eshare.go.kr/UserPortal/Upv/157195/fileDetail.do?file_sn=1&thumb_yn=Y', 'http://www.eshare.go.kr/..');
+
+
 --시설상세정보테이블
 CREATE TABLE facility_info_detail (
 	rsrcNo VARCHAR2(1000),

@@ -9,26 +9,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-</style>
+<link href="${path}/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="${path}/css/map.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<h1>map</h1>
-	<div id="map" style="width: 100%; height: 500px;"></div>
-	<p>${path}</p>
+	<div style="position: absolute; top: 0; width: 100%; height: 100%; overflow-x: hidden;">
+	<div id="map" style="width: 100%; height: 100%;"></div>
+	<div class="rightSideAreas" style="right: 0px; height: 100%; padding: 10px; padding-bottom: 55px;">
+		<div style="height: 100%;">
+			<p>천안시 체육시설 목록..</p>
+			<ul style="height: 100%; overflow-y: scroll; margin-bottom: 20px;">
+				<c:forEach var='data' items="${fcList}">
+					<li><button style="width: 100%;" type="button" data-lot="${data.lot}" data-lat="${data.lat}" class="eachPosBtn">
+					<img src="${data.imgFileUrlAddr}"  width="100px" height="100px" />
+					${data.rsrcNm}
+					<br />
+					${data.addr} ${data.daddr}
+					</button></li>
+				</c:forEach>
+			</ul>
+		</div>
+		<button type="button" class="closeSideBtn"></button>
+	</div>
+	</div>
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="${path}/js/map.js"></script>
 	<script type="text/javascript">
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	var fcList = '${fcList}';
-	var parsedList = JSON.parse(fcList);
+	var originalList = '${parsedList}';
+	var parsedList = JSON.parse(originalList);
 	var markers = [];
 
 	var options = { //지도를 생성할 때 필요한 기본 옵션
-		center : new kakao.maps.LatLng(36.814696991254436, 127.10570765151945), //지도의 중심좌표.
+		center : new kakao.maps.LatLng(36.83833584645811, 127.1958748509954), //지도의 중심좌표.
 		//지도의 레벨(확대, 축소 정도)
-		level : 9
+		level : 8
 	};
 
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
@@ -38,11 +55,11 @@
 
 	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
 	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPLEFT);
 
 	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 	var zoomControl = new kakao.maps.ZoomControl();
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	map.addControl(zoomControl, kakao.maps.ControlPosition.BOTTOMLEFT);
 
 	var clusterer = new kakao.maps.MarkerClusterer({
 		map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
@@ -50,62 +67,20 @@
 	    minLevel: 9, // 클러스터 할 최소 지도 레벨 
 	});
 	
+	kakao.maps.event.addListener(map, 'center_changed', function() {
+
+	    // 지도의  레벨을 얻어옵니다
+	    var level = map.getLevel();
+
+	    // 지도의 중심좌표를 얻어옵니다 
+	    var latlng = map.getCenter(); 
+
+	    console.log(latlng.getLat(), latlng.getLng())
+	});
+	
 	for (let i = 0; i < parsedList.length; i++) {
 		displayMarker(parsedList[i]);
-	}
-	
-	
-	// 지도에 마커를 표시하고 오버레이를 만들고 창을 닫는 이벤트를 등록하는 함수
-	function displayMarker(parsedData) {
-		// 지도에 마커를 표시
-		var marker = new kakao.maps.Marker({
-			position : new kakao.maps.LatLng(parsedData.lot,
-					parsedData.lat)
-		});
-				
-		// 오버레이 만들기
-		var overlay = new kakao.maps.CustomOverlay({
-			position : marker.getPosition()
-		});
-		
-				
-		// 띄울 창 만들기
-		var content = document.createElement('div');
-		content.innerHTML =  parsedData.rsrcNm;
-		content.style.cssText = 'background: white; border: 1px solid black';
-				    
-		var closeBtn = document.createElement('button');
-		closeBtn.innerHTML = '닫기';
-		closeBtn.onclick = function () {
-			overlay.setMap(null);
-		};
-		
-		var linkForm = document.createElement('form');
-		var linkInput = document.createElement('input');
-		
-		linkInput.type = "hidden";
-		linkInput.value = parsedData.rsrcNo;
-		linkInput.name = 'no';
-		
-		linkForm.setAttribute('action', '/detail?no=' + parsedData.rsrcNo);
-		
-		var bookBtn = document.createElement('button');
-		bookBtn.innerHTML = '예약하기';
-		
-		linkForm.appendChild(linkInput);
-		linkForm.appendChild(bookBtn);
-		
-		content.appendChild(closeBtn);
-		content.appendChild(linkForm);
-		overlay.setContent(content);
-
-		kakao.maps.event.addListener(marker, 'click', function() {
-			overlay.setMap(map);
-		});
-		
-		// 클러스터러에 마커들을 추가합니다
-        clusterer.addMarker(marker);
-	}
+	}	
 	</script>
 </body>
 </html>
