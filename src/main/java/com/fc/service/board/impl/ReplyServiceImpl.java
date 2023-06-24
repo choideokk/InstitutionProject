@@ -3,10 +3,12 @@ package com.fc.service.board.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.fc.dao.board.ReplyDao;
 import com.fc.dto.board.ReplyDto;
 import com.fc.service.board.ReplyService;
-
+@Service
 public class ReplyServiceImpl implements ReplyService{
 
 	ReplyDao replyDao;

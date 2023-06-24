@@ -102,8 +102,7 @@ textarea{
 
 	<div class="input_wrap">
 		<label>게시판 내용</label>
-	
-	<textarea rows="3" name="content"><c:out value="${viewPage.content}"/></textarea>	
+	<textarea rows="3" readonly="readonly"  name="content"><c:out value="${viewPage.content}"/></textarea>	
 </div>
 	<div class="input_wrap">
 		<label>게시판 작성자</label>

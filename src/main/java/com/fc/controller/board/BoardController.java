@@ -34,6 +34,14 @@ public class BoardController {
 		return "test";
 	}
 
+	@RequestMapping("/testboard")
+	public String index2() {
+
+		return "testboard";
+	}
+
+	
+	
 	
 	@GetMapping("/write")
 	public String insertContents() {
