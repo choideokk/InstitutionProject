@@ -1,3 +1,4 @@
+var clickedOverlay = null;
 // 지도에 마커를 표시하고 오버레이를 만들고 창을 닫는 이벤트를 등록하는 함수
 function displayMarker(parsedData) {
 	// 지도에 마커를 표시
@@ -43,7 +44,11 @@ function displayMarker(parsedData) {
 	overlay.setContent(content);
 
 	kakao.maps.event.addListener(marker, 'click', function() {
-		overlay.setMap(map);
+	if (clickedOverlay) {
+        clickedOverlay.setMap(null);
+    }
+    overlay.setMap(map);
+    clickedOverlay = overlay;
 	});
 
 	// 클러스터러에 마커들을 추가합니다

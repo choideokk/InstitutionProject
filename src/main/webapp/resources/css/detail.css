@@ -134,7 +134,7 @@
 
 .sec_cal .cal_wrap .day.disable {
 	color: #ddd;
-	background: url("https://www.eshare.go.kr/images/common/pat_disable.png");
+	background: url("../image/pat_disable.png");
 	background-color: #f6f6f9;
 }
 
@@ -172,7 +172,7 @@
 }
 
 .sec_cal .marker_info .marker.disable:before {
-	background: url("https://www.eshare.go.kr/images/common/pat_disable.png");
+	background: url("../image/pat_disable.png");
 	background-color: #f6f6f9;
 	top: -1px;
 }

@@ -13,8 +13,7 @@
 
     <typeAliases>
 		<typeAlias type="com.fc.dto.facility.FacilityDto" alias="FacilityDto"/>
-<!--    <typeAlias type="com.fc.dto.user.UserDto" alias="UserDto"/> -->
-<!--    <typeAlias type="com.fc.dto.user.Boardto" alias="UserDto"/> -->
+		<typeAlias type="com.fc.dto.facility.FcDetailDto" alias="FcDetailDto"/>
     </typeAliases>
 
 </configuration>

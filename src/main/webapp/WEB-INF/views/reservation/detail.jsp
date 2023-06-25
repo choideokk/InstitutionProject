@@ -16,14 +16,13 @@
 
 	<h1>상세페이지지롱</h1>
 	<ul>
-		<li>${currentFc.rsrcNo}</li>
 		<li>${currentFc.rsrcNm}</li>
+		<li>${currentFc.rsrcClsNm}</li>
 		<li>${currentFc.addr}${currentFc.daddr}</li>
-		<li>${currentFc.instUrlAddr}</li>
-		<li>위도 ${currentFc.lot}</li>
-		<li>경도 ${currentFc.lat}</li>
-		<li>예약링크 ${currentFc.instUrlAddr}</li>
 		<li>이미지파일 링크 ${currentFc.imgFileUrlAddr}</li>
+		<li>무료여부 ${currentFc.freeYn}</li>
+		<li>${currentFc.rsrcIntr}</li>
+		<li>${currentFc.atpn}</li>
 	</ul>
 	<div>
 	<div class="sec_cal">

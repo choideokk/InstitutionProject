@@ -1,5 +1,6 @@
 package com.fc.controller.map;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fc.dto.facility.FacilityDto;
+import com.fc.dto.facility.FcDetailDto;
 import com.fc.service.map.MapService;
 
 @Controller
@@ -21,15 +23,31 @@ import com.fc.service.map.MapService;
 public class MapController {
 	
 	@Value("${api.kakao.key}")
-	private String apiKey;
+	private String kakaoApiKey;
 	
 	@Autowired
 	MapService mapService;
 	
 	@GetMapping("/map")
 	public String getMapPage(Model model) {
-		List<FacilityDto> fcList = mapService.getFacilityList();
-		model.addAttribute("apiKey", apiKey);
+		Boolean isInitial = mapService.getFacilityList().size() == 0;
+		List<FacilityDto> fcList;
+		System.out.println("실행은 되니?");
+		
+		// 맨 처음 실행해서 데이터가 없는 경우..
+		if (isInitial) {
+			try {
+				mapService.getFacilityListFromApi();
+				//mapService.getFacilityDetailFromApi();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		fcList = mapService.getFacilityList();
+		
+		model.addAttribute("apiKey", kakaoApiKey);
 		String jsonList = "";
 		ObjectMapper mapper = new ObjectMapper();
 		
@@ -47,14 +65,9 @@ public class MapController {
 		return "map/map";
 	}
 	
-	@GetMapping("/map2")
-	public String getMapPage2(Model model) {	
-		return "map/map2";
-	}
-
 	@GetMapping("/detail")
 	public String getBookPage(@RequestParam String no, Model model) {
-		FacilityDto currentFc = mapService.getCurrentFacility(no);
+		FcDetailDto currentFc = mapService.getCurrentFacility(no);
 
 		if (currentFc != null) {
 			model.addAttribute("currentFc", currentFc);
@@ -63,5 +76,5 @@ public class MapController {
 
 		return "error";
 	}
-	
+
 }

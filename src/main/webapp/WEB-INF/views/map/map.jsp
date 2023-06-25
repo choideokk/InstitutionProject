@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="path"
@@ -21,7 +22,9 @@
 			<ul style="height: 100%; overflow-y: scroll; margin-bottom: 20px;">
 				<c:forEach var='data' items="${fcList}">
 					<li><button style="width: 100%;" type="button" data-lot="${data.lot}" data-lat="${data.lat}" class="eachPosBtn">
-					<img src="${data.imgFileUrlAddr}"  width="100px" height="100px" />
+					<!-- 
+					 <img src="${data.imgFileUrlAddr}"  width="100px" height="100px" />
+					 -->
 					${data.rsrcNm}
 					<br />
 					${data.addr} ${data.daddr}
@@ -65,17 +68,6 @@
 		map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
 	    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
 	    minLevel: 9, // 클러스터 할 최소 지도 레벨 
-	});
-	
-	kakao.maps.event.addListener(map, 'center_changed', function() {
-
-	    // 지도의  레벨을 얻어옵니다
-	    var level = map.getLevel();
-
-	    // 지도의 중심좌표를 얻어옵니다 
-	    var latlng = map.getCenter(); 
-
-	    console.log(latlng.getLat(), latlng.getLng())
 	});
 	
 	for (let i = 0; i < parsedList.length; i++) {
