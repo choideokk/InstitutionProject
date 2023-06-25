@@ -8,13 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insert_contents" parameterType="BoardDto">
 
-	insert into board_infos(title, content, writer) values (#{title}, #{content}, #{writer})
+	
+insert into board_infos(title, content, writer) values (#{title}, #{content}, #{writer})
 
 
 	</insert>
 
 	
-	<select id="list_contents" resultType="BoardDto"  >
+	<select id="list_contents" resultType="BoardDto" >
 		select postno,title,writer,
 		updatedate,changedate,viewcnt 
 		from board_infos		

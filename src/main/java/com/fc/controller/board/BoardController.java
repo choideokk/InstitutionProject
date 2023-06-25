@@ -130,7 +130,7 @@ public class BoardController {
 	public String delete(@RequestParam int postno,Model model) {
 	
 		boardService.boardDelte(postno);
-		model.addAttribute("viewPage",postno);
+		model.addAttribute("deleteviewPage",postno);
 
 		System.out.println("삭제 삭제 ");		
 		return "redirect:/boardlist";

@@ -133,15 +133,22 @@ textarea{
 	
 
 	$("#update_btn").on("click", function(e){
-		mForm.submit();
+		
+		var chk = confirm("수정 페이지로 가시겠습니까?");
+	    if (chk) {
+	    	mForm.submit();
+			}
 	});
 
 
 	$("#delete_btn").on("click", function(e){
 		form.attr("action", "/delete");
 		form.attr("method", "post");
+		var chk = confirm("게시물을 삭제하시겠습니까?");
+	    if (chk) {
+	      location.href="/delete?postno=${deleteviewPage.postno}"
+			}
 		form.submit();	
-        location.href="/delete?postno=${viewPage.postno}"
 	}); 
 	
 	
@@ -150,7 +157,7 @@ textarea{
 		form.submit();
 		var chk = confirm("취소하시겠습니까?");
 	    if (chk) {
-        location.href="delete";
+        location.href="boardlist";
 			}
 
 	});	

@@ -26,7 +26,6 @@ public interface BoardService {
 
 	void boardUpdate(BoardDto boardDto);
 
-
 	public void boardDelte(int postno);
 
 

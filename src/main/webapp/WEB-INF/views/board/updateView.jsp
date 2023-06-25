@@ -64,7 +64,7 @@ textarea{
 
 
 <h1>수정 페이지</h1>
-	<form id="modifyForm" action="/updateView" method="post">
+	<form id="saveForm" action="/updateView" method="post">
 	
 
 	<div class="input_wrap">
@@ -91,14 +91,21 @@ textarea{
 		<label>게시판 수정일</label>
 		<input readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${viewPage.changedate}"/>' >
 	</div>		
-	<div class="btn_wrap">
+	<!-- <div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
 		<button type="submit" class="update_btn">저장</button>
 		<button type="submit" class="cancel_btn">취소</button>
 		<a class="btn" id="cancel_btn">수정 취소</a>
+	</div> -->
+	
+	<div class="btn_wrap">
+		<a class="btn" id="update_btn">저장하기</a>
+		<a class="btn" id="cancel_btn">수정취소</a>
+		<a class="btn" id="delete_btn">게시물 삭제</a>
 	</div>
-
 	</form>
+	
+	
 	<form id="infoForm" action="/boardlist" method="get">
 		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.postno}"/>'>
 		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
@@ -107,7 +114,8 @@ textarea{
 		<input type="hidden" name="keyword" value="${cri.keyword }">	
 	</form> 
 	
-	  
+	
+<!-- 	  
   <script type="text/javascript">
 		$(document).ready(function(){
 			
@@ -117,36 +125,42 @@ textarea{
 			})
 		})
 	</script>
+-->
 
-<script>
+<script> 
 
-/* 	let form = $("#infoForm");		// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
-	let mForm = $("#modifyForm");	// 페이지 데이터 수정 from
+
+let form = $("#infoForm");	// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
+let mForm = $("#saveForm");	// 페이지 데이터 수정 from
+
+
+$("#update_btn").on("click", function(e){
 	
-	/* 목록 페이지 이동 버튼 */
-	/* $("#list_btn").on("click", function(e){
-		form.find("#bno").remove();
-		form.attr("action", "/boardlist");
-		form.submit();
-	});
-	
-	수정 하기 버튼
-	$("#modify_btn").on("click", function(e){
-		mForm.submit();
-	});
-	
- 취소 버튼
-	$("#cancel_btn").on("click", function(e){
-		form.attr("action", "/viewPage);
-		form.submit();
-	});	
-	
-	 삭제 버튼 
-	$("#delete_btn").on("click", function(e){
-		form.attr("action", "/boardlist");
-		form.attr("method", "post");
-		form.submit();
-	}); */ 
-	
+	var chk = confirm("수정하시겠습니까?");
+    if (chk) {
+    	mForm.submit();
+		}
+});
+
+$("#delete_btn").on("click", function(e){
+	form.attr("action", "/delete");
+	form.attr("method", "post");
+	var chk = confirm("게시물을 삭제하시겠습니까?");
+    if (chk) {
+      location.href="/delete?postno=${deleteviewPage.postno}"
+		}
+	form.submit();	
+}); 
+
+$("#cancel_btn").on("click", function(e){
+	form.attr("action", "/boardlist");
+	form.submit();
+	var chk = confirm("취소하시겠습니까?");
+    if (chk) {
+    location.href="detail?postno=${viewPage.postno}";
+		}
+});	
+
 </script>
-	
+	</body>
+</html>

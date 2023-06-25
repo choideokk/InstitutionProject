@@ -12,6 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
  <div class="container">
   <h2>게시판 글쓰기 페이지입니당.</h2>
   <form action="/write"  method="post">
