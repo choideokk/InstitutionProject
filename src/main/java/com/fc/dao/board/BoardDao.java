@@ -30,7 +30,7 @@ public interface BoardDao {
 	
 	public void update(BoardDto boardDto);
 	
-	public void delete(int postno) ;
+    public void delete(int postno) ;
 	
 
 	

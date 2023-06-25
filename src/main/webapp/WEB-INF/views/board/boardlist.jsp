@@ -119,7 +119,6 @@
                 <td><fmt:formatDate pattern="yyyy/MM/dd" value="${boardList.changedate}"/>             
 					<td><c:out value="${boardList.viewcnt}"/></td>
 			</tr>
-		
 			
 		</c:forEach>	
 	</table>

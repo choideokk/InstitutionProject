@@ -76,28 +76,6 @@ public  class BoardServiceImpl implements BoardService {
 		return dto;
 	}
 
-	
-	@Override
-	public void updateBoard(BoardDto boardDto)  {
-		// TODO Auto-generated method stub
-		try {
-			boardDao.update(boardDto);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void deleteBoard(int postno) {
-		// TODO Auto-generated method stub
-		try {
-			boardDao.delete(postno);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void boardUpdate(BoardDto boardDto) {
@@ -105,6 +83,16 @@ public  class BoardServiceImpl implements BoardService {
 		boardDao.update(boardDto);
 	}
 
+	@Override
+	public void boardDelte(int postno) {
+		// TODO Auto-generated method stub
+		
+		boardDao.delete(postno);
+	}
+
+
+
+	
 	
 
 

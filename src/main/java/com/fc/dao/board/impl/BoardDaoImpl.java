@@ -81,8 +81,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	
 	  @Override 
-	  public void viewCount(int postno) {
-	  
+	  public void viewCount(int postno) {  
 	 sqlSessionTemplate.selectList("board_mapper.list_count");
 	 
 	  }
@@ -97,11 +96,13 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public void delete(int postno)  {
+	public void delete(int postno) {
 		// TODO Auto-generated method stub
 		sqlSessionTemplate.delete("board_mapper.list_delete",postno);
+
 	
 	}
+
 
 	
 

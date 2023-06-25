@@ -24,15 +24,10 @@ public interface BoardService {
 
 	BoardDto getdetail(int postno);
 
-	
-	// 게시물 수정
-	public void updateBoard(BoardDto boardDto) throws Exception;
-		
-		// 게시물 삭제
-	public void deleteBoard(int postno) throws Exception;
-
-	
 	void boardUpdate(BoardDto boardDto);
+
+
+	public void boardDelte(int postno);
 
 
 

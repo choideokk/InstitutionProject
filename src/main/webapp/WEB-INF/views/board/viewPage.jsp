@@ -12,8 +12,7 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
  
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
+
   <style>
 <style type="text/css">
 .input_wrap{
@@ -34,7 +33,7 @@ textarea{
     font-size: 15px;
     padding: 10px;
 }
-.update_btn, .list_btn, .delete_btn{
+.btn{
   	display: inline-block;
     font-size: 22px;
     padding: 6px 12px;
@@ -56,31 +55,7 @@ textarea{
 	background-color: #f3e3e7;
 }
 </style>
-<script type="text/javascript">
-		$(document).ready(function(){
-			var formObj = $("form[name='readForm']");
-			
-			// 수정 
-			$(".update_btn").on("click", function(){
-				formObj.attr("action", "/updateView");
-				formObj.attr("method", "get");
-				formObj.submit();				
-			})
-			
-			// 삭제
-			$(".delete_btn").on("click", function(){
-				formObj.attr("action", "/board/delete");
-				formObj.attr("method", "post");
-				formObj.submit();
-			})
-			
-			// 취소
-			$(".list_btn").on("click", function(){
-				
-				location.href = "/boardlist";
-			})
-		})
-	</script>
+
 
 </head>
 
@@ -88,7 +63,7 @@ textarea{
 
 
 <h1>조회 페이지</h1>
-	<form id="modifyForm" action="/update" method="post">
+	<form id="updateForm" action="/update" method="post">
 	
 
 	<div class="input_wrap">
@@ -116,23 +91,17 @@ textarea{
 		<label>게시판 수정일</label>
 		<input readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${viewPage.changedate}"/>' >
 	</div>		
+
 	<div class="btn_wrap">
-<button type="submit" class="update_btn">수정</button>
-		<button type="submit" class="delete_btn">삭제</button>
-			<button type="submit" class="list_btn">목록</button>	
+		<a class="btn" id="list_btn">목록 페이지</a> 
+		<a class="btn" id="update_btn">수정하기</a>
+		<a class="btn" id="delete_btn" >삭제</a>
+		<a class="btn" id="cancel_btn">수정 취소</a>
+
 	</div>
 
 
 
-	
-<%-- 	<form id="infoForm" action="/board/modify" method="get">
-		<input type="hidden" id="bno" name="bno" value='<c:out value="${pageInfo.postno}"/>'>
-		<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
-		<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
-		<input type="hidden" name="type" value="${cri.type }">	
-		<input type="hidden" name="keyword" value="${cri.keyword }">	
-	</form> --%>
-		
 
 
 <div style="width:700px; margin-top:30px; text-align:center;">
@@ -148,48 +117,49 @@ textarea{
 <script>
 
 
-//댓글 목록 출력 함수
-function listReply(){
-    $.ajax({
-        type: "get", //get방식으로 자료를 전달한다
-        url: "${path}/reply/list.do?bno=${dto.bno}", //컨트롤러에 있는 list.do로 맵핑하고 게시판 번호도 같이 보낸다.
-        success: function(result){ //자료를 보내는것이 성 공했을때 출력되는 메시지
-            //result : responseText 응답텍스트(html)
-            $("#listReply").html(result);
-        }
-    });
-}
+ 	let form = $("#infoForm");		// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
+	let mForm = $("#updateForm");	// 페이지 데이터 수정 from
 
-
-
-
-/* 	let form = $("#infoForm");		// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
-	let mForm = $("#modifyForm");	// 페이지 데이터 수정 from
 	
-	 목록 페이지 이동 버튼 
 	$("#list_btn").on("click", function(e){
-		form.find("#bno").remove();
-		form.attr("action", "/board/list");
-		form.submit();
+		form.find("#postno").remove();
+		var chk = confirm("목록 페이지로 가시겠습니까?");
+	    if (chk) {
+        location.href='boardlist';
+			}
+
+
 	});
 	
 
-	$("#modify_btn").on("click", function(e){
+	$("#update_btn").on("click", function(e){
 		mForm.submit();
 	});
 
-	 취소 버튼 
+
+	$("#delete_btn").on("click", function(e){
+		form.attr("action", "/delete");
+		form.attr("method", "post");
+		form.submit();	
+        location.href="/delete?postno=${viewPage.postno}"
+	}); 
+	
+	
 	$("#cancel_btn").on("click", function(e){
-		form.attr("action", "/board/get");
+		form.attr("action", "/boardlist");
 		form.submit();
+		var chk = confirm("취소하시겠습니까?");
+	    if (chk) {
+        location.href="delete";
+			}
+
 	});	
 	
-	 삭제 버튼 
-	$("#delete_btn").on("click", function(e){
-		form.attr("action", "/board/delete");
-		form.attr("method", "post");
-		form.submit();
-	}); */
+
+
 	
 </script>
+
+</body>
+</html>
 	

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fc.dto.board.BoardDto;
 import com.fc.service.board.BoardService;
@@ -123,6 +124,20 @@ public class BoardController {
         System.out.println("보드값 확인 " + boardDto.getContent());
         return "redirect:/boardlist";
     }
+	//게시물 삭제
+	
+	@GetMapping("delete")
+	public String delete(@RequestParam int postno,Model model) {
+	
+		boardService.boardDelte(postno);
+		model.addAttribute("viewPage",postno);
+
+		System.out.println("삭제 삭제 ");		
+		return "redirect:/boardlist";
+		
+	}
+
+	
 	
 //	@PostMapping("/detail")
 //	public String detailProject(@ModelAttribute("boardDto") BoardDto boardDto, Model model,int postno) {
