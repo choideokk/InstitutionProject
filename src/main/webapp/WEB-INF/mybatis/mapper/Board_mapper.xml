@@ -30,11 +30,9 @@ insert into board_infos(title, content, writer) values (#{title}, #{content}, #{
 	</select>
 	
 	
-	<select id="list_count" resultType="BoardDto">
-		update board_infos
-		set viewcnt = viewcnt + 1
-		where postno = #{bno}
-	</select>
+	<update id="list_count" parameterType="int">
+	  UPDATE board_infos SET viewcnt = viewcnt + 1 WHERE postno = #{postno}
+	</update>
 	
  <update id="list_update" parameterType="BoardDto">
 		UPDATE board_infos
@@ -45,7 +43,7 @@ insert into board_infos(title, content, writer) values (#{title}, #{content}, #{
 	</update>
 	
 	
-	<delete id="list_delete" parameterType="int">
+	<delete id="list_delete" parameterType="BoardDto">
 		DELETE 
 		  FROM board_infos
 		 WHERE postno = #{postno}

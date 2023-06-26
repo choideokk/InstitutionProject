@@ -82,7 +82,8 @@ public class BoardDaoImpl implements BoardDao {
 	
 	  @Override 
 	  public void viewCount(int postno) {  
-	 sqlSessionTemplate.selectList("board_mapper.list_count");
+		  
+	 sqlSessionTemplate.update("board_mapper.list_count",postno);
 	 
 	  }
 

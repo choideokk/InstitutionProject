@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,8 +61,7 @@ public class BoardController {
 		return "redirect:/boardlist";
 	}
 
-	
-	
+		
 	@GetMapping("/boardlist")
 	public String boardList(Model model, @RequestParam(name = "postNo", required = false)String postNo) {
 
@@ -90,16 +88,21 @@ public class BoardController {
 	
 	//게시판 상세보기 페이지
 	@GetMapping("/detail")
-	public String getdetail(@RequestParam int postno , Model model) {
+	public String getdetail(@RequestParam("postno") int postno , Model model) {
 		
+		model.addAttribute("viewPage",boardService.getdetail(postno));
 		
 		BoardDto dto =boardService.getdetail(postno);
-			model.addAttribute("viewPage",dto);
+		boardService.viewCount(postno);
 		
 		return "viewPage";
-		
+			
 		
 	}
+	
+	
+	
+	
 	
 	@GetMapping("/update")
 	public String updateView(BoardDto boardDto, Model model) {
@@ -127,7 +130,7 @@ public class BoardController {
 	//게시물 삭제
 	
 	@GetMapping("delete")
-	public String delete(@RequestParam int postno,Model model) {
+	public String delete(@RequestParam int postno, Model model) {
 	
 		boardService.boardDelte(postno);
 		model.addAttribute("deleteviewPage",postno);

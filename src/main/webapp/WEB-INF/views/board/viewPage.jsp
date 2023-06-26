@@ -70,6 +70,10 @@ textarea{
 		<label>게시판 번호</label>
 		<input name="postno" readonly="readonly" value='<c:out value="${viewPage.postno}"/>' >
 	</div>
+		<div class="input_wrap">
+		<label>조회수</label>
+		<input name="viewcnt" readonly="readonly"  value=' <c:out value="${viewPage.viewcnt }"/>' >
+	</div>
 	<div class="input_wrap">
 		<label>게시판 제목</label>
 		<input name="title" readonly="readonly"  value=' <c:out value="${viewPage.writer }"/>' >
@@ -105,7 +109,10 @@ textarea{
 
 
 <div style="width:700px; margin-top:30px; text-align:center;">
-     
+    
+	
+
+	<br><br>
          <textarea rows="5" cols="80" id="replytext"
              placeholder="댓글을 작성하세요"></textarea>
          <br>
@@ -128,9 +135,8 @@ textarea{
         location.href='boardlist';
 			}
 
-
 	});
-	
+
 
 	$("#update_btn").on("click", function(e){
 		
@@ -143,12 +149,12 @@ textarea{
 
 	$("#delete_btn").on("click", function(e){
 		form.attr("action", "/delete");
-		form.attr("method", "post");
+	    form.attr("method", "get");
+		
 		var chk = confirm("게시물을 삭제하시겠습니까?");
 	    if (chk) {
-	      location.href="/delete?postno=${deleteviewPage.postno}"
+	      location.href="/delete?postno=${viewPage.postno}"
 			}
-		form.submit();	
 	}); 
 	
 	

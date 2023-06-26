@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -139,35 +141,20 @@
 		</div>
 	</div>		
 	
-		
-	<div class="pageInfo_wrap" >
-		<div class="pageInfo_area">
-			<ul id="pageInfo" class="pageInfo">
-			
-				<!-- 이전페이지 버튼 -->
-				<c:if test="${pageMaker.prev}">
-					<li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
-				</c:if>				
-				<!-- 각 번호 페이지 버튼 -->
-				<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-					<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li>
-				</c:forEach>	
-				<!-- 다음페이지 버튼 -->
-				<c:if test="${pageMaker.next}">
-					<li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
-				</c:if>			
-			</ul>
-		</div>
-	</div>
 	
+<div class="w3-center">
+<div class="w3-bar">
+  <a href="#" class="w3-button">&laquo;</a>
+  <a href="#" class="w3-button">1</a>
+  <a href="#" class="w3-button">2</a>
+  <a href="#" class="w3-button">3</a>
+  <a href="#" class="w3-button">4</a>
+  <a href="#" class="w3-button">&raquo;</a>
+</div>
+</div>
 
 	
-	 <form id="moveForm" method="get">	
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">	
-		<input type="hidden" name="type" value="${pageMaker.cri.type }">	
-	</form>
+	
 </div> 
 <!-- 
 <script>
