@@ -24,7 +24,6 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	
-	
 <!-- 	BasicDataSource data_source = new BasicDataSource(); -->
 <!-- 	data_source.setDriverClassName("oracle.jdbc.OracleDriver"); -->
 <!-- 	data_source.setUrl("jdbc:oracle:this:@localhost:1521:orcl"); -->

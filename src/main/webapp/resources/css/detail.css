@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* section calendar */
 .sec_cal {
 	width: 500px;
 	font-family: "NotoSansR";
@@ -46,7 +47,8 @@
 	transition: border 0.1s;
 }
 
-.sec_cal .cal_nav .go-prev:hover::before, .sec_cal .cal_nav .go-next:hover::before {
+.sec_cal .cal_nav .go-prev:hover::before, .sec_cal .cal_nav .go-next:hover::before
+	{
 	border-color: #ed2a61;
 }
 
@@ -84,7 +86,7 @@
 	color: #636363;
 	font-size: 12px;
 	text-align: center;
-	border-radius: 5px;
+	border-radius: 5px
 }
 
 .current.today {
@@ -123,15 +125,16 @@
 	height: 100%;
 }
 
-.sec_cal .cal_wrap .dates .day button.selectedDay {
-	background: #87CEFA;
+
+.sec_cal .cal_wrap .dates .day .selectedDay {
+	background: #016eac;
 	outline-color: #005d93;
 	color: #fff;
 }
 
 .sec_cal .cal_wrap .day.disable {
 	color: #ddd;
-	background: url("https://www.eshare.go.kr/images/common/pat_disable.png");
+	background: url("../image/pat_disable.png");
 	background-color: #f6f6f9;
 }
 
@@ -169,7 +172,7 @@
 }
 
 .sec_cal .marker_info .marker.disable:before {
-	background: url("https://www.eshare.go.kr/images/common/pat_disable.png");
+	background: url("../image/pat_disable.png");
 	background-color: #f6f6f9;
 	top: -1px;
 }
@@ -178,8 +181,4 @@
 	background: #016eac;
 	border-color: #005d93;
 	top: -1px;
-}
-
-.day button.selectedDay {
-    background-color: skyblue; /* 클릭하면 배경색이 하늘색으로 바뀜 */
-}
+} /*선택*/

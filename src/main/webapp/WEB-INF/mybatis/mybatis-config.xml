@@ -7,11 +7,15 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <setting name="jdbcTypeForNull" value="VARCHAR" />
+    	<setting name="callSettersOnNulls" value="true"/>
+    	<setting name="returnInstanceForEmptyRow" value="true"/>
     </settings>
 
     <typeAliases>
 		<typeAlias type="com.fc.dto.reservationCalendar.ReservationCalendarDto" alias="ReservationCalendarDto"/>
 		<typeAlias type="com.fc.dto.board.BoardDto" alias="BoardDto"/>
+		<typeAlias type="com.fc.dto.facility.FacilityDto" alias="FacilityDto"/>
+		<typeAlias type="com.fc.dto.facility.FcDetailDto" alias="FcDetailDto"/>
     </typeAliases>
 
 </configuration>
