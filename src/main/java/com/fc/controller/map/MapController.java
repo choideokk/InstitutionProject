@@ -9,13 +9,16 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fc.dto.facility.FacilityDto;
 import com.fc.dto.facility.FcDetailDto;
+import com.fc.dto.facility.SearchDto;
 import com.fc.service.map.MapService;
 
 @Controller
@@ -32,7 +35,6 @@ public class MapController {
 	public String getMapPage(Model model) {
 		Boolean isInitial = mapService.getFacilityList().size() == 0;
 		List<FacilityDto> fcList;
-		System.out.println("실행은 되니?");
 		
 		// 맨 처음 실행해서 데이터가 없는 경우..
 		if (isInitial) {
@@ -65,16 +67,17 @@ public class MapController {
 		return "map/map";
 	}
 	
-	@GetMapping("/detail")
-	public String getBookPage(@RequestParam String no, Model model) {
-		FcDetailDto currentFc = mapService.getCurrentFacility(no);
-
-		if (currentFc != null) {
-			model.addAttribute("currentFc", currentFc);
-			return "reservation/detail";
-		} 
-
-		return "error";
+	@PostMapping("map")
+	public String sendSearchKeyword(@ModelAttribute SearchDto searchDto) {
+		List<FacilityDto> fcList;
+		String txt = searchDto.getSearchTxt();
+		System.out.println(searchDto.getSearchTxt());
+		if (txt.trim() == "") {
+			fcList = mapService.getFacilityList();
+		} else {
+			fcList = mapService.getSearchedFacilityList(txt);
+		}
+		return "map/map";
 	}
 
 }

@@ -2,11 +2,11 @@ package com.fc.utils;
 
 public interface CommonCode {
 	//프로그램 전체에서 참조할 코드표
-	
+
 	//User 관련 코드
 	String USER_USER_TYPE_CUSTOMER = "CUS";
 	String USER_USER_TYPE_ADMIN = "ADM";
-	
+
 	String[] FACILITY_CODES_LIST = {
 			"DF16N2654325",
 			"EE25K0036224",
@@ -56,9 +56,7 @@ public interface CommonCode {
 			"CC26N1922175"
 	};
 
-	
-	
 	//객실 관련 코드
-	
-	
+
+
 }

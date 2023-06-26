@@ -10,6 +10,7 @@ import com.fc.dto.facility.FcDetailDto;
 
 public interface MapService {
 	public List<FacilityDto> getFacilityList();
+	public List<FacilityDto> getSearchedFacilityList(String txt);
 	public FcDetailDto getCurrentFacility(String fcCode);
 	public void getFacilityListFromApi() throws IOException ;
 	public void getFacilityDetailFromApi() throws IOException ;

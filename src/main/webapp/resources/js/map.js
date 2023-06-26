@@ -1,6 +1,9 @@
+
 var clickedOverlay = null;
+
+
 // 지도에 마커를 표시하고 오버레이를 만들고 창을 닫는 이벤트를 등록하는 함수
-function displayMarker(parsedData) {
+function displayMarker(parsedData, path) {
 	// 지도에 마커를 표시
 	var marker = new kakao.maps.Marker({
 		position: new kakao.maps.LatLng(parsedData.lot,
@@ -19,7 +22,7 @@ function displayMarker(parsedData) {
 	content.style.cssText = 'background: white; border: 1px solid black';
 
 	var closeBtn = document.createElement('button');
-	closeBtn.innerHTML = '닫기';
+	closeBtn.innerHTML = 'X';
 	closeBtn.onclick = function() {
 		overlay.setMap(null);
 	};
@@ -31,7 +34,7 @@ function displayMarker(parsedData) {
 	linkInput.value = parsedData.rsrcNo;
 	linkInput.name = 'no';
 
-	linkForm.setAttribute('action', '/detail?no=' + parsedData.rsrcNo);
+	linkForm.setAttribute('action', path + '/Calendar2');
 
 	var bookBtn = document.createElement('button');
 	bookBtn.innerHTML = '예약하기';
@@ -44,11 +47,11 @@ function displayMarker(parsedData) {
 	overlay.setContent(content);
 
 	kakao.maps.event.addListener(marker, 'click', function() {
-	if (clickedOverlay) {
-        clickedOverlay.setMap(null);
-    }
-    overlay.setMap(map);
-    clickedOverlay = overlay;
+		if (clickedOverlay) {
+			clickedOverlay.setMap(null);
+		}
+		overlay.setMap(map);
+		clickedOverlay = overlay;
 	});
 
 	// 클러스터러에 마커들을 추가합니다
@@ -57,8 +60,8 @@ function displayMarker(parsedData) {
 const eachPosBtns = document.querySelectorAll(".eachPosBtn");
 
 eachPosBtns.forEach((btn) => {
-	btn.addEventListener('click', (e) => {
-		map.setCenter(new kakao.maps.LatLng(e.target.dataset.lot, e.target.dataset.lat));
+	btn.addEventListener('click', () => {
+		map.setCenter(new kakao.maps.LatLng(btn.dataset.lot, btn.dataset.lat));
 		map.setLevel(4);
 	});
 });
