@@ -1,6 +1,5 @@
 package com.fc.dao.board.impl;
 
-
 import java.util.List;
 import java.util.Map;
 
@@ -105,22 +104,6 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 
-	
 
-
-
-	/*
-	 * @Override public void viewCount(int postno) {
-	 * 
-	 * int count = sqlSessionTemplate.update("board_mapper.list_count",postno);
-	 * 
-	 * }
-	 */
-
-	
-	
-	
-
-	
 		
 }

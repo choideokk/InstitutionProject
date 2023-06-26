@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+.closeSideBtn {
+	position: absolute;
+    top: 50%;
+    left: -25px;
+    z-index: 0;
+    display: block;
+    width: 25px;
+    height: 50px;
+    background: #fff;
+    border: 0;
+    border-radius: 5px 0 0 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.38);
+    cursor: pointer;
+}
+
+.closeSideBtn:before {
+	content: "";
+    margin-left: -4px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #006aee;
+    border-left: 0px;
+    border-top: 0px;
+    transform: rotate(-45deg);
+    transition: transform 0.3s;
+}
+
+.closeSideBtn.closed:before {
+	transform: rotate(135deg);
+    margin-left: 4px;
+}
+
+.rightSideAreas {
+	position: absolute;
+	width: 350px;
+	background: lightgrey;
+	right: 0;
+	top: 0;
+	z-index: 10;
+}

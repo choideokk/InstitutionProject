@@ -9,7 +9,10 @@
 			 					 http://www.springframework.org/schema/beans
 			 					 http://www.springframework.org/schema/beans/spring-beans.xsd
 			 					 http://www.springframework.org/schema/context
-			 					 http://www.springframework.org/schema/context/spring-context.xsd">
+			 					 http://www.springframework.org/schema/context/spring-context.xsd
+			 					 http://www.springframework.org/schema/websocket 
+			 					 http://www.springframework.org/schema/websocket/spring-websocket.xsd"
+			 xmlns:websocket="http://www.springframework.org/schema/websocket">
 	
 	<annotation-driven/>
 	
@@ -25,6 +28,15 @@
 	<resources location="/resources/" mapping="/**"></resources>
 	<beans:bean id="loginInterceptor" class="com.fc.interceptor.LoginInterceptor"/>
 	<beans:bean id="adminInterceptor" class="com.fc.interceptor.AdminInterceptor"/>
+	
+	<!-- 
+	<websocket:handlers>
+		<websocket:mapping handler="echoHandler" path="/echo" />
+		<websocket:sockjs />
+	</websocket:handlers>
+    
+	<beans:bean id="echoHandler" class="com.fc.utils.EchoHandler"/>
+	 -->
 	
 	<!-- <interceptors>
 		<interceptor>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="map_mapper">
+	<select id="select_facility_list" resultType="FacilityDto">
+		select rsrcNo,
+		rsrcNm, zip, addr, daddr, lot, lat, instUrlAddr, imgFileUrlAddr
+		from facility_info
+		where rsrcNo NOT IN (select rsrcNo
+							from facility_info_detail
+							where rsvtNdlsYn = 'Y')
+	</select>
+
+	<select id="select_facility" resultType="FcDetailDto"
+		parameterType="String">
+		 select d.rsrcClsCd, d.rsrcClsNm, d.rsrcInstCd, d.rsrcInstNm, d.usePsblYn,
+			d.freeYn, d.rsrcIntr, d.atpn, d.lcInf, d.inqTag, d.updYmd, d.bnrImgFileUrl, d.delYn,
+			d.rsrcAprvYn, d.sggCd, d.rsvtNdlsYn, d.lcInsttCd, d.lcInsttNm, f.rsrcNo,
+			f.rsrcNm, f.zip, f.addr, f.daddr, f.lot, f.lat, f.instUrlAddr, f.imgFileUrlAddr
+		from facility_info_detail d, facility_info f
+		where f.rsrcNo = #{fcCode} AND d.rsrcNo = f.rsrcNo
+	</select>
+
+	<insert id="insert_facility_from_api"
+		parameterType="FacilityDto">
+		insert rsrcNo, rsrcNm, zip, addr, daddr, lot, lat,
+		instUrlAddr, imgFileUrlAddr
+		into facility_info
+	</insert>
+</mapper>

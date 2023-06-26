@@ -10,12 +10,12 @@ import com.fc.dao.board.BoardDao;
 import com.fc.dto.board.BoardDto;
 import com.fc.service.board.BoardService;
 
-@Service
-public  class BoardServiceImpl implements BoardService {
 
-	@Autowired 
+@Service
+public class BoardServiceImpl implements BoardService {
+
+	@Autowired
 	BoardDao boardDao;
-	
 
 	@Override
 	public int boardInsert(BoardDto boardDto) {
@@ -90,12 +90,5 @@ public  class BoardServiceImpl implements BoardService {
 		boardDao.delete(postno);
 	}
 
-
-
-	
-	
-
-
-    
-	}
+}
 	

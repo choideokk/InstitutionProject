@@ -28,13 +28,4 @@ public interface BoardService {
 
 	public void boardDelte(int postno);
 
-
-
-
-		
-
-
-	
-	
-
 }

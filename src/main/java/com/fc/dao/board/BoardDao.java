@@ -1,6 +1,5 @@
 package com.fc.dao.board;
 
-
 import java.util.List;
 import java.util.Map;
 

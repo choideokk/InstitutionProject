@@ -17,6 +17,4 @@ public class BoardDto {
 	int recommend;
 	int report;
 	int viewcnt;
-	
-	
 }
