@@ -1,24 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Page Layout</title>
     <style>
+    
+    * {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
     .hahaContainer{
     height:50px;
     width:100%;
     display:flex;
     }
     
- 
-    
     	.haha{
     	height:100%;
-    	width:65%;
+    	width:60%;
     	}
     	.haha2{
     	height:100%;
-    	width:35%;
+    	width:40%;
     	display:flex;
     	}
     	
@@ -27,7 +34,7 @@
     	width:50%;
     	  font-size: 16px;
   text-align: center;
-  border: 2px solid black;
+  border: 1px solid black;
     	}
     	
     	.haha2_right{
@@ -35,7 +42,7 @@
     	width:50%;
     	  font-size: 16px;
   text-align: center;
-  border: 2px solid black;
+  border: 1px solid black;
     	}
     	
     .haha2_left, .haha2_right {
@@ -74,7 +81,7 @@
         }
 
         .left {
-            width: 65%;
+            width: 60%;
             box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
                  display: flex;
             flex-direction: column;
@@ -82,13 +89,13 @@
         
         .right{
         	height: 700px;
-        	width: 35%;
+        	width: 40%;
             box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
         }
         
                 .right2{
         	height: 700px;
-        	width: 35%;
+        	width: 40%;
             box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
         }
 
@@ -239,6 +246,7 @@
         function sendAjaxRequest() {
             if (selectedDate && selectedCategory) {
                 var dateText = selectedDate.data('date');
+                var rsvfnm = $('#rsvfnm').val();
 
                 $.ajax({
                     url: "reservationCalendar",
@@ -246,7 +254,7 @@
                     data: {
                         date: dateText,
                         category: selectedCategory,
-                        rsvfnm: 'Main Gym'
+                        rsvfnm: rsvfnm
                     },
                     success: function(data) {
                         $('#contentArea').html(data);
@@ -260,7 +268,8 @@
 <body>
 <div class="hahaContainer">
 	<div class="haha">
-		<p>시설이름 들어올곳</p>
+	<input type="hidden" id="rsvfnm" value="${currentFc.rsrcNm}" />
+		<p>${currentFc.rsrcNm} ${currentFc.rsrcClsNm}</p>
 	</div>
 	<div class="haha2">
 		<div class="haha2_left">
@@ -275,7 +284,7 @@
         <div class="left">
             <div class="top">
                 <!-- 이미지 추가 -->
-                <img src="https://yeyak.seoul.go.kr/cmsdata/web_upload/svc/20230615/168680410872562A6SOA7V41Y3JZ48FRXN9HKF.jpg" alt="이미지 설명">
+                <img src="${path}/image/fa/${currentFc.rsrcNo}.jpg" width="100px" height="100px" />
             </div>
             <div class="bottom">
                 <!-- FullCalendar 추가 -->
@@ -289,8 +298,7 @@
 	           <label>조회할 시설을 선택해주세요.</label><br/>
 	           <select id="category">
 	           <option value="" disabled selected hidden>선택해주세요</option>
-	               <option value="Football">축구장</option>
-	               <option value="tennis">테니스장</option>
+	               <option value="${currentFc.rsrcClsNm}">${currentFc.rsrcClsNm}</option>
 	           </select>
 	           </div>
 	
@@ -302,10 +310,19 @@
         <div class="right2">
 	       		<!-- content -->
 	           <div style="display: flex; justify-content: center; align-items: center;">
-	           <p>시설 예약에 대한 정보들
+	           
+	           <ul>
+					<li>장소 : ${currentFc.rsrcNm}</li>
+					<li>종목 : ${currentFc.rsrcClsNm}</li>
+					<li>주소 : ${currentFc.addr}${currentFc.daddr}</li>
+					<li>무료여부 : ${currentFc.freeYn}</li>
+					<li>예약순서 : 선착순</li>
+					<li>모집정원 : 4명</li>
+					<li>취소기간 : 이용일 1일 전까지</li>
+					<li>예약방법 : 인터넷</li>
+					<li>문의전화 : </li>
+			  </ul>
         </div>
-        
-        
     </div>
 </body>
 </html>

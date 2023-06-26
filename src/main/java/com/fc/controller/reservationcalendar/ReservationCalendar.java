@@ -7,12 +7,15 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fc.service.map.MapService;
 import com.fc.service.reservationCalendar.ReservationCalendarService;
 import com.fc.dao.reservationCalendar.ReservationCalendarDao;
+import com.fc.dto.facility.FcDetailDto;
 import com.fc.dto.reservationCalendar.ReservationCalendarDto;
 
 @Controller
@@ -20,6 +23,9 @@ public class ReservationCalendar {
 	
 	@Autowired
 	ReservationCalendarService reservationCalendarService;
+	
+	@Autowired
+	MapService mapService;
 
 //	 @RequestMapping("/reservationCalendar")
 //	    public String reservationCalendar(Model model) {
@@ -74,11 +80,33 @@ public class ReservationCalendar {
 		
 	 }
 	 
+	 
 	 @RequestMapping("/Calendar2")
-	    public String calendar2() {
+		public String calendar2(@RequestParam String no, Model model) {
+			FcDetailDto currentFc = mapService.getCurrentFacility(no);
 
-	        return "reservation/calendar2";
-	    }
+			if (currentFc != null) {
+				model.addAttribute("currentFc", currentFc);
+				return "reservation/calendar2";
+			} 
+
+			return "error";
+		}
+	 
+	 
+	 
+	 @PostMapping("/Calendar3")
+	    public String calendar3(
+	            @RequestParam("selectedKeyName") String selectedKeyName,
+	            @RequestParam("date") String date,
+	            @RequestParam("rsvfnm") String rsvfnm,
+	            Model model) {
+
+			return "reservation/calendar3";
+		}
+	 
+	 
+	 
 	
 	}
 

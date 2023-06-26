@@ -484,7 +484,7 @@ CREATE TABLE facility_info_detail (
 	usePsblYn VARCHAR2(1000),
 	freeYn VARCHAR2(1000),
 	rsrcIntr VARCHAR2(3000),
-	atpn VARCHAR2(2000),
+	atpn VARCHAR2(4000),
 	lcInf VARCHAR2(1000),
 	inqTag VARCHAR2(1000),
 	updYmd VARCHAR2(1000),

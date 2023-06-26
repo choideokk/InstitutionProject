@@ -23,7 +23,7 @@ function displayMarker(parsedData, path) {
 
 	var closeBtn = document.createElement('button');
 	closeBtn.innerHTML = 'X';
-	closeBtn.onclick = function() {
+	closeBtn.onclick = function () {
 		overlay.setMap(null);
 	};
 
@@ -34,7 +34,7 @@ function displayMarker(parsedData, path) {
 	linkInput.value = parsedData.rsrcNo;
 	linkInput.name = 'no';
 
-	linkForm.setAttribute('action', path + '/Calendar2');
+	linkForm.setAttribute('action', path + '/Calendar2?no=' + parsedData.rsrcNo);
 
 	var bookBtn = document.createElement('button');
 	bookBtn.innerHTML = '예약하기';
@@ -46,7 +46,7 @@ function displayMarker(parsedData, path) {
 	content.appendChild(linkForm);
 	overlay.setContent(content);
 
-	kakao.maps.event.addListener(marker, 'click', function() {
+	kakao.maps.event.addListener(marker, 'click', function () {
 		if (clickedOverlay) {
 			clickedOverlay.setMap(null);
 		}
