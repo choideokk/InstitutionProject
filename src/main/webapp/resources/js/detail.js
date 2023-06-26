@@ -7,6 +7,8 @@ const today = new Date(utc + kstGap); // 한국 시간으로 date 객체 만들�
 const thisMonth = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 renderCalender(thisMonth);
 
+
+
 function renderCalender(thisMonth) {
 
 	// 렌더링을 위한 데이터 정리
@@ -40,7 +42,7 @@ function renderCalender(thisMonth) {
 		calendar.innerHTML = calendar.innerHTML + '<div class="day prev"/>';
 	}
 
-	// 이번달
+		// 이번달
 	for (let i = 1; i <= nextDate; i++) {
 		if (i < today.getDate()) {
 			calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">'
@@ -56,11 +58,10 @@ function renderCalender(thisMonth) {
 				+ ">"
 				+ i + '<br /> 예약 가능 </button></div>';
 		}
-
 	}
+
 	// 다음달
 	for (let i = 1; i < (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
-		console.log(nextDay, i);
 		calendar.innerHTML = calendar.innerHTML + '<div class="day next" />';
 	}
 
@@ -71,24 +72,15 @@ function renderCalender(thisMonth) {
 		var currentMonthDate = document.querySelector('.dates .today');
 	}
 
-	const availableBtns = document.querySelectorAll(".current button");
-	const selectedDate = document.querySelector(".selectedDate");
-	const emptyTxt = document.querySelector(".emptyTxt");
-	const availableTimeTb = document.querySelector(".availableTimeTb");
-
-
-	availableBtns.forEach((btn) => {
-		btn.addEventListener('click', (e) => {
-			const selectedBtn = document.querySelector('.selectedDay');
-			console.log(selectedBtn != null, selectedBtn);
-			if (selectedBtn != null) {
-				console.log(selectedBtn.classList);
-				selectedBtn.classList.remove('selectedDay');
-			}
-			selectedDate.textContent = e.target.dataset.date;
-			emptyTxt.style.display = 'none';
-			availableTimeTb.style.display = 'block';
-			e.target.classList.add('selectedDay');
+	// 코드 추가 시작
+	document.querySelectorAll('.dates .day button').forEach(day => {
+		day.addEventListener('click', event => {
+			// Remove .selectedDay from all days
+			document.querySelectorAll('.dates .day button').forEach(day => {
+				day.classList.remove('selectedDay');
+			});
+			// Add .selectedDay to the clicked day
+			event.currentTarget.classList.add('selectedDay');
 		});
 	});
 }
