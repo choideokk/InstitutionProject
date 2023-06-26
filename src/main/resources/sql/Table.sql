@@ -486,7 +486,6 @@ CREATE TABLE facility_info_detail (
 	rsrcIntr VARCHAR2(3000),
 	atpn VARCHAR2(2000),
 	lcInf VARCHAR2(1000),
-	area NUMBER(1000),
 	inqTag VARCHAR2(1000),
 	updYmd VARCHAR2(1000),
 	bnrImgFileUrl VARCHAR2(1000),
@@ -627,20 +626,266 @@ INSERT INTO facility_info_detail VALUES(
     '','','2021-06-18','https://www.eshare.go.kr/UserPortal/Upv/56436/fileDetail.do?file_sn=1',
     'N','Y','44131','N','LC006316','태조산공원'
 );
+ 
+INSERT INTO facility_info_detail VALUES(
+    'CC26N2535948','010502','족구장','B552815','천안시시설관리공단','Y',
+    'Y','<p><br></p>','<p><br></p>',
+    '','','2021-06-18','https://www.eshare.go.kr/UserPortal/Upv/56439/fileDetail.do?file_sn=1',
+    'N','Y','44131','N','LC006316','태조산공원'
+);
 
---예약정보테이블
---예약번호
---등록일
---마감일
---사용일
---시간 ( 09:00 ~ 10:00 이면 테이블상 9로 표시, 10:00~11:00이면 10으로 표시)
---등록 유저 (예약자)
---사용 시설
---종목 
---참가자
---모집인원
---상태
---담당자 승인
+INSERT INTO facility_info_detail VALUES(
+'CC26O2402862','010599','기타','B552815','천안시시설관리공단','Y',
+'N',
+'<p><br></p>',
+'<p><br></p>','','','2021-03-26','https://www.eshare.go.kr/UserPortal/Upv/56457/fileDetail.do?file_sn=1','N','Y','44133',
+'N','LC006320',
+     '천안종합운동장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13K0659488','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>풍세면게이트볼장(풍세게이트볼장)</p><p>이용문의</p><p>천안시 체육진흥과 ☏041-521-5759</p>',
+'<p><br></p>',
+'','게이트볼장;게이트볼;풍세;천안;동남구;','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/57998/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006500','풍세면게이트볼장(풍세게이트볼장)'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13K1044197','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>광덕면게이트볼장(광덕게이트볼장)</p><p><br></p><p>이용문의 : 천안시 체육진흥과 ☏041-521-5759</p>',
+'<p><br></p>',
+'','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58001/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006501','광덕면게이트볼장(광덕게이트볼장)'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13K2459103','010514','골프장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>풍세그라운드골프장<br></p><p><br></p><p>이용문의 : 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p><br></p>',
+'천안시 동남구 풍세면 풍서리 676-107번지(도로명주소 없음) 풍세그라운드골프장 (풍서천 인근)','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58013/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006503','풍세그라운드골프장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q0552535','010512','실내체육관','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>이용문의: 천안시 체육진흥과 ☏041-521-5759</p>',
+'<p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'동면 다목적체육관','동면;천안체육시설;다목적체육관;','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58065/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006507','동면다목적체육관'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q0952173','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>동면 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>동면 게이트볼장<br></p>',
+'동면 게이트볼장','동면게이트볼장;게이트볼;동면;천안;','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58071/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006509','동면게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q1342629','010599','기타','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>천안정<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>천안정<br></p>',
+'천안정','국궁;국궁장;천안정;천안국궁장;천안국궁;','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58079/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006511','천안정'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q1804040','010599','기타','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>천안승마장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p><br></p>',
+'천안승마장','승마장;승마;천안승마;천안승마장;','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58085/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006512','천안승마장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q2224023','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>목천 서리 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p><br></p>',
+'목천 서리 게이트볼장','목천;게이트볼;천안게이트볼;천안게이트볼장;목천읍;','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58105/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006513','목천서리게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q4525063','010512','실내체육관','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>목천 체육관<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p><br></p>',
+'목천 체육관','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58180/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006514','목천체육관'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q4709394','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>병천 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p><br></p>',
+'병천 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58190/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006516','병천게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q5236030','010512','실내체육관','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>아우내 체육관<br></p><p>이용문의: 사적관리과 시설팀 ☏<span style=''white-space: nowrap;''>041-521-2827</span></p>',
+'<p>아우내 체육관<br></p><p>이용문의: 사적관리과 시설팀 ☏<span style=''white-space: nowrap;''>041-521-2827</span></p>',
+'아우내 체육관','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58223/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006519','아우내체육관'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q5640951','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>북면 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>북면 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759</p>',
+'북면 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58246/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006522','북면게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13Q5855589','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>성남 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p><br></p>',
+'성남 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58256/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006524','성남게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13R0553345','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>수신 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>수신 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759</p>',
+'수신 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58272/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006528','수신게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13R1040370','010512','실내체육관','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>천안 신방 체육관(<span style=''background-color: rgb(255, 255, 255); color: rgb(32, 32, 32); font-size: 13px;''>041-592-8556)</span> </p><p><span style=''background-color: rgb(255, 255, 255); color: rgb(32, 32, 32); font-size: 13px;''><br></span></p><p><span style=''background-color: rgb(255, 255, 255);''><span style=''color: rgb(32, 32, 32); ''><span style=''font-size: 13px;''>이용문의: 신방체육관 천안시체육회 ☏041-592-8556</span></span> </span></p>',
+'<p>천안 신방 체육관(<span style=''background-color: rgb(255, 255, 255); color: rgb(32, 32, 32); font-size: 13px;''>041-592-8556)</span> </p><p><span style=''background-color: rgb(255, 255, 255); color: rgb(32, 32, 32); font-size: 13px;''><br></span></p><p><span style=''background-color: rgb(255, 255, 255);''><span style=''color: rgb(32, 32, 32); ''><span style=''font-size: 13px;''>이용문의: 신방체육관 천안시체육회 ☏041-592-8556</span></span></span></p>',
+'천안 신방 체육관(041-592-8556)','탁구;천안탁구;천안탁구장;게이트볼;신방동;','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58281/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006531','천안신방체육관'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13R1308554','010599','기타','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p style=''margin-left: 0px;''><span style=''color: rgb(255, 0, 0);''></span>도솔광장 인공암벽장은 현재 실내인공암벽장만 운영 중이며, 코로나 의심증상이 있는 경우 이용이 불가능합니다.<br><span style=''color: rgb(255, 0, 0); font-size: 10pt;''>※</span><span style=''font-size: 10pt;''> </span><span style=''color: rgb(255, 0, 0); font-size: 11pt;''>사용 전 신청서식(ⓛ시설물사용신청서, ②이용수칙, ③출입자명부)을 작성하신 다음 담당자 메일 혹은 팩스로 <br>&nbsp; &nbsp;접수하셔야 예약승인이 완료됩니다. (서명 또는 날인은 자필로 작성하셔야 합니다.)</span><br><br>1. 이용시간<br>&nbsp; 1) 1부&nbsp;:&nbsp;10:00 ~ 13:00<br>&nbsp; 2) 2부 : 14:00 ~ 17:00<br><br>2.&nbsp;이용 가능 인원 : 최대 4인<br><br>3. 이용금액 : 무료&nbsp;&nbsp;<br></p>',
+'<p>도솔광장 인공암벽장은 현재 실내인공암벽장만 운영 중에 있으며, 코로나 의심증상이 있는 경우 이용이 불가능합니다.<br><span style=''color: rgb(255, 0, 0); font-size: 10pt;''>※</span><span style=''font-size: 10pt;''>&nbsp;</span><span style=''color: rgb(255, 0, 0); font-size: 11pt;''>사용 전 신청서식(ⓛ시설물사용신청서, ②이용수칙, ③출입자명부)을 작성하신 다음 담당자 메일 혹은 팩스로<br>&nbsp; &nbsp;접수하셔야 예약승인이 완료됩니다.&nbsp;</span><span style=''color: rgb(255, 0, 0); font-size: 14.6667px;''>(서명 또는 날인은 자필로 작성하셔야 합니다.)</span><span style=''color: rgb(255, 0, 0); font-size: 11pt;''><br></span><br>&lt;주의사항&gt;<br>1. 실내 인공암벽장을 이용 시 안전장비를 반드시 착용하여야 함<br>2. 시설물 사용시간 준수 및 5인 이상 이용금지<br>3. 이용 중 마스크를 반드시 착용하여야 함<br>4. 시설물 사용 시 발생되는 도난, 시설물 파손 및 훼손에 대한 변상 및 원상복구<br>5. 체육시설 이용 중 발생하는 모든 사고에 대한 책임은&nbsp;사용자에게 있습니다.&nbsp;<br></p>',
+'도솔광장 인공암벽장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58289/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006533','도솔광장인공암벽장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13R1503667','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>중앙동 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>중앙동 게이트볼장<br></p>',
+'중앙동 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58294/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006534','중앙동게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13R1705027','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>원성1동 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>원성1동 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759</p>',
+'원성1동 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58297/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006535','원성1동게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13R1958816','010512','실내체육관','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>천안시 장애인 종합체육관(041-558-7356)<br></p>',
+'<p>천안시 장애인 종합체육관(041-558-7356)<br></p>',
+'천안시 장애인 종합체육관(041-558-7356)','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58300/fileDetail.do?file_sn=1','N','Y','44131','N',
+'LC006536','천안시장애인종합체육관(041-558-7356)'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13S0148861','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>성거읍 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>성거읍 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'성거읍 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58306/fileDetail.do?file_sn=1','N','Y','44133','N',
+'LC006538','성거읍게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13S0341110','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>성환 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>성환 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'성환 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58309/fileDetail.do?file_sn=1','N','Y','44133','N',
+'LC006539','성환게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13S0556367','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>쌍용3동 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>쌍용3동 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'쌍용3동 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58312/fileDetail.do?file_sn=1','N','Y','44133','N',
+'LC006540','쌍용3동게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13S0806224','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>쌍용1동 게이트볼장</p><p>(쌍용 배수지 게이트볼장)</p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>쌍용1동 게이트볼장</p><p>(쌍용 배수지 게이트볼장)</p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'쌍용1동 게이트볼장 (쌍용 배수지 게이트볼장)','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58315/fileDetail.do?file_sn=1','N','Y','44133','N',
+'LC006541','쌍용1동게이트볼장(쌍용배수지게이트볼장)'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD13S1300306','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>직산 삼은공원 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'<p>직산 삼은공원 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759<br></p>',
+'직산 삼은공원 게이트볼장','','2023-05-25','https://www.eshare.go.kr/UserPortal/Upv/58321/fileDetail.do?file_sn=1','N','Y','44133','N',
+'LC006543','직산삼은공원게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'CD14K5813615','010513','게이트볼장','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p>입장 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759</p>',
+'<p>입장 게이트볼장<br></p><p>이용문의: 천안시 체육진흥과 ☏041-521-5759</p>',
+'입장 게이트볼장','','2023-05-24','https://www.eshare.go.kr/UserPortal/Upv/58349/fileDetail.do?file_sn=1','N','Y','44133','N',
+'LC006545','입장게이트볼장'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'DF16N2241001','010516','야외운동시설','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p><br></p>',
+'<p><br></p>',
+'','','2023-06-20','https://www.eshare.go.kr/UserPortal/Upv/116348/fileDetail.do?file_sn=1','N','Y','44131','Y',
+'LC011404','목천읍도장리387'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'DF16N2451662','010516','야외운동시설','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p><br></p>',
+'<p><br></p>',
+'','','2023-06-20','https://www.eshare.go.kr/UserPortal/Upv/116354/fileDetail.do?file_sn=1','N','Y','44131','Y',
+'LC014119','성남면용원리372-7'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'DF16N2654325','010516','야외운동시설','4490399','충청남도 천안시 복지문화국 체육진흥과','Y','Y',
+'<p><br></p>',
+'<p><br></p>',
+'','','2023-06-20','https://www.eshare.go.kr/UserPortal/Upv/116360/fileDetail.do?file_sn=1','N','Y','44133','Y',
+'LC011408','입장면호당리235-3'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'EE25K0036224','010510','운동장','D555075','중소벤처기업진흥공단 충청연수원','Y','N',
+'<p><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>&lt; 수용인원 &gt; 80명<br>· 상업적 목적을 제외한 경우에 허용</span><br style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>· 중소벤처기업 재직자 교육시설로, 교육과정 운영에 지장이 없는 범위에서 이용 가능</span> </p>',
+'<p><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>· 기본(3시간) 1,000,000원</span><br style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>· 추가 1시간당 200,000원</span><br style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>* 부가세 별도</span> </p>',
+'','','2023-05-26','https://www.eshare.go.kr/UserPortal/Upv/156433/fileDetail.do?file_sn=1','N','Y','44133','N',
+'LC014658','충청연수원'
+);
+
+INSERT INTO facility_info_detail VALUES(
+'EE25M4616164','010512','실내체육관','D555075','중소벤처기업진흥공단 충청연수원','Y','N',
+'<p><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>&lt; 수용인원 &gt; 80명<br>· 상업적 목적을 제외한 경우에 허용</span><br style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>· 중소벤처기업 재직자 교육시설로, 교육과정 운영에 지장이 없는 범위에서 이용 가능</span> </p>',
+'<p><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>· 기본(3시간) 300,000원</span><br style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>· 추가 1시간당 50,000원</span><br style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''><span style=''color: rgb(102, 102, 102); font-size: medium; background-color: rgb(255, 255, 255);''>* 부가세 별도</span> </p>',
+'','','2023-05-26','https://www.eshare.go.kr/UserPortal/Upv/156534/fileDetail.do?file_sn=1','N','Y','44133','N',
+'LC014658','충청연수원'
+);
+
+select * from facility_info_detail;
+
+
 
   CREATE TABLE reservation_info (
     rsvtNo Number PRIMARY KEY,  --예약번호
@@ -780,8 +1025,3 @@ CREATE TABLE STUDENT_GRADE (
  grade_gift VARCHAR2(200),-- 혜택
  grade_name  VARCHAR2(50), --등급이름 골드,플래티넘 등등
 );
-
-
-
-
-

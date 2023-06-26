@@ -70,43 +70,16 @@ public class ReservationCalendar {
 
 		    model.addAttribute("values", valuesMap);
 		 }
-		    return "reservationCalendar";
+		    return "reservation/reservationCalendar";
 		
 	 }
-	 
-	 
-	 @RequestMapping("/reservationInsert")
-	    public String reservationInsert() {
-
-	        return "reservationInsert";
-	    }
-	 
-	 @RequestMapping("/Calendar")
-	    public String calendar() {
-
-	        return "calendar";
-	    }
 	 
 	 @RequestMapping("/Calendar2")
 	    public String calendar2() {
 
-	        return "calendar2";
+	        return "reservation/calendar2";
 	    }
-	 
-	 @RequestMapping("/newpage")
-	    public String reservationCalendar() {
-
-	        return "newpage";
-	    }
-	 
-	 @RequestMapping("/detail")
-	    public String detail() {
-
-	        return "detail";
-	    }
-	 
-
-
+	
 	}
 
 
