@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <html>
 	<head>
 		<!-- 합쳐지고 최소화된 최신 CSS -->
@@ -49,11 +50,43 @@
 					return false;
 				}
 				
+				$("#regForm").submit();
+				
+				/*
+				var idChkVal = $("#id_check").val();
+				if(idChkVal == "N"){
+					alert("중복확인 버튼을 눌러주세요.");
+				}else if(idChkVal == "Y"){
+					$("#regForm").submit();
+				}
+				*/
 			});
 			
 				
 			
 		})
+		
+		function fn_idChk(){
+			$.ajax({
+				url : "${path}/id_check",
+				type : "post",
+				dataType : "json",
+				data : {"loginId" : $("#loginId").val()},
+				success : function(data){
+					console.log(data);
+					if(data == 1){
+						alert("중복된 아이디입니다.");
+						return false;
+					}else if(data == 0){
+						$("#id_check").attr("value", "Y");
+						alert("사용가능한 아이디입니다.");
+					}
+				},
+				error : function(request, status, error) {
+					console.log(request, status, error)
+				}
+			})
+		}
 		
 		
 		
@@ -69,14 +102,17 @@
 	
 	
 		<section id="container" >
-			<form action="" method="post" style="width:80%; magin-left:0 auto; margin-right:0 auto;">
+			<form action="" method="post" id="regForm" style="width:80%; magin-left:0 auto; margin-right:0 auto;">
 				<div class="form-group has-feedback">
 					<label class="control-label" for="loginId">아이디</label>
-					<input class="form-control" type="text" id="loginId" name="loginId" placeholder="숫자와 영어로 4-10자"/>
+					<input class="form-control chk" type="text" id="loginId" name="loginId" placeholder="숫자와 영어로 4-10자"/>
+				<!-- 
+				 	<button type="button" id="id_check" onclick="fn_idChk();" value="N">중복확인</button>
+				 -->
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="password">패스워드</label>
-					<input class="form-control" type="password" id="password" name="password" placeholder="영문과 특수문자를 포함한 최소 8자" />
+					<input class="form-control chk" type="password" id="password" name="password" placeholder="영문과 특수문자를 포함한 최소 8자" />
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for=memberName>성명</label>

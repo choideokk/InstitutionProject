@@ -46,14 +46,13 @@ public class MemberServiceImpl implements MemberService {
 	public void logout(HttpSession session) {
 		// TODO Auto-generated method stub
 		session.removeAttribute("loginId"); // 세션 초기화
-		
-		
 	}
 	
 	@Override
-	public boolean member_id_check(String id) {
+	public int member_id_check(String loginId) {
 		// TODO Auto-generated method stub
-		return false;
+		int result = memberDao.idCheck(loginId);
+		return result;
 	}
 
 	@Override

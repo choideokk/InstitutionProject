@@ -21,5 +21,11 @@
 		(member_no_seq.nextval, #{loginId} , #{password},
 		#{memberName},#{email}, #{phoneNum}, sysdate  ,  #{userCode}, 0, 0 )
 	</insert>
+	
+	
+	<select id="id_check"  parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE login_id=#{loginId}
+	</select>
+	
 
 </mapper>

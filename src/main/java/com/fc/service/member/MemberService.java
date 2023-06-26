@@ -17,7 +17,7 @@ public interface MemberService {
 	public void logout(HttpSession session);
 	
 	//아이디 중복 확인
-	boolean member_id_check(String id);
+	int member_id_check(String loginId);
 	
 	//마이페이지에서 회원 정보 변경 저장
 	boolean member_update(MemberDto memberdto);
