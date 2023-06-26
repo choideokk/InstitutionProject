@@ -41,7 +41,7 @@
 												<strong>${data.rsrcNm}</strong>
 												<p>${data.addr}${data.daddr}</p>
 											</div>
-										</button> <a href="${path}/Calendar2"
+										</button> <a href="${path}/Calendar2?no=${data.rsrcNo}"
 											style="width: 100%; text-decoration: none; display: block; text-align: center; background: #0d6efd; color: white; padding: 10px;">예약하기</a>
 									</li>
 								</c:forEach>

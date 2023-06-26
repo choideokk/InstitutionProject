@@ -284,7 +284,7 @@ box-sizing: border-box;
         <div class="left">
             <div class="top">
                 <!-- 이미지 추가 -->
-                <img src="${path}/image/fa/${currentFc.rsrcNo}.jpg" width="100px" height="100px" />
+                <img src="${path}/image/facilities/${currentFc.rsrcNo}.jpg" width="100px" height="100px" />
             </div>
             <div class="bottom">
                 <!-- FullCalendar 추가 -->

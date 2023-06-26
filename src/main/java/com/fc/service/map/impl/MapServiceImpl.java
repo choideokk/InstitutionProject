@@ -174,4 +174,10 @@ public class MapServiceImpl implements MapService {
 
 		facilityDao.insertFacilitiesDetailInfo(sb.toString());
 	}
+
+	@Override
+	public List<FacilityDto> getSearchedFacilityList(String txt) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
