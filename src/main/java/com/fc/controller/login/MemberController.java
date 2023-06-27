@@ -30,21 +30,28 @@ public class MemberController {
 	
 	@PostMapping("/register")
 	public String registerAdmin_process(MemberDto memberDto) {
-		memberDto.setUserCode(CommonCode.USER_USER_TYPE_CUSTOMER);
-		// 회원가입 성공했는지 여부
-	    int result= memberService.member_id_check(memberDto.getLoginId());
+	    if (memberDto == null) {
+	        throw new IllegalArgumentException("memberDto cannot be null");
+	    }
+
+	    memberDto.setUserCode(CommonCode.USER_USER_TYPE_CUSTOMER);
+
 	    try {
-			if(result == 0 ) {
-				memberService.member_insert(memberDto);
-			}else if(result == 1) {
-				return "member/register";
-			}
-			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
-			// 존재하지 않는다면 -> register
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
-		return "redirect:/login";
+	        int result= memberService.member_id_check(memberDto.getLoginId());
+	        switch (result) {
+	            case 0:
+	                memberService.member_insert(memberDto);
+	                break;
+	            case 1:
+	                return "member/register";
+	            default:
+	                throw new RuntimeException("Unexpected result from member_id_check: " + result);
+	        }
+	    } catch (Exception e) {
+	        // Consider logging the exception here, so that you can see what went wrong
+	        throw new RuntimeException(e);
+	    }
+	    return "redirect:/login";
 	}
 	    
 

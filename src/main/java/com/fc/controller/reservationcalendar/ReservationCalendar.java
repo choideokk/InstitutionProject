@@ -2,12 +2,16 @@ package com.fc.controller.reservationcalendar;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,24 +30,19 @@ public class ReservationCalendar {
 	
 	@Autowired
 	MapService mapService;
-
-//	 @RequestMapping("/reservationCalendar")
-//	    public String reservationCalendar(Model model) {
-//	        List<ReservationCalendarDto> values = reservationCalendarService.findDb();  // DB에서 여러 값을 가져옵니다.
-//	        model.addAttribute("values", values);  // 값을 List로 Model 객체에 추가합니다.
-//	        
-//	        return "reservationCalendar";
-//	    }
 	 
 	 @RequestMapping("/reservationCalendar")
 	 public String reservationCalendar(
-		        @RequestParam("rsvfnm") String rsvfnm, 
+		        @RequestParam("rsvfNm") String rsvfNm, 
 		        @RequestParam("category") String category, 
 		        @RequestParam("date") String date, 
 		        Model model) {
 
+		 model.addAttribute("date", date);
+		 model.addAttribute("rsvfNm", rsvfNm);
+		 model.addAttribute("category", category);
 		    // do something with these values
-		 List<ReservationCalendarDto> values = reservationCalendarService.findDb2(rsvfnm, category, date);
+		 List<ReservationCalendarDto> values = reservationCalendarService.findDb2(rsvfNm, category, date);
 		 Map<String, ReservationCalendarDto> valuesMap = new HashMap<>();
 		 for (int i = 0; i < values.size(); i++) {
 		     int rsvtTime = values.get(i).getRsvtTime();
@@ -96,17 +95,43 @@ public class ReservationCalendar {
 	 
 	 
 	 @PostMapping("/Calendar3")
-	    public String calendar3(
-	            @RequestParam("selectedKeyName") String selectedKeyName,
-	            @RequestParam("date") String date,
-	            @RequestParam("rsvfnm") String rsvfnm,
-	            Model model) {
-
+	    public String calendar3(ReservationCalendarDto reservationCalendarDto,
+	            Model model, HttpSession session) {
+		 
+		 	String loginId = (String) session.getAttribute("loginId");
+		    reservationCalendarDto.setRsrcId(loginId);
+		 	
+		 
+		 int result = reservationCalendarService.createReservation(reservationCalendarDto);
+		
+		    
 			return "reservation/calendar3";
 		}
 	 
-	 
-	 
+	 //ㅇㅇ
+	 @PostMapping("/Calendar4")
+	 public String calendar4(ReservationCalendarDto reservationCalendarDto,
+	         Model model, HttpSession session) {
+
+	     String loginId = (String) session.getAttribute("loginId");
+	     int totalPeopleCnt = reservationCalendarDto.getTotalPeopleCnt();
+
+	     // totalPeopleCnt 값이 1일 경우, participant_id1에 loginId를 설정
+	     if (totalPeopleCnt == 1) {
+	         reservationCalendarDto.setParticipant_id1(loginId);
+	         reservationCalendarDto.setTotalPeopleCnt(2);
+	         reservationCalendarDto.setStatus(1);
+	         
+	     } else if (totalPeopleCnt == 2) {
+	         reservationCalendarDto.setParticipant_id2(loginId);
+	         reservationCalendarDto.setTotalPeopleCnt(3);
+	         reservationCalendarDto.setStatus(1);
+	     }
+	     
+	     int result = reservationCalendarService.updateReservation(reservationCalendarDto);
+
+	     return "reservation/calendar3";
+	 }
 	
 	}
 

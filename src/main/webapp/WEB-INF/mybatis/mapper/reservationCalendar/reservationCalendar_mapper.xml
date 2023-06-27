@@ -5,7 +5,24 @@
 						
 
 <mapper namespace="reservationCalendar_mapper">
-	
+
+	<insert id="insert_reservation" parameterType="ReservationCalendarDto">
+    insert into reservation_info(rsvtNo, dDate, rsvtTime, rsrcId, totalPeopleCnt, status, category, rsvfNm)
+    values ( reservation_info_no_seq.nextval, #{dDate}, #{rsvtTime}, #{rsrcId}, 1, 1, #{category}, #{rsvfNm} )
+</insert>
+
+	<update id="update_reservation" parameterType="ReservationCalendarDto">
+    UPDATE reservation_info
+    SET totalPeopleCnt = #{totalPeopleCnt},
+        status = #{status},
+        participant_id1 = #{participant_id1},
+        participant_id2 = #{participant_id2}
+    WHERE dDate = #{dDate}
+    AND rsvtTime = #{rsvtTime}
+    AND category = #{category} 
+    AND rsvfNm = #{rsvfNm}
+</update>
+
 <select id="select_reservation_list" resultType="ReservationCalendarDto">
     SELECT rsvtNo,
            rsvtTime,
@@ -13,7 +30,7 @@
            status,
            totalPeopleCnt
     FROM reservation_info
-    WHERE rsvfNm = #{rsvfnm} AND category = #{category} AND dDate = #{date}
+    WHERE rsvfNm = #{rsvfNm} AND category = #{category} AND dDate = #{date}
 </select>
 	
 </mapper>

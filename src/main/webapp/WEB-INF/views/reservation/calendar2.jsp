@@ -192,7 +192,7 @@ box-sizing: border-box;
     
     $(document).ready(function() {
         var selectedDate = null;
-        var selectedCategory = null;
+        var selectedCategory = $("#category").val();
 
         $('#calendar').fullCalendar({
             defaultView: 'month',
@@ -246,7 +246,8 @@ box-sizing: border-box;
         function sendAjaxRequest() {
             if (selectedDate && selectedCategory) {
                 var dateText = selectedDate.data('date');
-                var rsvfnm = $('#rsvfnm').val();
+                $('#rsvfNm').val("${currentFc.rsrcNm}");
+                var rsvfNm = $('#rsvfNm').val();
 
                 $.ajax({
                     url: "reservationCalendar",
@@ -254,7 +255,7 @@ box-sizing: border-box;
                     data: {
                         date: dateText,
                         category: selectedCategory,
-                        rsvfnm: rsvfnm
+                        rsvfNm: rsvfNm
                     },
                     success: function(data) {
                         $('#contentArea').html(data);
@@ -268,7 +269,7 @@ box-sizing: border-box;
 <body>
 <div class="hahaContainer">
 	<div class="haha">
-	<input type="hidden" id="rsvfnm" value="${currentFc.rsrcNm}" />
+	<input type="hidden" id="rsvfNm" value="${currentFc.rsrcNm}" />
 		<p>${currentFc.rsrcNm} ${currentFc.rsrcClsNm}</p>
 	</div>
 	<div class="haha2">

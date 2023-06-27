@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,13 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-String selectedKeyName = request.getParameter("selectedKeyName");
-String date = request.getParameter("date");
-String rsvfnm = request.getParameter("rsvfnm");
-%>
-<%= selectedKeyName %>
-<%= date %>
-<%= rsvfnm %>
+
+
+<p>Selected Key Name: <span>${selectedKeyName}</span></p>
+<p>Date: <span>${date}</span></p>
+<p>Reservation Name: <span>${rsvfnm}</span></p>
+
 </body>
 </html>
