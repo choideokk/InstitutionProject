@@ -62,14 +62,14 @@ public class MemberController {
 		MemberDto name = memberService.member_login(memberDto, session);
 		ModelAndView mav = new ModelAndView();
 		if (name != null) { // 로그인 성공 시
-			mav.setViewName("logout"); // 뷰의 이름
+			mav.setViewName("member/logout"); // 뷰의 이름
 			session.getAttribute("loginId");
 			session.getAttribute("memberName");
 			System.out.println((String) session.getAttribute("loginId"));
 			System.out.println((String) session.getAttribute("memberName"));
 
 		} else { // 로그인 실패 시
-			mav.setViewName("login");
+			mav.setViewName("member/login");
 			mav.addObject("message", "error");
 		}
 		return mav;

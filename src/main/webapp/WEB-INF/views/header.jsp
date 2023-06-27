@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <%
 String loginId = null;
 %>
@@ -46,13 +48,13 @@ String loginId = null;
 						loginId = (String) session.getAttribute("loginId");
 			    %>
 				<ul class="d-flex">
-							<li><a href="./test">로그인</a></li>
-							<li><a href="./register">회원가입</a></li>
+							<li><a href="${path}/login">로그인</a></li>
+							<li><a href="${path}/register">회원가입</a></li>
 						</ul>	
 				<%
 				} else{
 				%>
-					<li class="nav-item"><a class="nav-link text-primary" href="./logout">로그아웃</a></li>
+					<li class="nav-item"><a class="nav-link text-primary" href="${path}/logout">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
 				<%
 				}

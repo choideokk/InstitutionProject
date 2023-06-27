@@ -22,7 +22,7 @@
 	
 		<!-- 로그인 하지 않은 상태  -->
 		<c:if test="${loginId== null}">
-		<form name="form1" method="post" action="${path}/test">
+		<form name="form1" method="post" action="${path}/login">
 		
 			<table border="1" width="400px">
 				<tr>
