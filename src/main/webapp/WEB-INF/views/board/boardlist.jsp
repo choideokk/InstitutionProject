@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>       
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,7 +80,7 @@
     margin-top: 30px;
     margin-left: 260px;
   }
-  .search_area input{
+  .search_area input[type="text"]{
   	height: 30px;
     width: 250px;
   }
@@ -96,7 +98,7 @@
 <h1>목록페이지입니다.</h1>
 
 <div class="table_wrap">
-	<a href="/write" class="top_btn">게시판 등록</a>
+	<a href="${path}/write" class="top_btn">게시판 등록</a>
 	<table>
 		<thead>
 			<tr>
@@ -108,11 +110,17 @@
 				<th class="updatedate_width">조회수</th>				
 			</tr>
 		</thead>		
+		<tbody>
+		<c:if test="${fn:length(boardList) == 0}">
+			<tr>
+				<td colspan="6">검색 결과가 없습니다!</td>
+			</tr>
+		</c:if>
 		<c:forEach items="${boardList}" var="boardList">
 			<tr>
 				<td><c:out value="${boardList.postno}"/></td>
 				<td>
-					<a class="move" href='<c:out value="detail?postno=${boardList.postno}"/>'>
+					<a class="move" href='<c:out value="${path}/detail?postno=${boardList.postno}"/>'>
 						<c:out value="${boardList.title}"/>
 					</a>
 				</td>
@@ -120,26 +128,25 @@
                 <td><fmt:formatDate pattern="yyyy/MM/dd" value="${boardList.updatedate}"/>
                 <td><fmt:formatDate pattern="yyyy/MM/dd" value="${boardList.changedate}"/>             
 					<td><c:out value="${boardList.viewcnt}"/></td>
-			</tr>
-			
+			</tr>			
 		</c:forEach>	
+		</tbody>
 	</table>
 		
-	 <div class="search_wrap">
+	<form class="search_wrap" method="POST" action="${path}/searchBoard">
 		<div class="search_area">
-			<select name="type">
-				<option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
-				<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
-				<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
-				<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>작성자</option>
-				<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':'' }"/>>제목 + 내용</option>
-				<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':'' }"/>>제목 + 작성자</option>
-				<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW'?'selected':'' }"/>>제목 + 내용 + 작성자</option>
-			</select>		
-			<input type="text" name="keyword" value="${pageMaker.cri.keyword }">
-			<button>Search</button>
+			<label> 대소문자 구분
+				<input type="checkbox" name="isChecked" <c:if test="${searchObj.isChecked == 'on'}">checked</c:if> />
+			</label>
+			<select name="searchKeyword">
+				<option value="T" <c:if test="${searchObj.searchKeyword == 'T'}">selected</c:if>>제목</option>
+				<option value="W" <c:if test="${searchObj.searchKeyword == 'W'}">selected</c:if>>작성자</option>
+				<option value="TW" <c:if test="${searchObj.searchKeyword == 'TW'}">selected</c:if>>제목 + 작성자</option>
+			</select>
+			<input type="text" name="searchTxt" value="${searchObj.searchTxt}">
+			<button type="submit">Search</button>
 		</div>
-	</div>		
+	</form>
 	
 	
 <div class="w3-center">

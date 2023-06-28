@@ -7,49 +7,85 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="board_mapper">
 
 	<insert id="insert_contents" parameterType="BoardDto">
-
-	
-insert into board_infos(title, content, writer) values (#{title}, #{content}, #{writer})
-
-
+		insert into
+		board_infos(title, content, writer) values (#{title},
+		#{content},
+		#{writer})
 	</insert>
 
-	
-	<select id="list_contents" resultType="BoardDto" >
-		select postno,title,writer,
-		updatedate,changedate,viewcnt 
-		from board_infos		
 
-	</select> 
-	
-	<select id="list_view" resultType="BoardDto">
-		select postno,title,writer,content,
-		updatedate,changedate
-		from board_infos where postno=#{postno}
+	<select id="list_contents" resultType="BoardDto">
+		select
+		postno,title,writer,
+		updatedate,changedate,viewcnt
+		from board_infos
 
 	</select>
-	
-	
+
+	<select id="list_view" resultType="BoardDto">
+		select
+		postno,title,writer,content,
+		updatedate,changedate
+		from board_infos
+		where postno=#{postno}
+	</select>
+
+	<select id="search_boardList_by_searchDto"
+		parameterType="SearchDto" resultType="BoardDto">
+		select
+		postno, title, writer, updatedate, changedate, viewcnt
+		from
+		board_infos
+		<choose>
+			<when test="isChecked == 'on'">
+					<if test='searchKeyword == "T"'>
+						where title like '%'||#{searchTxt}||'%'
+					</if>
+					<if test='searchKeyword == "W"'>
+						where writer like '%'||#{searchTxt}||'%'
+					</if>
+					<if test='searchKeyword == "TW"'>
+						where title like '%'||#{searchTxt}||'%' OR writer like
+						'%'||#{searchTxt}||'%'
+					</if>
+			</when>
+			<otherwise>
+					<if test='searchKeyword == "T"'>
+						where LOWER(title) like '%'||LOWER(#{searchTxt})||'%'
+					</if>
+					<if test='searchKeyword == "W"'>
+						where LOWER(writer) like '%'||LOWER(#{searchTxt})||'%'
+					</if>
+					<if test='searchKeyword == "TW"'>
+						where LOWER(title) like '%'||LOWER(#{searchTxt})||'%' OR LOWER(writer) like
+						'%'||#{searchTxt}||'%'
+					</if>
+			</otherwise>
+		</choose>
+	</select>
+
 	<update id="list_count" parameterType="int">
-	  UPDATE board_infos SET viewcnt = viewcnt + 1 WHERE postno = #{postno}
+		UPDATE board_infos SET
+		viewcnt = viewcnt + 1 WHERE postno = #{postno}
 	</update>
-	
- <update id="list_update" parameterType="BoardDto">
+
+	<update id="list_update" parameterType="BoardDto">
 		UPDATE board_infos
-		   SET TITLE    =   #{title},
-		   	   CONTENT  =   #{content},
-		   	   changedate = sysdate
-		 WHERE postno = #{postno} 
+		SET
+		TITLE = #{title},
+		CONTENT = #{content},
+		changedate = sysdate
+		WHERE postno
+		= #{postno}
 	</update>
-	
-	
+
 	<delete id="list_delete" parameterType="BoardDto">
-		DELETE 
-		  FROM board_infos
-		 WHERE postno = #{postno}
+		DELETE
+		FROM board_infos
+		WHERE postno = #{postno}
 	</delete>
-	
-	
+
+
 
 
 

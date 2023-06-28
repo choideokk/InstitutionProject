@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.fc.dto.board.BoardDto;
 import com.fc.dto.board.ReplyDto;
+import com.fc.dto.facility.SearchDto;
 
 public interface BoardService {
 
@@ -19,6 +20,8 @@ public interface BoardService {
 	List<BoardDto> findBoardListBySearchKeywordMap(Map<String, String> map);
 
 	List<BoardDto> findBoardListBySearchKeywordMap2(Map<String, String> map);
+
+	List<BoardDto> findBoardListBySearchDto(SearchDto searchDto);
 
 	void viewCount(int postno);
 

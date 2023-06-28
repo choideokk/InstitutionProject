@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fc.dao.board.BoardDao;
 import com.fc.dto.board.BoardDto;
+import com.fc.dto.facility.SearchDto;
 import com.fc.service.board.BoardService;
 
 
@@ -88,6 +89,17 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		
 		boardDao.delete(postno);
+	}
+
+	@Override
+	public List<BoardDto> findBoardListBySearchDto(SearchDto searchDto) {
+		// TODO Auto-generated method stub
+		// dao로 가서 검색하고 받아오는 메소드
+		List<BoardDto> searchedList = boardDao.selectBoardListBySearchDto(searchDto);
+		for (BoardDto l : searchedList) {
+			System.out.println(l.toString());
+		}
+		return searchedList;
 	}
 
 }

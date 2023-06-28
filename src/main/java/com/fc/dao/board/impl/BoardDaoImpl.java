@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fc.dao.board.BoardDao;
 import com.fc.dto.board.BoardDto;
+import com.fc.dto.facility.SearchDto;
 
 
 
@@ -101,6 +102,13 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSessionTemplate.delete("board_mapper.list_delete",postno);
 
 	
+	}
+
+	@Override
+	public List<BoardDto> selectBoardListBySearchDto(SearchDto searchDto) {
+		// TODO Auto-generated method stub
+		List<BoardDto> list = sqlSessionTemplate.selectList("search_boardList_by_searchDto", searchDto);
+		return list;
 	}
 
 

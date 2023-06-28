@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fc.dto.board.BoardDto;
+import com.fc.dto.facility.SearchDto;
 import com.fc.service.board.BoardService;
 
 @Controller
@@ -64,24 +65,47 @@ public class BoardController {
 
 		
 	@GetMapping("/boardlist")
-	public String boardList(Model model, @RequestParam(name = "postNo", required = false)String postNo) {
+	public String boardList(Model model, @RequestParam(name = "postNo", required = false) String postNo, @ModelAttribute SearchDto searchObj) {
 
 		//Integer 받는 경우 : 숫자형이 아닌경우에 바로 오류
 		
 		//String 받는 경우 : 일단 받고, 숫자형 체크 -> 이후 분기 처리 조절
 		//String pt;
+		List<BoardDto> boardList;
 		
-		if (postNo == null) {
-			List<BoardDto> boardList = boardService.getBoardList();
-			model.addAttribute("boardList", boardList);
+		if (searchObj.getSearchTxt() == "") {
+			boardList = boardService.getBoardList();
 		} else {
-	        int postNoInt = Integer.parseInt(postNo);
-	        
-			BoardDto boardDto = new BoardDto();
-			boardDto.setPostno(postNoInt);
-			List<BoardDto> boardList = boardService.getBoardListbyBoardNumber(boardDto);
-			model.addAttribute("boardList", boardList);
+			boardList = boardService.findBoardListBySearchDto(searchObj);
+		}
+		
+		model.addAttribute("boardList", boardList);
+		
+//		if (postNo == null) {
+//			List<BoardDto> boardList = boardService.getBoardList();
+//			model.addAttribute("boardList", boardList);
+//		} else {
+//	        int postNoInt = Integer.parseInt(postNo);
+//	        
+//			BoardDto boardDto = new BoardDto();
+//			boardDto.setPostno(postNoInt);
+//			List<BoardDto> boardList = boardService.getBoardListbyBoardNumber(boardDto);
+//			model.addAttribute("boardList", boardList);
+//	
+//		}
+		
+		return "board/boardlist";
+	}
 	
+	@PostMapping("/searchBoard")
+	public String getSearchedList(SearchDto searchDto, Model model) {
+		// checkbox 체크되면 on, 아니면 null값으로 들어옴
+		System.out.println("여기로!!");
+		List<BoardDto> searchedList = boardService.findBoardListBySearchDto(searchDto);
+		model.addAttribute("boardList", searchedList);
+		model.addAttribute("searchObj", searchDto);
+		for (BoardDto l : searchedList) {
+			System.out.println(l.toString());
 		}
 		return "board/boardlist";
 	}

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class SearchDto {
+	String isChecked;
 	String searchTxt;
 	String searchKeyword;
 }
