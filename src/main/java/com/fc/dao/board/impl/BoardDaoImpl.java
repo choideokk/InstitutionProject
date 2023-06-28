@@ -12,6 +12,7 @@ import com.fc.dto.board.BoardDto;
 
 
 
+
 @Repository
 public class BoardDaoImpl implements BoardDao {
 
@@ -48,7 +49,7 @@ public class BoardDaoImpl implements BoardDao {
 				sqlSessionTemplate.selectList("board_mapper.list_contents_byNumber", boardDto);
 		
 		
-		return null;
+		return list;
 	}
 	@Override
 	public List<BoardDto> selectBoardListBySearchKeywordMap(Map<String, String> map) {
@@ -102,6 +103,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	
 	}
+
 
 
 

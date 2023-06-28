@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.fc.dto.board.BoardDto;
-import com.fc.dto.board.ReplyDto;
+
+
 
 public interface BoardService {
 
@@ -27,5 +28,11 @@ public interface BoardService {
 	void boardUpdate(BoardDto boardDto);
 
 	public void boardDelte(int postno);
+
+
+
+
+//페이징
+
 
 }

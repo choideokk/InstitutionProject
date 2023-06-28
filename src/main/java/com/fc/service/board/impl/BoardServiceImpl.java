@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.fc.dao.board.BoardDao;
 import com.fc.dto.board.BoardDto;
+
+import com.fc.model.Criteria;
 import com.fc.service.board.BoardService;
 
 
@@ -89,6 +91,8 @@ public class BoardServiceImpl implements BoardService {
 		
 		boardDao.delete(postno);
 	}
+
+
 
 }
 	

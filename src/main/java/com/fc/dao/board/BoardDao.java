@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.fc.dto.board.BoardDto;
 
+import com.fc.model.Criteria;
+
 public interface BoardDao {
 
 
@@ -30,7 +32,11 @@ public interface BoardDao {
 	public void update(BoardDto boardDto);
 	
     public void delete(int postno) ;
-	
 
-	
+
+    
+    //페이징
+
+
+
 }

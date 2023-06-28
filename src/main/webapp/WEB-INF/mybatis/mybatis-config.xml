@@ -14,9 +14,11 @@
     <typeAliases>
 		<typeAlias type="com.fc.dto.reservationCalendar.ReservationCalendarDto" alias="ReservationCalendarDto"/>
 		<typeAlias type="com.fc.dto.board.BoardDto" alias="BoardDto"/>
+		<typeAlias type="com.fc.dto.board.ReplyDto" alias="ReplyDto"/>
 		<typeAlias type="com.fc.dto.facility.FacilityDto" alias="FacilityDto"/>
 		<typeAlias type="com.fc.dto.facility.FcDetailDto" alias="FcDetailDto"/>
   	    <typeAlias type="com.fc.dto.member.MemberDto" alias="MemberDto"/> 
+  	    
     </typeAliases>
 
 </configuration>
