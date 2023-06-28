@@ -1,7 +1,5 @@
 package com.fc.dao.member.impl;
 
-
-import org.apache.ibatis.jdbc.SQL;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
