@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fc.dto.facility.FacilityDto;
-import com.fc.dto.facility.FcDetailDto;
 import com.fc.dto.facility.SearchDto;
 import com.fc.service.map.MapService;
 

@@ -24,11 +24,9 @@ String loginId = null;
 
 </head>
 <body>
-
-	<nav class="navbar navbar-expand-lg bg-light">
+	<nav class="navbar navbar-expand-lg bg-light" style="z-index: 11;">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">공공시설 예약</a>
-
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
@@ -52,7 +50,7 @@ String loginId = null;
 							<li><a href="./register">회원가입</a></li>
 						</ul>	
 				<%
-				}else{
+				} else{
 				%>
 					<li class="nav-item"><a class="nav-link text-primary" href="./logout">로그아웃</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>

@@ -25,7 +25,7 @@ public class MemberController {
 	/** 회원가입 */
 	@GetMapping("/register")
 	public String registerAdmin() {
-		return "register";
+		return "member/register";
 	}
 	
 	@PostMapping("/register")
@@ -37,27 +37,27 @@ public class MemberController {
 			if(result == 0 ) {
 				memberService.member_insert(memberDto);
 			}else if(result == 1) {
-				return "register";
+				return "member/register";
 			}
 			// 요기에서~ 입력된 아이디가 존재한다면 -> 다시 회원가입 페이지로 돌아가기 
 			// 존재하지 않는다면 -> register
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
-		return "redirect:/test";
+		return "redirect:/login";
 	}
 	    
 
 	/** 로그인 */
 
-	@GetMapping("/test")
+	@GetMapping("/login")
 	public String login(HttpSession session) {
 		String test = (String) session.getAttribute("loginId");
 		System.out.println(test);
-		return "login";
+		return "member/login";
 	}
 
-	@PostMapping("/test")
+	@PostMapping("/login")
 	public ModelAndView login_check(@ModelAttribute MemberDto memberDto, HttpSession session) {
 		MemberDto name = memberService.member_login(memberDto, session);
 		ModelAndView mav = new ModelAndView();
@@ -79,7 +79,7 @@ public class MemberController {
 	@PostMapping("/logout")
 	public ModelAndView logout(HttpSession session, ModelAndView mav) {
 		memberService.logout(session);
-		mav.setViewName("redirect:/test");
+		mav.setViewName("redirect:/login");
 		mav.addObject("message", "logout");
 		return mav;
 	}

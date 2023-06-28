@@ -941,17 +941,30 @@ select member_no_seq.nextval from dual;
 --추천수
 --신고수
 --조회수
-    CREATE TABLE board_infos (
-        postNo Number,
-        writer VARCHAR2(100),
-        updateDate Date,
-        title VARCHAR2(100),
-        content VARCHAR2(3000),
-        recommend Number,
-        report Number,
-        viewCnt Number
-    );
-    
+create table board_infos(
+    postno number generated always as IDENTITY,
+    title varchar2(150),
+    content varchar2(2000) ,
+    writer varchar2(50) ,
+    updatedate date default sysdate,
+    changedate date default sysdate,
+    recommend NUMBER,
+    report NUMBER,
+    viewCnt NUMBER default 0,
+    constraint board_infos PRIMARY key(postno)
+);
+
+DROP TABLE board_infos;
+
+ALTER TABLE board_infos MODIFY(postno GENERATED AS IDENTITY (START WITH 1));
+
+CREATE SEQUENCE board_infos_seq 
+INCREMENT BY 1 
+START WITH 1 
+MINVALUE 1 
+MAXVALUE 9999999999 
+NOCYCLE
+NOCACHE;
 
 select * from board_infos;
 

@@ -34,13 +34,13 @@ public class BoardController {
 	public String index() {
 		
 
-		return "test";
+		return "board/test";
 	}
 
 	@RequestMapping("/testboard")
 	public String index2() {
 
-		return "testboard";
+		return "board/testboard";
 	}
 
 	
@@ -52,7 +52,7 @@ public class BoardController {
 		
 		log.info(" 글쓰기 페이지 진입했음");
 
-		return "/write";	
+		return "board/write";	
 
 	}
 
@@ -90,7 +90,7 @@ public class BoardController {
 			
 	
 		}
-		return "boardlist";
+		return "board/boardlist";
 	}
 	
 	
@@ -103,18 +103,17 @@ public class BoardController {
 		BoardDto dto =boardService.getdetail(postno);
 		boardService.viewCount(postno);
 		
-		return "viewPage";
+		return "board/viewPage";
 			
 		
 	}
 	
-
 	
 	
 	@GetMapping("/update")
 	public String updateView(BoardDto boardDto, Model model) {
 		model.addAttribute("viewPage", boardDto);
-		return "updateView";
+		return "board/updateView";
 	}
 	
 	@PostMapping("/update")
@@ -122,7 +121,7 @@ public class BoardController {
 		BoardDto dto =boardService.getdetail(boardDto.getPostno());
 		model.addAttribute("viewPage", dto);
 		boardService.boardUpdate(boardDto);
-		return "updateView";
+		return "board/updateView";
 	}
 	
 	@PostMapping("/updateView")
