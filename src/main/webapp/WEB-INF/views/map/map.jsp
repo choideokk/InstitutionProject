@@ -1,61 +1,78 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ page import="java.util.*" %>
-		<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-			<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
-			<!DOCTYPE html>
-			<html>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+<!DOCTYPE html>
+<html>
 
-			<head>
-				<meta charset="UTF-8">
-				<title>Insert title here</title>
-				<link href="${path}/css/reset.css" rel="stylesheet" type="text/css" />
-				<link href="${path}/css/map.css" rel="stylesheet" type="text/css" />
-			</head>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="${path}/css/reset.css" rel="stylesheet" type="text/css" />
+<link href="${path}/css/map.css" rel="stylesheet" type="text/css" />
+</head>
 
-			<body>
-			<%@ include file="../header.jsp"%>
-				<div style="position: absolute; top: 0; width: 100%; height: 100%; overflow-x: hidden;">
-					<div id="map" style="width: 100%; height: 100%;"></div>
-					<div class="rightSideAreas" style="right: 0px; height: 100%; padding: 10px; padding-bottom: 55px; padding-top: 30px;">
-						<div style="height: 100%;">
-							<p>천안시 체육시설 목록..</p>
-							<div style="margin-bottom: 15px;">
-								<p>체육시설 검색</p>
-								<form method="POST">
-									<input type="text" name="searchTxt" placeholder="체육시설명을 입력해주세요" />
-									<button type="submit">검색하기</button>
-									<button type="button">초기화</button>
-								</form>
-							</div>
-							<ul style="height: 100%; overflow-y: scroll; margin-bottom: 20px;">
-								<c:forEach var='data' items="${fcList}">
-									<li style="margin-bottom: 10px;">
-										<button style="width: 100%; background: white; border: 0; display: flex;"
-											type="button" data-lot="${data.lot}" data-lat="${data.lat}"
-											class="eachPosBtn">
-											<div>
-												<img src="${path}/image/facilities/${data.rsrcNo}.jpg" width="100px"
-													height="100px" />
-											</div>
-											<div>
-												<strong>${data.rsrcNm}</strong>
-												<p>${data.addr}${data.daddr}</p>
-											</div>
-										</button> <a href="${path}/Calendar2?no=${data.rsrcNo}"
-											style="width: 100%; text-decoration: none; display: block; text-align: center; background: #0d6efd; color: white; padding: 10px;">예약하기</a>
-									</li>
-								</c:forEach>
-							</ul>
-						</div>
-						<button type="button" class="closeSideBtn"></button>
-					</div>
+<body>
+	<%@ include file="../header.jsp"%>
+	<div
+		style="position: absolute; top: 0; width: 100%; height: 100%; overflow-x: hidden;">
+		<div id="map" style="width: 100%; height: 100%;"></div>
+		<div class="rightSideAreas"
+			style="right: 0px; height: 100%; padding: 15px; padding-top: 30px;">
+			<div style="height: 100%; overflow-y: hidden;">
+				<p>천안시 체육시설 목록..</p>
+				<div style="margin-bottom: 15px;">
+					<p>체육시설 검색</p>
+					<form method="POST" name="searchForm">
+						<select name="searchKeyword">
+							<option value="rsrcNm"
+								<c:if test="${searchDto.searchKeyword == 'rsrcNm'}">selected</c:if>>시설명</option>
+							<option value="addr"
+								<c:if test="${searchDto.searchKeyword == 'addr'}">selected</c:if>>주소지</option>
+						</select> <input type="text" name="searchTxt" placeholder="체육시설명을 입력해주세요"
+							required value="${searchDto.searchTxt}" />
+						<button type="submit">검색</button>
+						<button type="button" class="txtResetBtn" style="display: block;">초기화</button>
+					</form>
 				</div>
+				<button type="button" class="resetBtn" style="border: 0; padding: 0; background: none; position: relative; right: -60%;">검색 결과 초기화</button>
+				<ul
+					style="height: 80%; overflow-y: scroll; margin-bottom: 20px; padding: 0;">
+					<c:if test="${fn:length(fcList) == 0}">
+						<li style="margin-bottom: 10px;">검색 결과가 없습니다.</li>
+					</c:if>
+					<c:forEach var='data' items="${fcList}">
+						<li style="margin-bottom: 10px;">
+							<button
+								style="width: 100%; background: white; border: 0; display: flex;"
+								type="button" data-lot="${data.lot}" data-lat="${data.lat}"
+								class="eachPosBtn">
+								<div>
+									<img src="${path}/image/facilities/${data.rsrcNo}.jpg"
+										width="100px" height="100px" />
+								</div>
+								<div>
+									<strong>${data.rsrcNm}</strong>
+									<p>${data.addr}${data.daddr}</p>
+								</div>
+							</button> 
+							<a href="${path}/Calendar2?no=${data.rsrcNo}"
+							style="width: 100%; text-decoration: none; display: block; text-align: center; background: #0d6efd; color: white; padding: 10px;">예약하기</a>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<button type="button" class="closeSideBtn"></button>
+		</div>
+	</div>
 
-				<script type="text/javascript"
-					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}&libraries=services,clusterer,drawing"></script>
-				<script type="text/javascript" src="${path}/js/map.js"></script>
-				<script type="text/javascript">
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey}&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="${path}/js/map.js"></script>
+	<script type="text/javascript">
 					var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 					var originalList = '${parsedList}';
 					var path = '${path}';
@@ -92,6 +109,6 @@
 						displayMarker(parsedList[i], path);
 					}	
 				</script>
-			</body>
+</body>
 
-			</html>
+</html>
