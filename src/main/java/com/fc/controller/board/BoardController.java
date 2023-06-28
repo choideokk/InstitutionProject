@@ -4,6 +4,9 @@ package com.fc.controller.board;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -65,7 +68,8 @@ public class BoardController {
 
 		
 	@GetMapping("/boardlist")
-	public String boardList(Model model, @RequestParam(name = "postNo", required = false) String postNo, @ModelAttribute SearchDto searchObj) {
+	public String boardList(Model model, @ModelAttribute SearchDto searchObj) {
+	// public String boardList(Model model, @RequestParam(name = "postNo", required = false) String postNo, @ModelAttribute SearchDto searchObj) {
 
 		//Integer 받는 경우 : 숫자형이 아닌경우에 바로 오류
 		
@@ -100,7 +104,6 @@ public class BoardController {
 	@PostMapping("/searchBoard")
 	public String getSearchedList(SearchDto searchDto, Model model) {
 		// checkbox 체크되면 on, 아니면 null값으로 들어옴
-		System.out.println("여기로!!");
 		List<BoardDto> searchedList = boardService.findBoardListBySearchDto(searchDto);
 		model.addAttribute("boardList", searchedList);
 		model.addAttribute("searchObj", searchDto);
@@ -121,10 +124,24 @@ public class BoardController {
 		boardService.viewCount(postno);
 		
 		return "board/viewPage";
-			
-		
 	}
 	
+	@PostMapping("/likes")
+	public String likesUp(@RequestParam("postno") int postno , Model model, HttpSession session) {
+		Map<String, String> likeInfo = new HashMap<String, String>();
+		likeInfo.put("likeUserId", (String)session.getAttribute("loginId"));
+		likeInfo.put("likePostNo", Integer.toString(postno));
+//		model.addAttribute("viewPage",boardService.getdetail(postno));
+		
+		int result = boardService.likeBoard(likeInfo);
+		if (result == 0) {
+			System.out.println("추천 중복!");
+		} else {
+			System.out.println("정상 처리!");
+		}
+		// 좋아요 취소 기능..쩝
+		return "redirect:/detail?postno=" + postno;
+	}
 	
 	
 	@GetMapping("/update")

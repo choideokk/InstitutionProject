@@ -12,6 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{content},
 		#{writer})
 	</insert>
+	
+	<insert id="insert_likes_info" parameterType="HashMap">
+		insert into board_likes (postno, login_id) values (#{likePostNo}, #{likeUserId})
+	</insert>
 
 
 	<select id="list_contents" resultType="BoardDto">
@@ -67,6 +71,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="list_count" parameterType="int">
 		UPDATE board_infos SET
 		viewcnt = viewcnt + 1 WHERE postno = #{postno}
+	</update>
+	
+	<update id="update_board_likesUp" parameterType="HashMap">
+		UPDATE board_infos SET
+		recommend = recommend + 1 WHERE postno = #{likePostNo}
 	</update>
 
 	<update id="list_update" parameterType="BoardDto">

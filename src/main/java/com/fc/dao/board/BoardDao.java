@@ -33,6 +33,8 @@ public interface BoardDao {
 	public void update(BoardDto boardDto);
 	
     public void delete(int postno) ;
+    
+    public int insertBoardLike(Map<String, String> infoMap);
 	
 
 	

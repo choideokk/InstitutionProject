@@ -113,7 +113,7 @@
 		<tbody>
 		<c:if test="${fn:length(boardList) == 0}">
 			<tr>
-				<td colspan="6">검색 결과가 없습니다!</td>
+				<td>검색 결과가 없습니다!</td>
 			</tr>
 		</c:if>
 		<c:forEach items="${boardList}" var="boardList">

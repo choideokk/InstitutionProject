@@ -30,5 +30,7 @@ public interface BoardService {
 	void boardUpdate(BoardDto boardDto);
 
 	public void boardDelte(int postno);
+	
+	public int likeBoard(Map<String, String> map);
 
 }

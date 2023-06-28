@@ -96,10 +96,14 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		// dao로 가서 검색하고 받아오는 메소드
 		List<BoardDto> searchedList = boardDao.selectBoardListBySearchDto(searchDto);
-		for (BoardDto l : searchedList) {
-			System.out.println(l.toString());
-		}
 		return searchedList;
+	}
+
+	@Override
+	public int likeBoard(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		int result = boardDao.insertBoardLike(map);
+		return result;
 	}
 
 }
