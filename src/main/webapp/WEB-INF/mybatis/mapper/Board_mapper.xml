@@ -11,9 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 insert into board_infos(title, content, writer) values (#{title}, #{content}, #{writer})
 
-
 	</insert>
 
+	
+	
 	
 	<select id="list_contents" resultType="BoardDto" >
 		select postno,title,writer,
@@ -26,6 +27,7 @@ insert into board_infos(title, content, writer) values (#{title}, #{content}, #{
 		select postno,title,writer,content,
 		updatedate,changedate
 		from board_infos where postno=#{postno}
+		order by postno desc
 
 	</select>
 	
@@ -50,6 +52,7 @@ insert into board_infos(title, content, writer) values (#{title}, #{content}, #{
 	</delete>
 	
 	
+
 
 
 

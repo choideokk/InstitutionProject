@@ -44,7 +44,7 @@ textarea{
     height: 41px;
     line-height: 39px;
     text-align : center;
-    margin-left : 30px;
+    margin-left : 80px;
     cursor : pointer;
 }
 .btn_wrap{
@@ -53,7 +53,45 @@ textarea{
 }
 #delete_btn{
 	background-color: #f3e3e7;
+
 }
+
+
+ input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    /* Style for the comments table */
+    table {
+        width: 700px;
+        border-collapse: collapse;
+    }
+    td {
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    tr:hover {
+        background-color: #ddd;
+    }
+
 </style>
 
 
@@ -99,29 +137,55 @@ textarea{
 	<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
 		<a class="btn" id="update_btn">수정하기</a>
-		<a class="btn" id="delete_btn" >삭제</a>
-		<a class="btn" id="cancel_btn">수정 취소</a>
-
+		<a class="btn" id="delete_btn" >게시글삭제</a>
 	</div>
 
+</form>
 
-
-
-
-<div style="width:700px; margin-top:30px; text-align:center;">
+   <h1>댓글 목록</h1>
     
+    <table>
+        <thead>
+            <tr>
+                <th>등록일</th>
+                <th>작성자</th>
+                <th>내용</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${replylist}" var="replylist">
+                <tr>
+                
+                    <td><fmt:formatDate value="${replylist.date}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+                    <td>${replylist.content}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 	
 
-	<br><br>
-         <textarea rows="5" cols="80" id="replytext"
-             placeholder="댓글을 작성하세요"></textarea>
-         <br>
-    
-         <button type="button" id="btnReply">댓글쓰기</button>
+<h1>댓글입력</h1>
 
-</div>
+  <form action="comments" method="post">
+    <input type="text" name="name" placeholder="" required><br>
+    <textarea name="replyText" placeholder="" required></textarea><br>
+    <input type="submit" value="작성">
 </form>
+
+<table>
+    <c:forEach var="comment" items="${comments}">
+        <tr>
+            <td>
+                ${comment.name}
+<%--                 (<fmt:formatDate value="${comment.regDate}" pattern="yyyy-MM-dd a HH:mm:ss" />)<br>
+ --%>                ${comment.replyText}
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 <script>
+
 
 
  	let form = $("#infoForm");		// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
@@ -168,8 +232,6 @@ textarea{
 
 	});	
 	
-
-
 	
 </script>
 

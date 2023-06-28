@@ -152,10 +152,10 @@
   <a href="#" class="w3-button">&raquo;</a>
 </div>
 </div>
-
 	
 	
 </div> 
+
 <!-- 
 <script>
 $(document).ready(function(){
@@ -228,3 +228,6 @@ $(document).ready(function(){
 	});
 	
 </script> -->
+</body>
+
+</html>

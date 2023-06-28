@@ -91,12 +91,7 @@ textarea{
 		<label>게시판 수정일</label>
 		<input readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${viewPage.changedate}"/>' >
 	</div>		
-	<!-- <div class="btn_wrap">
-		<a class="btn" id="list_btn">목록 페이지</a> 
-		<button type="submit" class="update_btn">저장</button>
-		<button type="submit" class="cancel_btn">취소</button>
-		<a class="btn" id="cancel_btn">수정 취소</a>
-	</div> -->
+	
 	
 	<div class="btn_wrap">
 		<a class="btn" id="update_btn">저장하기</a>
@@ -114,20 +109,9 @@ textarea{
 		<input type="hidden" name="keyword" value="${cri.keyword }">	
 	</form> 
 	
-	
-<!-- 	  
-  <script type="text/javascript">
-		$(document).ready(function(){
-			
-			$(".cancel_btn").on("click", function(){
-				event.preventDefault();
-				location.href = "/boardlist";
-			})
-		})
-	</script>
--->
 
-<script> 
+
+<script>
 
 
 let form = $("#infoForm");	// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)

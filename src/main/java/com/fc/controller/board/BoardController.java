@@ -1,7 +1,6 @@
 
 package com.fc.controller.board;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fc.dto.board.BoardDto;
+
+import com.fc.model.Criteria;
 import com.fc.service.board.BoardService;
 
 @Controller
@@ -31,6 +32,7 @@ public class BoardController {
 	
 	@RequestMapping("/test")
 	public String index() {
+		
 
 		return "test";
 	}
@@ -50,7 +52,7 @@ public class BoardController {
 		
 		log.info(" 글쓰기 페이지 진입했음");
 
-		return "write";	
+		return "/write";	
 
 	}
 
@@ -64,7 +66,7 @@ public class BoardController {
 
 		
 	@GetMapping("/boardlist")
-	public String boardList(Model model, @RequestParam(name = "postNo", required = false)String postNo) {
+	public String boardList(Model model, @RequestParam(name = "postNo", required = false)String postNo ,Criteria cri) {
 
 		//Integer 받는 경우 : 숫자형이 아닌경우에 바로 오류
 		
@@ -74,6 +76,9 @@ public class BoardController {
 		if (postNo == null) {
 			List<BoardDto> boardList = boardService.getBoardList();
 			model.addAttribute("boardList", boardList);
+			
+			//
+	
 		} else {
 	        int postNoInt = Integer.parseInt(postNo);
 	        
@@ -81,6 +86,8 @@ public class BoardController {
 			boardDto.setPostno(postNoInt);
 			List<BoardDto> boardList = boardService.getBoardListbyBoardNumber(boardDto);
 			model.addAttribute("boardList", boardList);
+			
+			
 	
 		}
 		return "boardlist";
@@ -101,8 +108,7 @@ public class BoardController {
 		
 	}
 	
-	
-	
+
 	
 	
 	@GetMapping("/update")
@@ -138,9 +144,18 @@ public class BoardController {
 
 		System.out.println("삭제 삭제 ");		
 		return "redirect:/boardlist";
+	
 		
 	}
+	
 
+
+
+
+	
+}
+	
+	
 	
 	
 //	@PostMapping("/detail")
@@ -209,7 +224,7 @@ public class BoardController {
 	        return "redirect:/boardlist";
 	    }
 	*/
-}	
+
 	
 	
 	//2번안됨 
