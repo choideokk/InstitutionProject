@@ -6,10 +6,11 @@
 <mapper namespace="member_mapper">
 
 
-  <select id="login" parameterType="MemberDto"
-  resultType="MemberDto">
+	<select id="login" parameterType="MemberDto"
+		resultType="MemberDto">
 		select LOGIN_ID,PASSWORD,member_name from member
-		where login_id=#{loginId} AND password=#{password}
+		where
+		login_id=#{loginId} AND password=#{password}
 	</select>
 
 
@@ -19,23 +20,32 @@
 		insert into Member
 		values
 		(member_no_seq.nextval, #{loginId} , #{password},
-		#{memberName},#{birth},#{email}, #{phoneNum}, sysdate  ,  #{userCode}, 0, 0 )
+		#{memberName},#{birth},#{email}, #{phoneNum}, sysdate , #{userCode},
+		0, 0 )
 	</insert>
-	
-	
-	<select id="id_check"  parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM member WHERE login_id=#{loginId}
+
+
+	<select id="id_check" parameterType="String" resultType="int">
+		SELECT
+		COUNT(*) FROM member WHERE login_id=#{loginId}
 	</select>
-	
-	
+
+
+
+   <select id="memberInfo" parameterType="String" resultType="MemberDto">
+		SELECT LOGIN_ID,PASSWORD,MEMBER_NAME,EMAIL,PHONE_NUM
+		FROM member WHERE login_id=#{loginId}
+	</select>
+   
+
 	<update id="memberUpdate">
-	UPDATE MP_MEMBER SET 
+		UPDATE MEMBER SET
 		PASSWORD = #{password},
-		MEMBERNAME = #{memberName},
 		EMAIL=#{email},
-		PHONENUM=#{phoneNum}
-		WHERE LOGINID = #{loginId}
+		MEMBER_NAME=#{memberName},
+		PHONE_NUM=#{phoneNum}
+		WHERE LOGIN_ID =#{loginId}
 	</update>
-	
+
 
 </mapper>

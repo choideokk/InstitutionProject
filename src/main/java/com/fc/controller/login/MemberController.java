@@ -94,6 +94,37 @@ public class MemberController {
 		return result;
 
 	}
+	
+	
+	//화원정보 불러오기 
+	@GetMapping("/memberInfo")
+	public String memberInfo(HttpSession session,Model model) {
+		
+		//세션 객체 안에 있는 ID정보 저장
+		String id = (String) session.getAttribute("loginId");
+	
+
+		//서비스안의 회원정보보기 메서드 호출
+		MemberDto memberDto =  memberService.member_select(id);
+
+		//정보저장 후 페이지 이동
+		model.addAttribute("memberDto", memberDto);
+		
+	
+		
+		return "member/myPage";
+		
+	}
+	
+	//회원정보 업데이트
+	@PostMapping("/memberUpdate")
+	public String memberUpdate(MemberDto memberDto,HttpSession session) {
+		memberService.member_update(memberDto);
+		session.invalidate();
+		return "redirect:/login";
+		
+	}
+	
 
 
 
