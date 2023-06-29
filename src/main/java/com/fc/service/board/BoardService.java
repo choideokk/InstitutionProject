@@ -31,6 +31,6 @@ public interface BoardService {
 
 	public void boardDelte(int postno);
 	
-	public int likeBoard(Map<String, String> map);
+	public int controlBoardInfo(Map<String, String> map);
 
 }

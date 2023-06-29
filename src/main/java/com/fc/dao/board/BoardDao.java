@@ -34,7 +34,7 @@ public interface BoardDao {
 	
     public void delete(int postno) ;
     
-    public int insertBoardLike(Map<String, String> infoMap);
+    public int insertBoardOpinion(Map<String, String> infoMap);
 	
 
 	

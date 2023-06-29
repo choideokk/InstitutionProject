@@ -13,8 +13,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{writer})
 	</insert>
 	
-	<insert id="insert_likes_info" parameterType="HashMap">
-		insert into board_likes (postno, login_id) values (#{likePostNo}, #{likeUserId})
+	<insert id="insert_opinion_info" parameterType="HashMap">
+		insert into board_opinions (postno, opinion_type, login_id) values (#{targetPostNo}, #{type}, #{sendUserId})
 	</insert>
 
 
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list_view" resultType="BoardDto">
 		select
 		postno,title,writer,content,
-		updatedate,changedate
+		updatedate,changedate, recommend, report
 		from board_infos
 		where postno=#{postno}
 	</select>
@@ -73,9 +73,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		viewcnt = viewcnt + 1 WHERE postno = #{postno}
 	</update>
 	
-	<update id="update_board_likesUp" parameterType="HashMap">
+	<update id="update_board_infoCount" parameterType="HashMap">
 		UPDATE board_infos SET
-		recommend = recommend + 1 WHERE postno = #{likePostNo}
+		<if test='type == "1"'>
+			recommend = recommend + 1 
+		</if>
+		<if test='type == "2"'>
+			report = report + 1
+		</if>
+		WHERE postno = #{targetPostNo}
 	</update>
 
 	<update id="list_update" parameterType="BoardDto">

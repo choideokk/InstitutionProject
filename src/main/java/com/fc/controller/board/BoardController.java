@@ -1,7 +1,6 @@
 
 package com.fc.controller.board;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fc.dto.board.BoardDto;
 import com.fc.dto.facility.SearchDto;
@@ -126,21 +126,16 @@ public class BoardController {
 		return "board/viewPage";
 	}
 	
-	@PostMapping("/likes")
-	public String likesUp(@RequestParam("postno") int postno , Model model, HttpSession session) {
-		Map<String, String> likeInfo = new HashMap<String, String>();
-		likeInfo.put("likeUserId", (String)session.getAttribute("loginId"));
-		likeInfo.put("likePostNo", Integer.toString(postno));
-//		model.addAttribute("viewPage",boardService.getdetail(postno));
-		
-		int result = boardService.likeBoard(likeInfo);
-		if (result == 0) {
-			System.out.println("추천 중복!");
-		} else {
-			System.out.println("정상 처리!");
-		}
-		// 좋아요 취소 기능..쩝
-		return "redirect:/detail?postno=" + postno;
+	// 기존에 신고한적이 있는지 결과값을 리턴받아서 ajax로 전달..
+	@ResponseBody
+	@PostMapping("/action_proc")
+	public int like_proc(@RequestParam("postno") int postno, @RequestParam("type") String type, HttpSession session) {
+		Map<String, String> commonInfo = new HashMap<String, String>();
+		commonInfo.put("sendUserId", (String)session.getAttribute("loginId"));
+		commonInfo.put("type", type);
+		commonInfo.put("targetPostNo", Integer.toString(postno));
+		int result = boardService.controlBoardInfo(commonInfo);
+		return result;
 	}
 	
 	

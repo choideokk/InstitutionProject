@@ -68,9 +68,10 @@ textarea {
 
 	<div>
 	<h1>조회 페이지</h1>
-	<form method="POST" action="${path}/likes?postno=${viewPage.postno}">
-		<button type="submit">추천수 테스트</button>
-		<button type="submit">신고 테스트</button>
+	<p>${status}</p>
+	<form method="POST" action="" name="opinionForm" id="opinionForm">
+		<button type="button" class="likesBtn">추천하기</button>
+		<button type="button" class="reportBtn">신고하기</button>
 	</form>
 	<form id="updateForm" action="/update" method="post">
 		<div class="input_wrap">
@@ -79,7 +80,15 @@ textarea {
 		</div>
 		<div class="input_wrap">
 			<label>조회수</label> <input name="viewcnt" readonly="readonly"
-				value=' <c:out value="${viewPage.viewcnt }"/>'>
+				value=' <c:out value="${viewPage.viewcnt}"/>'>
+		</div>
+		<div class="input_wrap">
+			<label>추천수</label> <input name="recommend" readonly="readonly"
+				value=' <c:out value="${viewPage.recommend}"/>'>
+		</div>
+		<div class="input_wrap">
+			<label>신고수</label> <input name="report" readonly="readonly"
+				value=' <c:out value="${viewPage.report}"/>'>
 		</div>
 		<div class="input_wrap">
 			<label>게시판 제목</label> <input name="title" readonly="readonly"
@@ -96,7 +105,7 @@ textarea {
 		</div>
 		<div class="input_wrap">
 			<label>게시판 등록일</label> <input readonly="readonly"
-				value='<fmt:formatDate pattern="yyyy/MM/dd" value="${viewPage.updatedate }"/>'>
+				value='<fmt:formatDate pattern="yyyy/MM/dd" value="${viewPage.updatedate}"/>'>
 		</div>
 		<div class="input_wrap">
 			<label>게시판 수정일</label> <input readonly="readonly"
@@ -116,12 +125,13 @@ textarea {
 		</div>
 	</form>
 	</div>
+	<script type="text/javascript" src="${path}/js/manageInfo.js"></script>
 	<script>
 
-
+	var path = '${path}';
+	var postNumber = '${viewPage.postno}';
  	let form = $("#infoForm");		// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
 	let mForm = $("#updateForm");	// 페이지 데이터 수정 from
-
 	
 	$("#list_btn").on("click", function(e){
 		form.find("#postno").remove();
@@ -150,7 +160,7 @@ textarea {
 	    if (chk) {
 	      location.href="/delete?postno=${viewPage.postno}"
 			}
-	}); 
+	}); 2
 	
 	
 	$("#cancel_btn").on("click", function(e){
@@ -163,6 +173,13 @@ textarea {
 
 	});	
 	
+	$(".likesBtn").on("click", function() {
+		fn_opinionChk("1", "추천")
+	});
+	
+	$(".reportBtn").on("click", function() {
+		fn_opinionChk("2", "신고")
+	});
 
 
 	

@@ -114,13 +114,13 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int insertBoardLike(Map<String, String> infoMap){
+	public int insertBoardOpinion(Map<String, String> infoMap){
 		// TODO Auto-generated method stub
 		int finalResult = 0;
 		try {
-		int result = sqlSessionTemplate.insert("insert_likes_info", infoMap);
+		int result = sqlSessionTemplate.insert("insert_opinion_info", infoMap);
 			if (result == 1) {
-				finalResult = sqlSessionTemplate.update("update_board_likesUp", infoMap);
+				finalResult = sqlSessionTemplate.update("update_board_infoCount", infoMap);
 			}
 		// 중복이 안돼서 좋아요를 누를 수 있는 상황이면
 		} catch (DuplicateKeyException e) {

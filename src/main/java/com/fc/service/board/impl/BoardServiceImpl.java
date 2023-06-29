@@ -100,9 +100,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int likeBoard(Map<String, String> map) {
+	public int controlBoardInfo(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		int result = boardDao.insertBoardLike(map);
+		int result = boardDao.insertBoardOpinion(map);
 		return result;
 	}
 
