@@ -54,8 +54,24 @@ public class MemberDaoImpl implements MemberDao{
 		return result; // 아이디중복
 	}
 
+
+
+	/**회원정보 수정 */
+	@Override
+	public MemberDto memberUpdate(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		
+		  try {
+		        sqlSessionTemplate.update("member_mapper.memberUpdate", memberDto);
+		        return memberDto;
+		    } catch (Exception e) {
+		        // 업데이트 실패 시 필요한 처리 작성
+		        return null;
+		    }
 	
 	
 
-
+	}
 }
+	
+	

@@ -9,6 +9,7 @@ public class MemberDto {
 	String loginId;// 로그인 아이디	
 	String password;// 로그인 비밀번호 
 	String memberName;// 이름
+	String birth;
 	String email;// 이메일 
 	String phoneNum;// 전화번호 
 	String joinDate;// 가입날짜
@@ -19,12 +20,7 @@ public class MemberDto {
 
 	
 	
-	@Override
-	public String toString() {
-		return "MemberDto [memberNo=" + memberNo + ", loginId=" + loginId + ", password=" + password + ", memberName="
-				+ memberName + ", email=" + email + ", phoneNum=" + phoneNum + ", joinDate=" + joinDate + ", userCode="
-				+ userCode + ", point=" + point + ", reportCount=" + reportCount + "]";
-	}
+	
 
 	
 }

@@ -14,108 +14,19 @@
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 <title>회원가입</title>
 </head>
-<script type="text/javascript">
-	$(document).ready(function() {
-		// 취소
-		$(".cancle").on("click", function() {
-
-			location.href = "/register";
-
-		})
-
-		$("#submit").on("click", function() {
-
-			if ($("#loginId").val() == "") {
-				alert("아이디를 입력해주세요.");
-				$("#loginId").focus();
-				return false;
-			}
-
-			if ($("#password").val() == "") {
-				alert("비밀번호를 입력해주세요.");
-				$("#password").focus();
-				return false;
-			}
-			if ($("#memberName").val() == "") {
-				alert("성명을 입력해주세요.");
-				$("#memberName").focus();
-				return false;
-			}
-			if ($("#email").val() == "") {
-				alert("이메일을 입력해주세요.");
-				$("#email").focus();
-				return false;
-			}
-			if ($("#phoneNum").val() == "") {
-				alert("전화번호를 입력해주세요.");
-				$("#phoneNum").focus();
-				return false;
-			}
-
-			var idChkVal = $("#id_check").val();
-			if (idChkVal == "N") {
-				alert("중복확인 버튼을 눌러주세요.");
-				return false;
-			} else if (idChkVal == "Y") {
-				$("#regForm").submit();
-				 alert("회원가입이 성공적으로 완료되었습니다. 반갑습니다!");
-			}
-
-		});
-
-	})
-
-	function fn_idChk() {
-		// 그 전에 아이디가 숫자와 영어로 6-14자인지 먼저 체크하고, 안되면 중복확인조차 못하게
-		var id = $("#loginId").val();
-		var regExp = /^[a-z0-9]{6,14}$/;
-		if (!regExp.test(id)) {
-			alert("아이디는 숫자와 영어로 6-14자이어야 합니다.");
-			return false;
-		
-		// 중복확인 코드
-		}
-			$.ajax({
-			url : "${path}/id_check",
-			type : "post",
-			dataType : "json",
-			data : {"loginId" : id},
-			success : function(data) {
-				console.log(data);
-				if (data == 1) {
-					$("#loginId").val("");
-					$("#id_check").attr("value", "N");
-					alert("중복된 아이디입니다.");
-					return false;
-				} else if (data == 0) {
-					$("#id_check").attr("value", "Y");
-					alert("사용가능한 아이디입니다.");
-				}
-			},
-			error : function(request, status, error) {
-				console.log(request, status, error)
-			}
-		})
-		
-	}	
-	
-	
-	
-	
-	
-</script>
+<style type="text/css">
 
 
+.ui-datepicker select {
+	vertical-align: middle;
+	height: 28px;
+}
 
+</style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <body>
-
-
-
-
 
 	<section id="container">
 		<form action="" method="post" id="regForm"
@@ -140,6 +51,12 @@
 					class="form-control" type="text" id="memberName" name="memberName"
 					placeholder="한글로 최대 6자 입력해주세요 " />
 			</div>
+			
+			<div class="form-group has-feedback">
+				<label class="control-label" for=phoneNum>생년월일</label> <input
+					class="form-control" type="text" id="birth" name="birth"placeholder="만 14세 미만 가입 불가 " readonly>
+					<span id="delete" style="color: red; position: relative; right: 25px; display: none;"><i class="fas fa-times font-img"></i></span>
+			</div>
 			<div class="form-group has-feedback">
 				<label class="control-label" for=email>이메일</label> <input
 					class="form-control" type="email" id="email" name="email"
@@ -158,7 +75,44 @@
 			</div>
 		</form>
 	</section>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script type="text/javascript">
+		var path='${path}';
+	</script>
+<script type="text/javascript" src="${path}/js/register.js"></script>
+<script type="text/javascript">
+var today = new Date();
+var endDay = new Date( today.getFullYear()-14, today.getMonth(), today.getDate() );
 
+$('#birth').datepicker({
+	dateFormat: 'yy-mm-dd',
+	changeYear: true,
+	changeMonth: true,	
+	showMonthAfterYear: true,
+	dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	maxDate: endDay
+	//beforeShowDay: after	//오늘 이후로 선택 못하게 하는 함수
+});
+
+$('#birth').change(function() {
+	$('#delete').css('display', 'inline-block');
+});
+
+$('#delete').click(function(){
+	$('#birth').val('');
+	$('#delete').css('display', 'none');
+});
+
+function after(date) {
+	if(date > new Date()) {
+		return [false];
+	} else {
+		return [true];
+	}
+}
+</script>
 </body>
 
 </html>

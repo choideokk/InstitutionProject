@@ -13,11 +13,11 @@
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <%@ include file="../header.jsp"%>
 
+<link href="${path}/css/login.css" rel="stylesheet" type="text/css" />
 
 
 
-
-
+<div class="container">
 	<h2>로그인</h2>
 	
 		<!-- 로그인 하지 않은 상태  -->
@@ -48,7 +48,7 @@
 			</table>
 		</form>
 	</c:if>
-	
+	</div>
 	
 	
 	

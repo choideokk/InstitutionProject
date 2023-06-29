@@ -19,13 +19,23 @@
 		insert into Member
 		values
 		(member_no_seq.nextval, #{loginId} , #{password},
-		#{memberName},#{email}, #{phoneNum}, sysdate  ,  #{userCode}, 0, 0 )
+		#{memberName},#{birth},#{email}, #{phoneNum}, sysdate  ,  #{userCode}, 0, 0 )
 	</insert>
 	
 	
 	<select id="id_check"  parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM member WHERE login_id=#{loginId}
 	</select>
+	
+	
+	<update id="memberUpdate">
+	UPDATE MP_MEMBER SET 
+		PASSWORD = #{password},
+		MEMBERNAME = #{memberName},
+		EMAIL=#{email},
+		PHONENUM=#{phoneNum}
+		WHERE LOGINID = #{loginId}
+	</update>
 	
 
 </mapper>

@@ -31,7 +31,7 @@ public class MemberController {
 	@PostMapping("/register")
 	public String registerAdmin_process(MemberDto memberDto) {
 		memberDto.setUserCode(CommonCode.USER_USER_TYPE_CUSTOMER);
-		// 회원가입 성공했는지 여부
+		
 	    int result= memberService.member_id_check(memberDto.getLoginId());
 	    try {
 			if(result == 0 ) {
