@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
 	</select>
 
-	<!-- <update id="Reply_insert_info" parameterType="HashMap">
+<!--  <update id="Reply_insert_info" parameterType="HashMap" >
 		UPDATE reply SET
 		<if test='type == "1"'>
 			recommend = recommend + 1 
@@ -44,9 +44,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			report = report + 1
 		</if>
 		WHERE postno = #{postno}
-	</update> -->
-
-   
+	</update>
+    -->
+    
 <!--    
    	int postno ; //게시물 번호
 	int replynumber; //댓글번호

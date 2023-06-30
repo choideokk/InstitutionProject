@@ -174,6 +174,7 @@ textarea {
 			<button type="submit">제출</button>
 			<input type="submit" value="댓글 작성" id="reply">
 			<button type="button" id="chochun">댓글 추천</button>
+			
 			<button type="button" id="singo">댓글 신고</button>
 		</form>
 
