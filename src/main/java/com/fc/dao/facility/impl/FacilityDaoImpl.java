@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.fc.dao.facility.FacilityDao;
 import com.fc.dto.facility.FacilityDto;
 import com.fc.dto.facility.FcDetailDto;
+import com.fc.dto.facility.SearchDto;
 
 @Repository
 public class FacilityDaoImpl implements FacilityDao {
@@ -114,5 +115,12 @@ public class FacilityDaoImpl implements FacilityDao {
 			
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<FacilityDto> selectSearchedFacilitiesList(SearchDto searchDto) {
+		// TODO Auto-generated method stub
+		List<FacilityDto> searchedList = sqlSessionTemplate.selectList("select_searched_facility_list", searchDto);
+		return searchedList;
 	}
 }

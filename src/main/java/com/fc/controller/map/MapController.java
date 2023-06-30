@@ -64,17 +64,32 @@ public class MapController {
 		return "map/map";
 	}
 	
-	@PostMapping("map")
-	public String sendSearchKeyword(@ModelAttribute SearchDto searchDto) {
+	@PostMapping("/map")
+	public String sendSearchKeyword(@ModelAttribute SearchDto searchDto, Model model) {
 		List<FacilityDto> fcList;
 		String txt = searchDto.getSearchTxt();
-		System.out.println(searchDto.getSearchTxt());
+
+		model.addAttribute("apiKey", kakaoApiKey);
 		if (txt.trim() == "") {
 			fcList = mapService.getFacilityList();
 		} else {
-			fcList = mapService.getSearchedFacilityList(txt);
+			fcList = mapService.getSearchedFacilityList(searchDto);
 		}
+		
+		String jsonList = "";
+		ObjectMapper mapper = new ObjectMapper();
+		
+		try {
+			// list를 JSON으로
+			jsonList = mapper.writeValueAsString(fcList);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("parsedList", jsonList);
+		model.addAttribute("fcList", fcList);
+		model.addAttribute("searchDto", searchDto);
+		
 		return "map/map";
 	}
-
 }

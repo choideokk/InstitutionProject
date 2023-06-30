@@ -34,6 +34,7 @@ String loginId = null;
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="#">메인</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">예약</a></li>
+						<li class="nav-item"><a class="nav-link" href="${path}/boardlist">게시판</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" role="button"
 						data-bs-toggle="dropdown" aria-expanded="false">시설 둘러보기 </a>

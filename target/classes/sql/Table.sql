@@ -916,6 +916,12 @@ VALUES (2, TO_DATE('2023-06-21','YYYY-MM-DD'), TO_DATE('2023-06-22','YYYY-MM-DD'
  
   COMMIT;
     
+DROP SEQUENCE member_no_seq;
+
+CREATE SEQUENCE member_no_seq
+  START WITH 0
+  MINVALUE 0
+  INCREMENT BY 1;
   
 select member_no_seq.nextval from dual;
 
@@ -955,12 +961,6 @@ MAXVALUE 9999999999
 NOCYCLE
 NOCACHE;
 
-CREATE SEQUENCE member_no_seq
-START WITH 0
-MINVALUE 0
-INCREMENT BY 1;
-
-
 create table board_infos(
     postno number generated always as IDENTITY,
     title varchar2(150),
@@ -974,6 +974,21 @@ create table board_infos(
     constraint board_infos PRIMARY key(postno)
 );
 
+CREATE TABLE board_infos (
+    postno NUMBER(10) GENERATED ALWAYS AS IDENTITY,
+    num NUMBER(10),
+    title VARCHAR2(150),
+    content VARCHAR2(2000) not null,
+    writer VARCHAR2(50),
+    updatedate DATE DEFAULT SYSDATE,
+    changedate DATE DEFAULT SYSDATE,
+    recommend NUMBER,
+    report NUMBER,
+    viewCnt NUMBER DEFAULT 0,
+    CONSTRAINT pk_board_infos PRIMARY KEY (postno)
+);
+
+
 ALTER TABLE board_infos MODIFY(postno GENERATED AS IDENTITY (START WITH 1));
 
 select * from board_infos;
@@ -982,7 +997,20 @@ select * from board_infos;
 
 commit;
 
-
+--댓글테이블
+create table reply(
+             replynumber number not null primary key, 
+			 postno number , --  board_infos랑 연결할 거
+			 replytext varchar2(1000)  ,
+			 replyname varchar2(20)  ,
+			 replyUserID varchar2(50)  ,
+			 secretreply number(2)  ,
+             recommend number default 0,
+               report number default 0,
+			 changedate date default sysdate, 
+			 updatedate date default sysdate,
+    FOREIGN KEY (postno) REFERENCES board_infos (POSTNO) 
+);
 
 
 --레슨테이블1

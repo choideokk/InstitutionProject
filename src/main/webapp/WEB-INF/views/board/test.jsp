@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 
- 
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  
 <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">

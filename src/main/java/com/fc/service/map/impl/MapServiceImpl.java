@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import com.fc.dao.facility.FacilityDao;
 import com.fc.dto.facility.FacilityDto;
 import com.fc.dto.facility.FcDetailDto;
+import com.fc.dto.facility.SearchDto;
 import com.fc.service.map.MapService;
 import com.fc.utils.CommonCode;
 
@@ -176,8 +177,9 @@ public class MapServiceImpl implements MapService {
 	}
 
 	@Override
-	public List<FacilityDto> getSearchedFacilityList(String txt) {
+	public List<FacilityDto> getSearchedFacilityList(SearchDto searchDto) {
 		// TODO Auto-generated method stub
-		return null;
+		List<FacilityDto> fcList = facilityDao.selectSearchedFacilitiesList(searchDto);
+		return fcList;
 	}
 }
