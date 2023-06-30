@@ -2,7 +2,7 @@ $(document).ready(function() {
 		// 취소
 		$(".cancle").on("click", function() {
 
-			location.href = path + "/register";
+			location.href = path + "/memberInfo";
 
 		})
 
@@ -52,7 +52,7 @@ $(document).ready(function() {
 			const phoneNum= $("#phoneNum").val();
 			const phoneNumRegExp =/^[0-9]{11}$/;
 			if (!phoneNumRegExp.test(phoneNum)) {
-				alert("전화번호를 입력해주세요");
+			alert("특수기호 없이 숫자 11자리를 입력해주세요");
 				return false;
 				}
 			

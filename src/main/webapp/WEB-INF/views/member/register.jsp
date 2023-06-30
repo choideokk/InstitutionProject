@@ -47,24 +47,24 @@
 					
 			</div>
 			<div class="form-group has-feedback">
-				<label class="control-label" for=memberName>성명</label> <input
+				<label class="control-label" for="memberName">성명</label> <input
 					class="form-control" type="text" id="memberName" name="memberName"
 					placeholder="한글로 최대 6자 입력해주세요 " />
 			</div>
 			
 			<div class="form-group has-feedback">
-				<label class="control-label" for=phoneNum>생년월일</label> <input
+				<label class="control-label" for="phoneNum">생년월일</label> <input
 					class="form-control" type="text" id="birth" name="birth"placeholder="만 14세 미만 가입 불가 " readonly>
 					<span id="delete" style="color: red; position: relative; right: 25px; display: none;"><i class="fas fa-times font-img"></i></span>
 			</div>
 			<div class="form-group has-feedback">
-				<label class="control-label" for=email>이메일</label> <input
+				<label class="control-label" for="email">이메일</label> <input
 					class="form-control" type="email" id="email" name="email"
 					placeholder="이메일을 입력해주세요"
 					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
 			</div>
 			<div class="form-group has-feedback">
-				<label class="control-label" for=phoneNum>전화번호</label> <input
+				<label class="control-label" for="phoneNum">전화번호</label> <input
 					class="form-control" type="text" id="phoneNum" name="phoneNum"
 					placeholder="전화번호를 입력해주세요"
 					pattern="[0-9]{11}">

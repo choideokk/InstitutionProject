@@ -7,41 +7,72 @@ $(document).ready(function() {
 	})
 
 	$("#submit").on("click", function(e) {
+	console.log("엥");
 
 		if ($("#loginId").val() == "") {
 			alert("아이디를 입력해주세요.");
 			$("#loginId").focus();
 			return false;
 		}
-
+	
 		if ($("#password").val() == "") {
 			alert("비밀번호를 입력해주세요.");
 			$("#password").focus();
 			return false;
 		}
-		var pw= $("#password").val();
-	    const pwRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-		 if (!pwRegExp.test(pw)) {
+		const pw = $("#password").val();
+		const pwRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+		if (!pwRegExp.test(pw)) {
 			alert("대문자, 소문자 , 숫자를 1개씩 포함해서 8글자 이상 입력해주세요");
 			return false;
-			}
+		}
 
 		if ($.trim($("#memberName").val()) == "") {
 			alert("성명을 입력해주세요.");
 			$("#memberName").focus();
 			return false;
 		}
+		const name = $("#memberName").val();
+		console.log(name);
+		const nameRegExp = /^[가-힣]+$/;
+		if (!nameRegExp.test(name)) {
+			alert("한글만 입력하세요");
+			return false;
+		}
+		
+		
+		if ($("#birth").val() == "") {
+			alert("날짜를 선택해주세요.");
+			$("#birth").focus();
+			return false;
+		}
+		
 		if ($("#email").val() == "") {
 			alert("이메일을 입력해주세요.");
 			$("#email").focus();
 			return false;
 		}
+		const email = $("#email").val();
+		const emailRegExp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+		if (!emailRegExp.test(email)) {
+			alert("이메일 형식에 맞게 입력해주세요");
+			return false;
+		}
+
 		if ($("#phoneNum").val() == "") {
 			alert("전화번호를 입력해주세요.");
 			$("#phoneNum").focus();
 			return false;
 		}
-	    var idChkVal = $("#id_check").val();
+
+		const phoneNum = $("#phoneNum").val();
+		const phoneNumRegExp = /^[0-9]{11}$/;
+		if (!phoneNumRegExp.test(phoneNum)) {
+			alert("'-'없이 숫자 11자리를 입력해주세요");
+			return false;
+		}
+		
+		var idChkVal = $("#id_check").val();
 		if (idChkVal == "N") {
 			alert("중복확인 버튼을 눌러주세요.");
 			return false;
