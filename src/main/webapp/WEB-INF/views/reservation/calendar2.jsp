@@ -198,6 +198,11 @@ box-sizing: border-box;
             defaultView: 'month',
             aspectRatio: 1.8, /* 달력의 가로 세로 비율을 조절 */
             dayClick: function(date, jsEvent, view) {
+            	// 추가된 코드: 클래스 'unavailable'가 있으면 클릭 기능 무시
+                if ($(this).find('.unavailable').length > 0) {
+                    return;
+                }
+            	
                 // 기존에 선택된 날짜가 있을 경우 배경색 초기화
                 if (selectedDate) {
                     selectedDate.css('background-color', '');
@@ -248,6 +253,8 @@ box-sizing: border-box;
                 var dateText = selectedDate.data('date');
                 $('#rsvfNm').val("${currentFc.rsrcNm}");
                 var rsvfNm = $('#rsvfNm').val();
+                var urlParams = new URLSearchParams(window.location.search);
+                var myParam = urlParams.get('no'); // 이곳에 실제로 가져오고 싶은 파라미터 이름을 넣어주세요.
 
                 $.ajax({
                     url: "reservationCalendar",
@@ -255,7 +262,8 @@ box-sizing: border-box;
                     data: {
                         date: dateText,
                         category: selectedCategory,
-                        rsvfNm: rsvfNm
+                        rsvfNm: rsvfNm,
+                        myParam: myParam
                     },
                     success: function(data) {
                         $('#contentArea').html(data);
@@ -267,6 +275,13 @@ box-sizing: border-box;
     </script>
 </head>
 <body>
+<c:if test="${not empty errorMessage}">
+    <script>
+        alert("${errorMessage}");
+    </script>
+</c:if>
+
+
 <div class="hahaContainer">
 	<div class="haha">
 	<input type="hidden" id="rsvfNm" value="${currentFc.rsrcNm}" />
