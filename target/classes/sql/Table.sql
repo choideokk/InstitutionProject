@@ -883,6 +883,8 @@ INSERT INTO facility_info_detail VALUES(
 select * from facility_info_detail;
 
 
+DROP TABLE reservation_info;
+
   CREATE TABLE reservation_info (
     rsvtNo Number PRIMARY KEY,  --예약번호
     rgsrDate Date,  --등록일

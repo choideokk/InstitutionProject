@@ -5,10 +5,12 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import com.fc.dao.board.BoardDao;
 import com.fc.dto.board.BoardDto;
+import com.fc.dto.facility.SearchDto;
 
 
 
@@ -101,6 +103,41 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSessionTemplate.delete("board_mapper.list_delete",postno);
 
 	
+	}
+
+	@Override
+	public List<BoardDto> selectBoardListBySearchDto(SearchDto searchDto) {
+		// TODO Auto-generated method stub
+		List<BoardDto> list = sqlSessionTemplate.selectList("search_boardList_by_searchDto", searchDto);
+		return list;
+	}
+
+	@Override
+	public int insertBoardOpinion(Map<String, String> infoMap){
+		// TODO Auto-generated method stub
+		int finalResult = 0;
+		try {
+		int result = sqlSessionTemplate.insert("insert_opinion_info", infoMap);
+			if (result == 1) {
+				finalResult = sqlSessionTemplate.update("update_board_infoCount", infoMap);
+			}
+		// 중복이 안돼서 좋아요를 누를 수 있는 상황이면
+		} catch (DuplicateKeyException e) {
+			finalResult = 0;
+		}
+		return finalResult;	
+	}
+
+	@Override
+	public int selectTotalBoardsCount() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("pageCount");
+	}
+
+	@Override
+	public int selectTotalSearchedBoardsCount() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("searchedPageCount");
 	}
 
 

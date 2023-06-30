@@ -77,3 +77,28 @@ sideBtn.addEventListener('click', () => {
 		rightSideAreas.style.right = "-350px";
 	}
 })
+
+const searchInput = document.searchForm.searchTxt;
+const keywordSelector = document.searchForm.searchKeyword;
+keywordSelector.addEventListener('change', (e)=>{
+	if (e.target.value == 'addr') {
+		searchInput.placeholder = "도로명 주소지를 입력해주세요";
+	} else {
+		searchInput.placeholder = "체육시설 명을 입력해주세요";
+	}
+});
+
+const resetBtn = document.querySelector(".resetBtn");
+resetBtn.addEventListener('click', ()=>{
+	window.location.href = path + "/map";
+})
+
+const txtResetBtn = document.querySelector(".txtResetBtn");
+txtResetBtn.addEventListener('click', ()=>{
+	searchInput.value = "";
+	if (keywordSelector.value == 'addr') {
+		searchInput.placeholder = "도로명 주소지를 입력해주세요";
+	} else {
+		searchInput.placeholder = "체육시설 명을 입력해주세요";
+	}
+});

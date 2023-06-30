@@ -1,9 +1,11 @@
 
 package com.fc.controller.board;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -16,8 +18,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fc.dto.board.ArticlePage;
 import com.fc.dto.board.BoardDto;
+import com.fc.dto.facility.SearchDto;
 import com.fc.service.board.BoardService;
 
 @Controller
@@ -28,61 +33,48 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 
-	
-	@RequestMapping("/test")
-	public String index() {
-
-		return "board/test";
-	}
-
-	@RequestMapping("/testboard")
-	public String index2() {
-
-		return "board/testboard";
-	}
-
-	
-	
-	
+	// 게시글 작성
 	@GetMapping("/write")
 	public String insertContents() {
-	
-		
-		log.info(" 글쓰기 페이지 진입했음");
-
 		return "board/write";	
-
 	}
 
 	@PostMapping("/write")
 	public String insertContents_process(@ModelAttribute BoardDto boardDto) {
-		System.out.println(boardDto);
 		int result = boardService.boardInsert(boardDto);
-		System.out.println(result);
-		return "redirect:/boardlist";
+		return "redirect:/boardlist?pageNo=1";
 	}
 
-		
+	// 전체 글 목록
 	@GetMapping("/boardlist")
-	public String boardList(Model model, @RequestParam(name = "postNo", required = false)String postNo) {
+	public String boardList(Model model, @RequestParam int pageNo, @ModelAttribute SearchDto searchObj) {
+	// public String boardList(Model model, @RequestParam(name = "postNo", required = false) String postNo, @ModelAttribute SearchDto searchObj) {
 
-		//Integer 받는 경우 : 숫자형이 아닌경우에 바로 오류
+		List<BoardDto> boardList;
 		
-		//String 받는 경우 : 일단 받고, 숫자형 체크 -> 이후 분기 처리 조절
-		//String pt;
+		boardList = boardService.getBoardList();
 		
-		if (postNo == null) {
-			List<BoardDto> boardList = boardService.getBoardList();
-			model.addAttribute("boardList", boardList);
-		} else {
-	        int postNoInt = Integer.parseInt(postNo);
-	        
-			BoardDto boardDto = new BoardDto();
-			boardDto.setPostno(postNoInt);
-			List<BoardDto> boardList = boardService.getBoardListbyBoardNumber(boardDto);
-			model.addAttribute("boardList", boardList);
+		int totalPage = boardService.getTotalPage();
+		ArticlePage currentPageInfo = new ArticlePage(totalPage, (int)pageNo, 7, 5, boardList);
+		
+		model.addAttribute("currentPageInfo", currentPageInfo);
+		model.addAttribute("totalPage", totalPage);
+		
+		
+		return "board/boardlist";
+	}
 	
-		}
+	// 게시글 검색 (수정중..)
+	@PostMapping("/searchBoard")
+	public String getSearchedList(SearchDto searchDto, @RequestParam int pageNo, Model model) {
+		// checkbox 체크되면 on, 아니면 null값으로 들어옴
+		List<BoardDto> searchedList = boardService.findBoardListBySearchDto(searchDto);
+		int totalPage = boardService.getSearchedTotalPage();
+		
+		ArticlePage currentPageInfo = new ArticlePage(totalPage, (int)pageNo, 7, 5, searchedList);
+		
+		model.addAttribute("currentPageInfo", currentPageInfo);
+		model.addAttribute("searchObj", searchDto);
 		return "board/boardlist";
 	}
 	
@@ -91,18 +83,29 @@ public class BoardController {
 	@GetMapping("/detail")
 	public String getdetail(@RequestParam("postno") int postno , Model model) {
 		
+		BoardDto dto = boardService.getdetail(postno);
 		model.addAttribute("viewPage",boardService.getdetail(postno));
 		
-		BoardDto dto =boardService.getdetail(postno);
 		boardService.viewCount(postno);
 		
 		return "board/viewPage";
-			
-		
+	}
+	
+	// 신고 or 추천
+	// 기존에 신고한적이 있는지 결과값을 리턴받아서 ajax로 전달..
+	@ResponseBody
+	@PostMapping("/action_proc")
+	public int like_proc(@RequestParam("postno") int postno, @RequestParam("type") String type, HttpSession session) {
+		Map<String, String> commonInfo = new HashMap<String, String>();
+		commonInfo.put("sendUserId", (String)session.getAttribute("loginId"));
+		commonInfo.put("type", type);
+		commonInfo.put("targetPostNo", Integer.toString(postno));
+		int result = boardService.controlBoardInfo(commonInfo);
+		return result;
 	}
 	
 	
-	
+	// 게시글 수정
 	@GetMapping("/update")
 	public String updateView(BoardDto boardDto, Model model) {
 		model.addAttribute("viewPage", boardDto);
@@ -119,23 +122,24 @@ public class BoardController {
 	
 	@PostMapping("/updateView")
 	 public String update(BoardDto boardDto) {
+		int postno = boardDto.getPostno();
 		System.out.println("여기로!!");
         log.info("게시물 수정 컨트롤러 시작");
         boardService.boardUpdate(boardDto);
         System.out.println("보드값 확인 " + boardDto.getTitle());
         System.out.println("보드값 확인 " + boardDto.getContent());
-        return "redirect:/boardlist";
+        return "redirect:/detail?postno=" + postno;
     }
-	//게시물 삭제
 	
+	//게시물 삭제
 	@GetMapping("delete")
 	public String delete(@RequestParam int postno, Model model) {
 	
 		boardService.boardDelte(postno);
-		model.addAttribute("deleteviewPage",postno);
+		//model.addAttribute("deleteviewPage",postno);
 
 		System.out.println("삭제 삭제 ");		
-		return "redirect:/boardlist";
+		return "redirect:/boardlist?pageNo=1";
 		
 	}
 
