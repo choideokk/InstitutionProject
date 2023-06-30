@@ -24,13 +24,13 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return false; // 회원가입 실패 시
 	}
-
+	//마이페이지에서 회원 정보 확인
 	@Override
-	public MemberDto member_select(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberDto member_select(String loginId) {
+		MemberDto result= memberDao.readMember(loginId);
+		return result;
 	}
-
+	//로그인 처리
 	@Override
 	public MemberDto member_login(MemberDto memberDto, HttpSession session) {
 		// TODO Auto-generated method stub
@@ -48,17 +48,19 @@ public class MemberServiceImpl implements MemberService {
 		session.removeAttribute("loginId"); // 세션 초기화
 	}
 	
+	
+	//아이디 중복 확인
 	@Override
 	public int member_id_check(String loginId) {
 		// TODO Auto-generated method stub
 		int result = memberDao.idCheck(loginId);
 		return result;
 	}
-
+	//마이페이지에서 회원 정보 변경 저장
 	@Override
-	public boolean member_update(MemberDto memberdto) {
+	public void member_update(MemberDto memberdto) {
 		// TODO Auto-generated method stub
-		return false;
+		memberDao.memberUpdate(memberdto);
 	}
 
 	@Override
