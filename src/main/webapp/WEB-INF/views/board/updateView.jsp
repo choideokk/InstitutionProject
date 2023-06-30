@@ -128,12 +128,12 @@ $("#update_btn").on("click", function(e){
 });
 
 $("#delete_btn").on("click", function(e){
-	form.attr("action", "/delete");
 	form.attr("method", "post");
 	var chk = confirm("게시물을 삭제하시겠습니까?");
     if (chk) {
-      location.href="/delete?postno=${deleteviewPage.postno}"
-		}
+	form.attr("action", "/delete?postno=${viewPage.postno}");
+    //location.href="/delete?postno=${viewPage.postno}"
+	}
 	form.submit();	
 }); 
 

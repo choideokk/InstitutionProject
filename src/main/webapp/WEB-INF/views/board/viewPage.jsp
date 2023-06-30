@@ -247,7 +247,7 @@ textarea {
 
 	$("#delete_btn").on("click", function(e) {
 		  var form = $("form"); // 
-		  form.attr("action", "/delete");
+		  form.attr("action", "/delete?postno=${viewPage.postno}");
 		  form.attr("method", "post");
 		  var chk = confirm("삭제 진짜 페이지로 가시겠습니까?");
 		  if (chk) {

@@ -179,7 +179,7 @@ public class BoardController {
 	
 	//게시물 삭제
 	
-	@GetMapping("delete")
+	@PostMapping("/delete")
 	public String delete(@RequestParam int postno, Model model) {
 	
 		boardService.boardDelte(postno);
