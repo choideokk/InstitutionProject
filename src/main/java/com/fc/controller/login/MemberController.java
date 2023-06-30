@@ -36,7 +36,7 @@ public class MemberController {
 
 	    memberDto.setUserCode(CommonCode.USER_USER_TYPE_CUSTOMER);
 		
-	    int result= memberService.member_id_check(memberDto.getLoginId());
+	   
 	    try {
 	        int result= memberService.member_id_check(memberDto.getLoginId());
 	        switch (result) {

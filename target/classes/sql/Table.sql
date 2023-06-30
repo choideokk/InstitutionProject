@@ -926,8 +926,7 @@ MINVALUE 0
 INCREMENT BY 1;
 
   COMMIT;
-    
-  
+   
 select member_no_seq.nextval from dual;
 
 --회원정보테이블

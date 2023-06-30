@@ -14,9 +14,9 @@ $(document).ready(function() {
 				return false;
 			}
 			const pw= $("#password").val();
-		    const pwRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+		    const pwRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
 			 if (!pwRegExp.test(pw)) {
-				alert("대문자, 소문자 , 숫자를 1개씩 포함해서 8글자 이상 입력해주세요");
+				alert("비밀번호: 대문자, 소문자 , 숫자를 1개씩 포함해서 8~15자를 입력해주세요");
 				return false;
 				}
 		   
@@ -28,7 +28,7 @@ $(document).ready(function() {
 			const name= $("#memberName").val();
 			const nameRegExp =/^[가-힣]+$/;
 			if (!nameRegExp.test(name)) {
-				alert("한글만 입력하세요");
+				alert("성명: 한글만 입력하세요");
 				return false;
 				}
 			if ($("#email").val() == "") {
@@ -39,7 +39,7 @@ $(document).ready(function() {
 			const email= $("#email").val();
 			const emailRegExp =/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 			if (!emailRegExp.test(email)) {
-				alert("이메일 형식에 맞게 입력해주세요");
+				alert("이메일: 이메일 형식에 맞게 입력해주세요");
 				return false;
 				}
 			
@@ -52,7 +52,7 @@ $(document).ready(function() {
 			const phoneNum= $("#phoneNum").val();
 			const phoneNumRegExp =/^[0-9]{11}$/;
 			if (!phoneNumRegExp.test(phoneNum)) {
-			alert("특수기호 없이 숫자 11자리를 입력해주세요");
+		        alert("전화번호: '-'없이 숫자 11자리를 입력해주세요");
 				return false;
 				}
 			
