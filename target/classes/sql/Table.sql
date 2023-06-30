@@ -883,8 +883,6 @@ INSERT INTO facility_info_detail VALUES(
 select * from facility_info_detail;
 
 
-DROP TABLE reservation_info;
-
   CREATE TABLE reservation_info (
     rsvtNo Number PRIMARY KEY,  --예약번호
     rgsrDate Date,  --등록일
@@ -919,35 +917,12 @@ VALUES (
     1, -- 상태
     'Y' -- 담당자 승인여부
 );
-
-
-    SELECT rsvtNo,
-           rsvtTime,
-           toDate,
-           status,
-           totalPeopleCnt,
-           rsrcId,
-           participant_id1,
-           participant_id2,
-           participant_id3
-    FROM reservation_info
-    WHERE rsrcId = '1q2w3e4r'
-    OR id1 = '1q2w3e4r'
-    OR id2 = '1q2w3e4r'
-    OR id3 = '1q2w3e4r';
-
-   select * from reservation_info;
-   
-   drop table reservation_info;
    
    CREATE SEQUENCE reservation_info_no_seq
 START WITH 0
 MINVALUE 0
 INCREMENT BY 1;
-   
-   INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, dDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, participant_id4, status, approval) 
-VALUES (2, TO_DATE('2023-06-21','YYYY-MM-DD'), TO_DATE('2023-06-22','YYYY-MM-DD'), TO_DATE('2023-06-25','YYYY-MM-DD'), 1200, 'userId', 'Main Gym', 'Football', 4, 'participant1', 'participant2', 'participant3', 'participant4', 1, 'Y');
- 
+
   COMMIT;
     
   
