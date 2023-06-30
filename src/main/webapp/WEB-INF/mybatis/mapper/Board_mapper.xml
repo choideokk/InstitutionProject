@@ -19,11 +19,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="list_contents" resultType="BoardDto">
-		select
+		SELECT
 		postno,title,writer,
 		updatedate,changedate,viewcnt
-		from board_infos
-
+		FROM board_infos
+		ORDER BY updatedate DESC
 	</select>
 
 	<select id="list_view" resultType="BoardDto">
@@ -66,6 +66,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					</if>
 			</otherwise>
 		</choose>
+		ORDER BY updatedate DESC
+	</select>
+	
+	<select id="pageCount" resultType="int">
+		select count(*) from board_infos
+	</select>
+	
+	<select id="searchedPageCount" parameterType="SearchDto" resultType="int">
+		select count(*) from (
+		select
+		postno, title, writer, updatedate, changedate, viewcnt
+		from
+		board_infos
+		<choose>
+			<when test="isChecked == 'on'">
+					<if test='searchKeyword == "T"'>
+						where title like '%'||#{searchTxt}||'%'
+					</if>
+					<if test='searchKeyword == "W"'>
+						where writer like '%'||#{searchTxt}||'%'
+					</if>
+					<if test='searchKeyword == "TW"'>
+						where title like '%'||#{searchTxt}||'%' OR writer like
+						'%'||#{searchTxt}||'%'
+					</if>
+			</when>
+			<otherwise>
+					<if test='searchKeyword == "T"'>
+						where LOWER(title) like '%'||LOWER(#{searchTxt})||'%'
+					</if>
+					<if test='searchKeyword == "W"'>
+						where LOWER(writer) like '%'||LOWER(#{searchTxt})||'%'
+					</if>
+					<if test='searchKeyword == "TW"'>
+						where LOWER(title) like '%'||LOWER(#{searchTxt})||'%' OR LOWER(writer) like
+						'%'||#{searchTxt}||'%'
+					</if>
+			</otherwise>
+		</choose>
+		)
 	</select>
 
 	<update id="list_count" parameterType="int">

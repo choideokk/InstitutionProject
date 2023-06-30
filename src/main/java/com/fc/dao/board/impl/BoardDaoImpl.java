@@ -1,6 +1,5 @@
 package com.fc.dao.board.impl;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 import java.util.Map;
 
@@ -127,6 +126,18 @@ public class BoardDaoImpl implements BoardDao {
 			finalResult = 0;
 		}
 		return finalResult;	
+	}
+
+	@Override
+	public int selectTotalBoardsCount() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("pageCount");
+	}
+
+	@Override
+	public int selectTotalSearchedBoardsCount() {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("searchedPageCount");
 	}
 
 

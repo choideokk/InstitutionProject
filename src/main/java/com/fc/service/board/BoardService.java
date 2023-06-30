@@ -32,5 +32,9 @@ public interface BoardService {
 	public void boardDelte(int postno);
 	
 	public int controlBoardInfo(Map<String, String> map);
+	
+	public int getTotalPage();
+	
+	public int getSearchedTotalPage();
 
 }

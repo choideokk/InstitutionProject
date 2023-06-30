@@ -35,6 +35,10 @@ public interface BoardDao {
     public void delete(int postno) ;
     
     public int insertBoardOpinion(Map<String, String> infoMap);
+    
+    public int selectTotalBoardsCount();
+    
+    public int selectTotalSearchedBoardsCount();
 	
 
 	

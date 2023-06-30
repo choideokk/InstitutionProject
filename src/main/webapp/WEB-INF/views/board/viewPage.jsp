@@ -160,7 +160,7 @@ textarea {
 	    if (chk) {
 	      location.href="/delete?postno=${viewPage.postno}"
 			}
-	}); 2
+	});
 	
 	
 	$("#cancel_btn").on("click", function(e){

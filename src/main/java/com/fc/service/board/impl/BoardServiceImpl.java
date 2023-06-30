@@ -106,5 +106,16 @@ public class BoardServiceImpl implements BoardService {
 		return result;
 	}
 
+	@Override
+	public int getTotalPage() {
+		return boardDao.selectTotalBoardsCount();
+	}
+
+	@Override
+	public int getSearchedTotalPage() {
+		// TODO Auto-generated method stub
+		return boardDao.selectTotalSearchedBoardsCount();
+	}
+
 }
 	
