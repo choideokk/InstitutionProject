@@ -32,17 +32,9 @@ String loginId = null;
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">메인</a></li>
+						aria-current="page" href="${path}/map">메인지도</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">예약</a></li>
-						<li class="nav-item"><a class="nav-link" href="${path}/boardlist">게시판</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false">시설 둘러보기 </a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="#">천안</a></li>
-							<li><a class="dropdown-item" href="#">그 외 지역</a></li>
-						</ul>
-					</li>
+					<li class="nav-item"><a class="nav-link" href="${path}/boardlist?pageNo=1">게시판</a></li>
 				</ul>
 				<%
 					if (session.getAttribute("loginId") == null) {

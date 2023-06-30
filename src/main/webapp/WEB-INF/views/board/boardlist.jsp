@@ -111,10 +111,8 @@
 <body>
 <h1>목록페이지입니다.</h1>
 <c:if test="${loginId != null}">
-	<form name="form2" method="post" action="${path}../member/logout">
-		<p>${loginId}님반갑습니다</p>
-		<button type="submit" id="logout" name="logout">로그아웃</button>
-	</form>
+	<p>${loginId}님반갑습니다</p>
+	<a href="${path}/logout">로그아웃</a>
 </c:if>
 
 <div class="collapse" id="navbarToggleExternalContent">
