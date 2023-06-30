@@ -59,8 +59,9 @@
         <!-- Hidden fields -->
         <input type="hidden" id="rsvtTime" name="rsvtTime">
         <input type="hidden" id="category" name="category" value="${category}">
-        <input type="hidden" id="dDate" name="dDate" value="${date}">
+        <input type="hidden" id="toDate" name="toDate" value="${date}">
         <input type="hidden" id="rsvfNm" name="rsvfNm" value="${rsvfNm}">
+        
 
         <c:forEach var="i" begin="1" end="6">
           <c:set var="keyName" value="key${i}" />
@@ -80,7 +81,7 @@
                 <p>참가 가능</p>
               </c:when>
               <c:when test="${currentValue.status == '2'}">
-                <p>마감</p>
+                <p>마감 관리자 승인 대기중</p>
               </c:when>
             </c:choose>
           </div>
@@ -89,7 +90,9 @@
         <div>
           <button type="submit">예약&참가</button>
         </div>
-      </form>
+        </form>
+        
+        
 
       <form>
         <button>목록</button>
@@ -120,6 +123,8 @@
     if (totalPeopleCnt == 4) {
       return;
     }
+    
+    
 
     if (selectedBox) {
       selectedBox.style.backgroundColor = 'initial';

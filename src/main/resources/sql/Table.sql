@@ -889,31 +889,42 @@ DROP TABLE reservation_info;
     rsvtNo Number PRIMARY KEY,  --예약번호
     rgsrDate Date,  --등록일
     deadDate Date,  --마감일
-    dDate Date,  --사용하는 날
+    toDate Date,  --사용하는 날
     rsvtTime Number,   --사용하는 시간
     rsrcId VARCHAR2(1000),  -- 개설자 아이디
     rsvfNm VARCHAR2(1000), --시설이름
     category VARCHAR2(500),  -- 종목
     totalPeopleCnt Number,  -- 참가 인원 숫자
-    participant_id1 VARCHAR2(100),  -- 참가자1
-    participant_id2 VARCHAR2(100),  -- 참가자2
-    participant_id3 VARCHAR2(100),  -- 참가자3
+    jidone VARCHAR2(100),  -- 참가자1
+    jidtwo VARCHAR2(100),  -- 참가자2
+    jidthree VARCHAR2(100),  -- 참가자3
     status Number, -- 상태
     approval  VARCHAR2(2)   --담당자 승인여부
     );
-   
-   select * from reservation_info;
-   
-   drop table reservation_info;
+    
+INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, toDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, status, approval)
+VALUES (
+    1, -- 예약번호
+    TO_DATE('2023-06-29', 'YYYY-MM-DD'), -- 등록일
+    TO_DATE('2023-06-30', 'YYYY-MM-DD'), -- 마감일
+    TO_DATE(SYSDATE), -- 사용하는 날짜: 오늘 날짜로 설정
+    2, -- 사용하는 시간
+    '1q2w3e4r', -- 개설자 아이디
+    '시설 A', -- 시설이름
+    '종목 X', -- 종목
+    4, -- 참가 인원 숫자
+    'user1', -- 참가자1
+    'user2', -- 참가자2
+    'user3', -- 참가자3
+    1, -- 상태
+    'Y' -- 담당자 승인여부
+);
    
    CREATE SEQUENCE reservation_info_no_seq
 START WITH 0
 MINVALUE 0
 INCREMENT BY 1;
-   
-   INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, dDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, participant_id4, status, approval) 
-VALUES (2, TO_DATE('2023-06-21','YYYY-MM-DD'), TO_DATE('2023-06-22','YYYY-MM-DD'), TO_DATE('2023-06-25','YYYY-MM-DD'), 1200, 'userId', 'Main Gym', 'Football', 4, 'participant1', 'participant2', 'participant3', 'participant4', 1, 'Y');
- 
+
   COMMIT;
     
 DROP SEQUENCE member_no_seq;

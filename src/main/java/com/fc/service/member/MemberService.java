@@ -8,7 +8,7 @@ public interface MemberService {
 	boolean member_insert(MemberDto memberdto);
 	
 	//마이페이지에서 회원 정보 확인
-	MemberDto member_select(String id);
+	MemberDto member_select(String loginId);
 	
 	//로그인 처리
 	MemberDto member_login(MemberDto memberDto, HttpSession session);
@@ -20,7 +20,7 @@ public interface MemberService {
 	int member_id_check(String loginId);
 	
 	//마이페이지에서 회원 정보 변경 저장
-	boolean member_update(MemberDto memberdto);
+	public void member_update(MemberDto memberdto);
 
 	//회원 정보 탈퇴
 	boolean member_delete(String id);

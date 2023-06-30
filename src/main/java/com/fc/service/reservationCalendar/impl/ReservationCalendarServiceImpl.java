@@ -1,5 +1,6 @@
 package com.fc.service.reservationCalendar.impl;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public class ReservationCalendarServiceImpl implements ReservationCalendarServic
 	ReservationCalendarDao reservationCalendarDao;
 
 	@Override
-	public List<ReservationCalendarDto> findDb2(String rsvfNm, String category, String date) {
+	public List<ReservationCalendarDto> findDb2(String rsvfNm, String category, Date date) {
 		List<ReservationCalendarDto> list = reservationCalendarDao.selectReservationListBySearchKeyword(rsvfNm, category, date);
 	    return list;
 	}
@@ -41,6 +42,38 @@ public class ReservationCalendarServiceImpl implements ReservationCalendarServic
 		
 		return result;
 	}
+
+
+	@Override
+	public List<ReservationCalendarDto> myReservation(String loginId) {
+		List<ReservationCalendarDto> list = reservationCalendarDao.selectMyReservationList(loginId);
+	    return list;
+	}
+
+
+	@Override
+	public boolean checkDuplicateId(String loginId) {
+	    return reservationCalendarDao.isDuplicateId(loginId);
+	}
+
+
+	@Override
+	public int clearReservation(ReservationCalendarDto reservationCalendarDto) {
+		
+	int result = reservationCalendarDao.clearReservation(reservationCalendarDto);
+		
+		return result;
+	}
+
+
+	@Override
+	public boolean checkMyReservation(String loginId) {
+		// TODO Auto-generated method stub
+		 return reservationCalendarDao.checkMyReservation(loginId);
+			}
+
+
+
 
 
 

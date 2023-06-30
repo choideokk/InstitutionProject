@@ -27,7 +27,7 @@
  
  *{
  	margin:0;
- 	padiing:0;
+ 	padding:0;
  	box-sizing: border-box;
  }
  .rowtable{
@@ -180,61 +180,54 @@
 
 
 <div class="row">
-        <div class="card card-margin search-form" method="POST" action="${path}/searchBoard">
+  <form class="search_wrap" method="POST" action="${path}/searchBoard?pageNo=1">
+    <div class="search_area">
+      <label> 대소문자 구분 <input type="checkbox" name="isChecked"
+        <c:if test="${searchObj.isChecked == 'on'}">checked</c:if> />
+      </label> <select name="searchKeyword">
+        <option value="T"
+          <c:if test="${searchObj.searchKeyword == 'T'}">selected</c:if>>제목</option>
+        <option value="W"
+          <c:if test="${searchObj.searchKeyword == 'W'}">selected</c:if>>작성자</option>
+        <option value="TW"
+          <c:if test="${searchObj.searchKeyword == 'TW'}">selected</c:if>>제목
+          + 작성자</option>
+      </select> <input type="text" name="searchTxt" value="${searchObj.searchTxt}">
+      <button type="submit">Search</button>
+    </div>
+  </form>
+</div>
             
-            <div class="card-body p-0">
-                <form id="search-form">
-                    <div class="row">
-                        <div class="col-12">
-                   
-                            <div class="row no-gutters">
-                                <div class="col-lg-3 col-md-3 col-sm-12 p-0">
-                                    <label for="search-type" hidden>검색 유형</label>
-                        
-                                    <select class="form-control" id="search-type" name="searchType">
-                                        <option>제목</option>
-                                        <option>본문</option>
-                                        <option>id</option>
-                                        <option>닉네임</option>
-                                        <option>해시태그</option>
-                                    </select>
-                    <label> 대소문자 구분<input type="checkbox" name="isChecked" <c:if test="${searchObj.isChecked == 'on'}">checked</c:if> /></label>
-                                </div>
-                                <div class="col-lg-8 col-md-6 col-sm-12 p-0">
-                                    <label for="search-value" hidden>검색어</label>
-                                    <input type="text" placeholder="검색어..." class="form-control" id="search-value"
-                                           name="searchValue">
-                                </div>
-                                
-                                <div class="col-lg-1 col-md-3 col-sm-12 p-0">
-                                    <button type="submit" class="btn btn-base">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                             stroke-linecap="round" stroke-linejoin="round"
-                                             class="feather feather-search">
-                                            <circle cx="11" cy="11" r="8"></circle>
-                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                        </svg>
-                                    </button>
-               
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+           
              
-    <div class="row">
-        <nav id="pagination" aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-        </nav>
-    </div>
+    <ul class="pagination">
+			<!-- Previous 시작 -->
+			<li
+				class="paginate_button page-item previous <c:if test='${currentPageInfo.startPage<6}'>disabled</c:if>"
+				id="dataTable_previous"><a
+				href="${path}/boardlist?pageNo=${currentPageInfo.startPage-5}"
+				aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+				class="page-link">Previous</a></li>
+			<!-- Previous 끝 -->
+			<!-- Page번호 시작, 컨트롤러에서 list에 페이징 객체를 넣었으므로 list.변수명으로 불러옴 -->
+			<c:forEach var="pNo" begin="${currentPageInfo.startPage}" end="${currentPageInfo.endPage}"
+				step="1">
+				<li
+					class="paginate_button page-item <c:if test='${param.pageNo eq pNo}'>active</c:if>"><a
+					href="${path}/boardlist?pageNo=${pNo}" aria-controls="dataTable"
+					data-dt-idx="1" tabindex="0" class="page-link">${pNo}</a></li>
+			</c:forEach>
+			<!-- Page번호 끝 -->
+			<!-- Next 시작 -->
+			<li
+				class="paginate_button page-item next <c:if test='${currentPageInfo.endPage>=currentPageInfo.totalPages}'>disabled</c:if>"
+				id="dataTable_next"><a
+				href="${path}/boardlist?pageNo=${currentPageInfo.startPage+5}"
+				aria-controls="dataTable" data-dt-idx="7" tabindex="0"
+				class="page-link">Next</a></li>
+			<!-- Next 끝 -->
+			<!-- 페이징 처리 끝 -->
+		</ul>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 

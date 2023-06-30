@@ -22,7 +22,9 @@ public interface BoardService {
  
 	List<BoardDto> findBoardListBySearchDto(SearchDto searchDto);
 
-	public void viewCount(int postno);
+	List<BoardDto> findBoardListBySearchDto(SearchDto searchDto);
+
+	void viewCount(int postno);
 
 	public BoardDto getdetail(int postno);
 
@@ -30,14 +32,10 @@ public interface BoardService {
 
 	public void boardDelte(int postno);
 	
-	public int likeBoard(Map<String, String> map);
-
-
-	public int getArticleCount();
-
-
-	public List<BoardDto> getListPage(int displayArticle, int articleNum);
-
-
+	public int controlBoardInfo(Map<String, String> map);
+	
+	public int getTotalPage();
+	
+	public int getSearchedTotalPage();
 
 }

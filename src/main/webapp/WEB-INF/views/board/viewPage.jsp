@@ -21,7 +21,7 @@
 
 
 <style>
-style type ="text /css ">.input_wrap {
+.input_wrap {
 	padding: 5px 20px;
 }
 
@@ -213,18 +213,14 @@ textarea {
         </table>
     </div>
   </div>
-	
+  
+  <script type="text/javascript" src="${path}/js/manageInfo.js"></script>
 <script>
 
-/* 	function submit2(frm){
-		frm.action ='/update'
-		frm.submit();
-		
-		return true;
-	} */
-	
-
- 
+	var path = '${path}';
+	var postNumber = '${viewPage.postno}';
+ 	let form = $("#infoForm");		// 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)
+	let mForm = $("#updateForm");	// 페이지 데이터 수정 from
 	
 	$("#list_btn").on("click", function(e){
 		var chk = confirm("목록 페이지로 가시겠습니까?");
@@ -266,6 +262,13 @@ textarea {
 	//		}
 	//});	 
 	
+	$(".likesBtn").on("click", function() {
+		fn_opinionChk("1", "추천")
+	});
+	
+	$(".reportBtn").on("click", function() {
+		fn_opinionChk("2", "신고")
+	});
 
 
 	

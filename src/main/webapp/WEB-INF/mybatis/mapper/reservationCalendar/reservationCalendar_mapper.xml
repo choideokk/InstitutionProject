@@ -7,21 +7,40 @@
 <mapper namespace="reservationCalendar_mapper">
 
 	<insert id="insert_reservation" parameterType="ReservationCalendarDto">
-    insert into reservation_info(rsvtNo, dDate, rsvtTime, rsrcId, totalPeopleCnt, status, category, rsvfNm)
-    values ( reservation_info_no_seq.nextval, #{dDate}, #{rsvtTime}, #{rsrcId}, 1, 1, #{category}, #{rsvfNm} )
+    insert into reservation_info(rsvtNo, toDate, rsvtTime, rsrcId, totalPeopleCnt, status, category, rsvfNm, jidone, jidtwo, jidthree)
+    values ( reservation_info_no_seq.nextval, #{toDate}, #{rsvtTime}, #{rsrcId}, 1, 1, #{category}, #{rsvfNm}, ' ', ' ', ' ' )
 </insert>
 
-	<update id="update_reservation" parameterType="ReservationCalendarDto">
+
+<update id="update_reservation" parameterType="ReservationCalendarDto">
     UPDATE reservation_info
     SET totalPeopleCnt = #{totalPeopleCnt},
-        status = #{status},
-        participant_id1 = #{participant_id1},
-        participant_id2 = #{participant_id2}
-    WHERE dDate = #{dDate}
+        status = #{status}
+        <if test="jidone != null">
+            , jidone = #{jidone}
+        </if>
+        <if test="jidtwo != null">
+            , jidtwo = #{jidtwo}
+        </if>
+        <if test="jidthree != null">
+            , jidthree = #{jidthree}
+        </if>
+    WHERE toDate = #{toDate}
     AND rsvtTime = #{rsvtTime}
     AND category = #{category} 
     AND rsvfNm = #{rsvfNm}
 </update>
+
+<delete id="delete_reservation" parameterType="ReservationCalendarDto">
+    delete from reservation_info where rsvtNo = #{rsvtNo}
+</delete>
+
+<select id="check_my_reservation_list" resultType="int">
+    SELECT COUNT(*)      
+    FROM reservation_info
+    WHERE rsrcId = #{loginId}
+</select>
+
 
 <select id="select_reservation_list" resultType="ReservationCalendarDto">
     SELECT rsvtNo,
@@ -30,7 +49,26 @@
            status,
            totalPeopleCnt
     FROM reservation_info
-    WHERE rsvfNm = #{rsvfNm} AND category = #{category} AND dDate = #{date}
+    WHERE rsvfNm = #{rsvfNm} AND category = #{category} AND toDate = #{date}
 </select>
+
+<select id="select_my_reservation_list" resultType="ReservationCalendarDto">
+    SELECT *      
+    FROM reservation_info
+    WHERE rsrcId = #{rsrcId}
+    OR jidone = #{rsrcId}
+    OR jidtwo = #{rsrcId}
+    OR jidthree = #{rsrcId}
+</select>
+
+<select id="count_duplicate_id" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM reservation_info
+        WHERE rsrcId = #{loginId}
+            OR jidone = #{loginId}
+            OR jidtwo = #{loginId}
+            OR jidthree = #{loginId}
+    </select>
+
+
 	
 </mapper>

@@ -43,6 +43,11 @@ public interface BoardDao {
 
 
 	List<BoardDto> ListPage(int displayArticle, int articleNum);
+    public int insertBoardOpinion(Map<String, String> infoMap);
+    
+    public int selectTotalBoardsCount();
+    
+    public int selectTotalSearchedBoardsCount();
 	
 
 	

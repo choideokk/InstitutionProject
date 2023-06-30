@@ -100,29 +100,21 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int likeBoard(Map<String, String> map) {
+	public int controlBoardInfo(Map<String, String> map) {
 		// TODO Auto-generated method stub
-		int result = boardDao.insertBoardLike(map);
+		int result = boardDao.insertBoardOpinion(map);
 		return result;
 	}
 
 	@Override
-	public int getArticleCount() {
-		// TODO Auto-generated method stub
-		
-		int result =boardDao.pageCount();
-		
-		return 0;
+	public int getTotalPage() {
+		return boardDao.selectTotalBoardsCount();
 	}
 
 	@Override
-	public List<BoardDto> getListPage(int displayArticle, int articleNum) {
+	public int getSearchedTotalPage() {
 		// TODO Auto-generated method stub
-		
-		
-		List<BoardDto> list = boardDao.ListPage(displayArticle,articleNum);
-		
-		return list;
+		return boardDao.selectTotalSearchedBoardsCount();
 	}
 
 }

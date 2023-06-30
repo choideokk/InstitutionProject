@@ -889,31 +889,42 @@ DROP TABLE reservation_info;
     rsvtNo Number PRIMARY KEY,  --예약번호
     rgsrDate Date,  --등록일
     deadDate Date,  --마감일
-    dDate Date,  --사용하는 날
+    toDate Date,  --사용하는 날
     rsvtTime Number,   --사용하는 시간
     rsrcId VARCHAR2(1000),  -- 개설자 아이디
     rsvfNm VARCHAR2(1000), --시설이름
     category VARCHAR2(500),  -- 종목
     totalPeopleCnt Number,  -- 참가 인원 숫자
-    participant_id1 VARCHAR2(100),  -- 참가자1
-    participant_id2 VARCHAR2(100),  -- 참가자2
-    participant_id3 VARCHAR2(100),  -- 참가자3
+    jidone VARCHAR2(100),  -- 참가자1
+    jidtwo VARCHAR2(100),  -- 참가자2
+    jidthree VARCHAR2(100),  -- 참가자3
     status Number, -- 상태
     approval  VARCHAR2(2)   --담당자 승인여부
     );
-   
-   select * from reservation_info;
-   
-   drop table reservation_info;
+    
+INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, toDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, status, approval)
+VALUES (
+    1, -- 예약번호
+    TO_DATE('2023-06-29', 'YYYY-MM-DD'), -- 등록일
+    TO_DATE('2023-06-30', 'YYYY-MM-DD'), -- 마감일
+    TO_DATE(SYSDATE), -- 사용하는 날짜: 오늘 날짜로 설정
+    2, -- 사용하는 시간
+    '1q2w3e4r', -- 개설자 아이디
+    '시설 A', -- 시설이름
+    '종목 X', -- 종목
+    4, -- 참가 인원 숫자
+    'user1', -- 참가자1
+    'user2', -- 참가자2
+    'user3', -- 참가자3
+    1, -- 상태
+    'Y' -- 담당자 승인여부
+);
    
    CREATE SEQUENCE reservation_info_no_seq
 START WITH 0
 MINVALUE 0
 INCREMENT BY 1;
-   
-   INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, dDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, participant_id4, status, approval) 
-VALUES (2, TO_DATE('2023-06-21','YYYY-MM-DD'), TO_DATE('2023-06-22','YYYY-MM-DD'), TO_DATE('2023-06-25','YYYY-MM-DD'), 1200, 'userId', 'Main Gym', 'Football', 4, 'participant1', 'participant2', 'participant3', 'participant4', 1, 'Y');
- 
+
   COMMIT;
     
 DROP SEQUENCE member_no_seq;
@@ -961,19 +972,6 @@ MAXVALUE 9999999999
 NOCYCLE
 NOCACHE;
 
-create table board_infos(
-    postno number generated always as IDENTITY,
-    title varchar2(150),
-    content varchar2(2000) ,
-    writer varchar2(50) ,
-    updatedate date default sysdate,
-    changedate date default sysdate,
-    recommend NUMBER,
-    report NUMBER,
-    viewCnt NUMBER default 0,
-    constraint board_infos PRIMARY key(postno)
-);
-
 CREATE TABLE board_infos (
     postno NUMBER(10) GENERATED ALWAYS AS IDENTITY,
     num NUMBER(10),
@@ -996,90 +994,3 @@ select * from board_infos;
 
 
 commit;
-
---댓글테이블
-create table reply(
-             replynumber number not null primary key, 
-			 postno number , --  board_infos랑 연결할 거
-			 replytext varchar2(1000)  ,
-			 replyname varchar2(20)  ,
-			 replyUserID varchar2(50)  ,
-			 secretreply number(2)  ,
-             recommend number default 0,
-               report number default 0,
-			 changedate date default sysdate, 
-			 updatedate date default sysdate,
-    FOREIGN KEY (postno) REFERENCES board_infos (POSTNO) 
-);
-
-
---레슨테이블1
-CREATE TABLE LESSON (
-  student_number NUMBER(10) PRIMARY KEY NOT NULL,  --학생번호
-  lesson_start DATE, --레슨 시작일
-  lesson_end DATE, --레슨 종료일
-  student_id VARCHAR2(40), --학생 아이디
- 	 CONSTRAINT student_fk FOREIGN KEY (student_id) REFERENCES LESSON_STUDENT_PROFILE(student_id)
- 		ON DELETE SET NULL,
-  lesson_id NUMBER(5), -- 레슨 아이디
-  	CONSTRAINT teacher_fk  FOREIGN KEY (lesson_id) REFERENCES TEACHER_PROFILE(teacher_id) 
-		ON DELETE SET NULL,
-  possible VARCHAR2(10) DEFAULT '예약가능' -- 예약 가능한 날
-);
-
-select *
-from LESSON;
-
-
---레슨테이블2
-
-CREATE TABLE MUSICLESSON (
-  lesson_id NUMBER(5) PRIMARY KEY,--레슨 아이디
-  student_id NUMBER(10), --학생 아이디
-  teacher_id NUMBER(5),--선생 아이디
-  lesson_statr_date DATE, --레슨 시작일
-  lesson_end_date DATE,--레슨 종료일
-  start_time TIME, -- 시작 시간
-  end_time TIME,  --끝나는 시간
-  lesson_department VARCHAR2(50),-- 레슨 분야
-  lesson_pay INT, --레슨 비용
-  CONSTRAINT student_fk FOREIGN KEY (student_id) REFERENCES LESSON_STUDENT_PROFILE(student_id) ON DELETE SET NULL,
-  CONSTRAINT teacher_fk FOREIGN KEY (teacher_id) REFERENCES LESSON_TEACHER_PROFILE(teacher_id) ON DELETE SET NULL
-);
---학생정보
-CREATE TABLE LESSON_STUDENT_PROFILE (
-  student_id VARCHAR2(20) PRIMARY KEY,
-  pw VARCHAR2(30) NOT NULL,
-  gender VARCHAR2(4),
-  interest VARCHAR2(20),
-  name VARCHAR2(10) NOT NULL,
-  level NUMBER(2),
-  email VARCHAR2(50) NOT NULL,
-  age INTEGER NOT NULL,
-  address VARCHAR2(20) NOT NULL,
-  phone INTEGER
-);
---선생정보
-CREATE TABLE LESSON_TEACHER_PROFILE (
-  teacher_id VARCHAR2(20) PRIMARY KEY,
-  pw VARCHAR2(30) NOT NULL,
-  name VARCHAR2(10) NOT NULL,
-  gender VARCHAR2(4),
-  email VARCHAR2(50) NOT NULL,
-  age INTEGER NOT NULL,
-  address VARCHAR2(30) NOT NULL,
-  phone INTEGER NOT NULL,
-  department VARCHAR2(10) NOT NULL  -- 선생 파트
-);
-
---공간 미정
-CREATE TABLE facility (
-
-);
-
---회원등급
-CREATE TABLE STUDENT_GRADE (
- student_id VARCHAR2(20) PRIMARY KEY, --학생 아이디
- grade_gift VARCHAR2(200),-- 혜택
- grade_name  VARCHAR2(50), --등급이름 골드,플래티넘 등등
-);

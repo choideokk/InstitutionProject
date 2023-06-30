@@ -9,16 +9,15 @@ public class ReservationCalendarDto {
 	int rsvtNo;
 	Date rgsrDate;
 	Date deadDate;
-	String dDate;
+	Date toDate;
 	int rsvtTime;
 	String rsrcId;
 	String rsvfNm;
 	String category;
 	int totalPeopleCnt;
-	String participant_id1;
-	String participant_id2;
-	String participant_id3;
-	String participant_id4;
+	String jidone;
+	String jidtwo;
+	String jidthree;
 	int status;
 	String approval;
 	

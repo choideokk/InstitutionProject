@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import java.sql.Date;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,17 +32,41 @@ public class ReservationCalendar {
 	
 	@Autowired
 	MapService mapService;
+	
+	@PostMapping("/clearMyReservation")
+	public String clearMyReservation(@RequestBody ReservationCalendarDto reservationCalendarDto, HttpSession session, Model model) {
+
+		  String loginId = (String) session.getAttribute("loginId");
+		   System.out.println("loginId: " + loginId);
+	    
+		   boolean checkMyReservation = reservationCalendarService.checkMyReservation(loginId);
+
+		   if (checkMyReservation) {
+			    int result = reservationCalendarService.clearReservation(reservationCalendarDto);
+			    
+			    return "reservation/myReservation";
+	     }
+		   
+	    model.addAttribute("errorMessage", "예약 등록자가 아닙니다.");
+	    
+	    return "reservation/myReservation";
+	}
+	
 	 
 	 @RequestMapping("/reservationCalendar")
 	 public String reservationCalendar(
 		        @RequestParam("rsvfNm") String rsvfNm, 
 		        @RequestParam("category") String category, 
-		        @RequestParam("date") String date, 
+		        @RequestParam("date") Date date, 
+		        HttpSession session,
 		        Model model) {
-
+		 
 		 model.addAttribute("date", date);
 		 model.addAttribute("rsvfNm", rsvfNm);
 		 model.addAttribute("category", category);
+		 
+		 String no = (String) session.getAttribute("no");
+		
 		    // do something with these values
 		 List<ReservationCalendarDto> values = reservationCalendarService.findDb2(rsvfNm, category, date);
 		 Map<String, ReservationCalendarDto> valuesMap = new HashMap<>();
@@ -81,34 +107,51 @@ public class ReservationCalendar {
 	 
 	 
 	 @RequestMapping("/Calendar2")
-		public String calendar2(@RequestParam String no, Model model) {
+		public String calendar2(@RequestParam String no, Model model, HttpSession session) {
 			FcDetailDto currentFc = mapService.getCurrentFacility(no);
 
 			if (currentFc != null) {
 				model.addAttribute("currentFc", currentFc);
+				
+				session.setAttribute("no", no);
 				return "reservation/calendar2";
 			} 
 
 			return "error";
 		}
 	 
-	 
-	 
-	 @PostMapping("/Calendar3")
+	 //예약 등록 했을 때
+	 	 @RequestMapping("/Calendar3")
 	    public String calendar3(ReservationCalendarDto reservationCalendarDto,
 	            Model model, HttpSession session) {
 		 
 		 	String loginId = (String) session.getAttribute("loginId");
 		    reservationCalendarDto.setRsrcId(loginId);
 		 	
-		 
-		 int result = reservationCalendarService.createReservation(reservationCalendarDto);
-		
+		    int result = reservationCalendarService.createReservation(reservationCalendarDto);
+	
+		    List<ReservationCalendarDto> values = reservationCalendarService.myReservation(loginId);
 		    
-			return "reservation/calendar3";
+		    model.addAttribute("values", values);
+		    
+		    return "redirect:/myReservation";
 		}
-	 
-	 //ㅇㅇ
+	 	 
+	 	 //나의 예약 페이지 접근 및 처리
+	 	 @RequestMapping("/myReservation")
+		    public String myReservation(Model model, HttpSession session) {
+			 
+			 	String loginId = (String) session.getAttribute("loginId");
+			    
+			    List<ReservationCalendarDto> values = reservationCalendarService.myReservation(loginId);
+			    
+			    model.addAttribute("values", values);
+			    
+			    return "reservation/myReservation";
+			}
+	 	 
+
+	 //등록된 예약에 참가 했을 때
 	 @PostMapping("/Calendar4")
 	 public String calendar4(ReservationCalendarDto reservationCalendarDto,
 	         Model model, HttpSession session) {
@@ -116,21 +159,44 @@ public class ReservationCalendar {
 	     String loginId = (String) session.getAttribute("loginId");
 	     int totalPeopleCnt = reservationCalendarDto.getTotalPeopleCnt();
 
+	     // 중복 아이디 확인을 위한 쿼리 실행
+	     boolean isDuplicateId = reservationCalendarService.checkDuplicateId(loginId);
+
+	     if (isDuplicateId) {
+	    	 	String no = (String) session.getAttribute("no");
+	    	 	 model.addAttribute("errorMessage", "이미 참가되어 있는 예약입니다.");
+	    	 	
+	    	 	
+	    	    List<ReservationCalendarDto> values = reservationCalendarService.myReservation(loginId);
+	    	    model.addAttribute("values", values);
+	    	    return "forward:/Calendar2?no=" + no;
+	     }
+	     
 	     // totalPeopleCnt 값이 1일 경우, participant_id1에 loginId를 설정
 	     if (totalPeopleCnt == 1) {
-	         reservationCalendarDto.setParticipant_id1(loginId);
+	         reservationCalendarDto.setJidone(loginId);
 	         reservationCalendarDto.setTotalPeopleCnt(2);
 	         reservationCalendarDto.setStatus(1);
 	         
 	     } else if (totalPeopleCnt == 2) {
-	         reservationCalendarDto.setParticipant_id2(loginId);
+	         // 기존 participant_id1 값을 유지하고 participant_id2에 loginId를 설정
+	         reservationCalendarDto.setJidtwo(loginId);
 	         reservationCalendarDto.setTotalPeopleCnt(3);
 	         reservationCalendarDto.setStatus(1);
+	     } else if (totalPeopleCnt == 3) {
+	         // 기존 participant_id1 값을 유지하고 participant_id2에 loginId를 설정
+	         reservationCalendarDto.setJidthree(loginId);
+	         reservationCalendarDto.setTotalPeopleCnt(4);
+	         reservationCalendarDto.setStatus(2);
 	     }
-	     
+
 	     int result = reservationCalendarService.updateReservation(reservationCalendarDto);
 
-	     return "reservation/calendar3";
+		 List<ReservationCalendarDto> values = reservationCalendarService.myReservation(loginId);
+		    
+		 model.addAttribute("values", values);
+	     
+		 return "redirect:/myReservation";
 	 }
 	
 	}
