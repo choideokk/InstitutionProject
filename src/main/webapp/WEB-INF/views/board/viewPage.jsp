@@ -193,25 +193,26 @@ textarea {
 
 				<tbody>
 
-					<c:forEach items="${list}" var="list">
+					<c:forEach items="${list}" var="comment">
 						<tr>
-							<td><c:out value="${list.replynumber}" /></td>
+							<td><c:out value="${comment.replynumber}" /></td>
 							<c:if test="${sessionScope.loginId != null}">
 								<label for="userid">작성자: ${sessionScope.loginId}</label>
 							</c:if>
-							<td><c:out value="${list.replytext}" /></td>
+							<td><c:out value="${comment.replytext}" /></td>
 							<td><fmt:formatDate pattern="yyyy/MM/dd"
-									value="${reply.updatedate}" /> <td><fmt:formatDate pattern="yyyy/MM/dd"
-									value="${reply.changedate}" />             
+									value="${comment.updatedate}" /> <td>
+					<fmt:formatDate pattern="yyyy/MM/dd"
+									value="${comment.changedate}" />             
 					
-							<td><c:out value="${list.recommend}" /></td>
-						<td><c:out value="${list.report}" /></td>		
+							<td><c:out value="${comment.recommend}" /></td>
+						<td><c:out value="${comment.report}" /></td>		
 			</tr>			
 		</c:forEach>	
             </tbody>
         </table>
     </div>
-  
+  </div>
 	
 <script>
 
