@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 
- 
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  
 <link href="bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -90,7 +90,7 @@
  
  
 <body>
-<h1> 테스트용 페이지</h1>
+    <!-- 배열이 비어있지 않으면 참을 출력함. (다시말해서 배열에 값들이 있으면 댓글 리스트를 출력한다.) -->
  
  
  

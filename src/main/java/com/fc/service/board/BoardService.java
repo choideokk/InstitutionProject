@@ -4,13 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.fc.dto.board.BoardDto;
-
-
+import com.fc.dto.board.ReplyDto;
+import com.fc.dto.facility.SearchDto;
 
 public interface BoardService {
 
-	int boardInsert(BoardDto boardDto);
-
+	public int boardInsert(BoardDto boardDto);
 
 
 	List<BoardDto> getBoardListbyBoardNumber(BoardDto boardDto);
@@ -20,19 +19,25 @@ public interface BoardService {
 	List<BoardDto> findBoardListBySearchKeywordMap(Map<String, String> map);
 
 	List<BoardDto> findBoardListBySearchKeywordMap2(Map<String, String> map);
+ 
+	List<BoardDto> findBoardListBySearchDto(SearchDto searchDto);
 
-	void viewCount(int postno);
+	public void viewCount(int postno);
 
-	BoardDto getdetail(int postno);
+	public BoardDto getdetail(int postno);
 
-	void boardUpdate(BoardDto boardDto);
+	public void boardUpdate(BoardDto boardDto);
 
 	public void boardDelte(int postno);
+	
+	public int likeBoard(Map<String, String> map);
 
 
+	public int getArticleCount();
 
 
-//페이징
+	public List<BoardDto> getListPage(int displayArticle, int articleNum);
+
 
 
 }

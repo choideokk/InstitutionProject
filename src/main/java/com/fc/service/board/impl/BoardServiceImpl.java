@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fc.dao.board.BoardDao;
 import com.fc.dto.board.BoardDto;
-
-import com.fc.model.Criteria;
+import com.fc.dto.facility.SearchDto;
 import com.fc.service.board.BoardService;
 
 
@@ -92,7 +91,39 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.delete(postno);
 	}
 
+	@Override
+	public List<BoardDto> findBoardListBySearchDto(SearchDto searchDto) {
+		// TODO Auto-generated method stub
+		// dao로 가서 검색하고 받아오는 메소드
+		List<BoardDto> searchedList = boardDao.selectBoardListBySearchDto(searchDto);
+		return searchedList;
+	}
 
+	@Override
+	public int likeBoard(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		int result = boardDao.insertBoardLike(map);
+		return result;
+	}
+
+	@Override
+	public int getArticleCount() {
+		// TODO Auto-generated method stub
+		
+		int result =boardDao.pageCount();
+		
+		return 0;
+	}
+
+	@Override
+	public List<BoardDto> getListPage(int displayArticle, int articleNum) {
+		// TODO Auto-generated method stub
+		
+		
+		List<BoardDto> list = boardDao.ListPage(displayArticle,articleNum);
+		
+		return list;
+	}
 
 }
 	

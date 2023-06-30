@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fc.dto.board.BoardDto;
-
-import com.fc.model.Criteria;
+import com.fc.dto.facility.SearchDto;
 
 public interface BoardDao {
 
@@ -24,6 +23,8 @@ public interface BoardDao {
 	//내용
 	List<BoardDto> selectBoardListBySearchKeywordMap2(Map<String, String> map);
 	
+	List<BoardDto> selectBoardListBySearchDto(SearchDto searchDto);
+	
 	void viewCount(int postno);
 	//조회수 예정
 
@@ -32,11 +33,17 @@ public interface BoardDao {
 	public void update(BoardDto boardDto);
 	
     public void delete(int postno) ;
-
-
     
-    //페이징
+    public int insertBoardLike(Map<String, String> infoMap);
 
 
 
+	public int pageCount();
+
+
+
+	List<BoardDto> ListPage(int displayArticle, int articleNum);
+	
+
+	
 }

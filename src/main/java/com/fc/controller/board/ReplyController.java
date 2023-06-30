@@ -1,80 +1,91 @@
 package com.fc.controller.board;
 
-
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.stream.events.Comment;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fc.dto.board.ReplyDto;
+import com.fc.dto.member.MemberDto;
 import com.fc.service.board.ReplyService;
-
 
 @Controller
 public class ReplyController {
+	private static final Logger log = LogManager.getLogger(BoardController.class);
 
 	@Autowired
 	ReplyService replyService;
 
-	
-	
+//	@GetMapping("/reply")
+//	public String insertContents() {
+//		log.info(" 댓글 작성 페이지 진입");
+//
+//
+//		return "board/reply";	
+//
+//	}
 
-
-	@GetMapping("/comments")
-	public String insertContents() {
-	
-		System.out.println("댓글쓰기 페이지");
-		return "comments";	
-
-	}
-
-	@PostMapping("/comments")
-	public String insertContents_process(@ModelAttribute ReplyDto replyDto ) {
-		System.out.println(replyDto);
-		System.out.println("왜 안넘어오지?");
+	@PostMapping("/reply")
+	public String insertContents_process(@ModelAttribute ReplyDto replyDto, @RequestParam int postno, HttpSession session, Model model) {
+		
+		String userId = (String ) session.getAttribute("userId");
+		replyDto.setReplywriter(userId);
+		replyDto.setPostno(postno);
 		int result = replyService.replyInsert(replyDto);
 		System.out.println(result);
-		return "comments";
+		
+		return "redirect:/detail?postno=" + postno;
 	}
 	
 	
-	
-	@RequestMapping("/comments")
-	public String commentList(Model model, @RequestParam(name = "replyno", required = false)String replyno) {
+	@RequestMapping("/listreply")
+	public String list(int replynumber,Model model) {
+		
+		List<ReplyDto> list=replyService.list(replynumber);
 
-		//Integer 받는 경우 : 숫자형이 아닌경우에 바로 오류
+		model.addAttribute("list",list);
 		
-		//String 받는 경우 : 일단 받고, 숫자형 체크 -> 이후 분기 처리 조절
-		//String pt;
-		
-		if (replyno == null) {
-			List<ReplyDto> replyList = replyService.getCommentList();
-			model.addAttribute("replyList", replyList);
-		} else {
-	        int reply = Integer.parseInt(replyno);
-	        
-	        System.out.println(replyno);
-			ReplyDto replyDto = new ReplyDto();
-			replyDto.setReplyno(reply);
-			List<ReplyDto> replyList = replyService.getCommentListbyNumber(replyDto);
-			model.addAttribute("replyList", replyList);
+		return "board/reply";
+	}
 	
+	
+	/*
+	 * @RequestMapping("list_json.do") public List<ReplyDto> list_json(int postno){
+	 * return replyService.list(postno);
+	 * 
+	 * }
+	 */
+	@PostMapping("/replylikes")
+	public String likesUp(@RequestParam("postno") int postno , Model model, HttpSession session) {
+		Map<String, String> likeInfo = new HashMap<String, String>();
+		likeInfo.put("likeUserId", (String)session.getAttribute("loginId"));
+		likeInfo.put("likePostNo", Integer.toString(postno));
+//		model.addAttribute("viewPage",boardService.getdetail(postno));
+		
+		int result = replyService.replylike(likeInfo);
+		if (result == 0) {
+			
+			System.err.println("왜 안오지 ");
+		} else {
+				
 		}
-		return "redirect:/viewPage";
+		return "redirect:/reply";
 	}
 	
 }
-
-

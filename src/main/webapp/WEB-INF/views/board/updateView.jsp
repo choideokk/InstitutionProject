@@ -73,7 +73,7 @@ textarea{
 	</div>
 	<div class="input_wrap">
 		<label>게시판 제목</label>
-		<input name="title" value='<c:out value="${viewPage.writer }"/>' >
+		<input name="title" value='<c:out value="${viewPage.title }"/>' >
 	</div>
 	<div class="input_wrap">
 		<label>게시판 내용</label>
@@ -108,6 +108,7 @@ textarea{
 		<input type="hidden" name="type" value="${cri.type }">	
 		<input type="hidden" name="keyword" value="${cri.keyword }">	
 	</form> 
+	
 	
 
 

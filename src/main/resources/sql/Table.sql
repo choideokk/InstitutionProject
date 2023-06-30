@@ -8,6 +8,8 @@
 --결제 포인트
 
 --시설정보테이블
+DROP TABLE facility_info CASCADE CONSTRAINTS;
+
 CREATE TABLE facility_info (
  rsrcNo VARCHAR2(22) PRIMARY KEY,
  rsrcNm VARCHAR2(500),
@@ -19,8 +21,6 @@ CREATE TABLE facility_info (
  instUrlAddr VARCHAR2(1000),
  imgFileUrlAddr VARCHAR2(1000)
 );
-
-DROP TABLE facility_info CASCADE CONSTRAINTS;
 
 SET DEFINE OFF;
 
@@ -474,6 +474,8 @@ SET DEFINE OFF;
 
 select * from facility_info;
 
+DROP TABLE facility_info_detail CASCADE CONSTRAINTS;
+
 --시설상세정보테이블
 CREATE TABLE facility_info_detail (
     rsrcNo VARCHAR2(1000) PRIMARY KEY,
@@ -499,11 +501,6 @@ CREATE TABLE facility_info_detail (
     foreign key (rsrcNo)
     references facility_info(rsrcNo)
 );
-
-DROP TABLE facility_info_detail CASCADE CONSTRAINTS;
-
-select * from facility_info_detail;
-
 
 INSERT INTO facility_info_detail VALUES(
     'BA10A0015167','010510','운동장','7004123','한국기술교육대학교','Y','N',
@@ -886,6 +883,7 @@ INSERT INTO facility_info_detail VALUES(
 select * from facility_info_detail;
 
 
+DROP TABLE reservation_info;
 
   CREATE TABLE reservation_info (
     rsvtNo Number PRIMARY KEY,  --예약번호
@@ -905,14 +903,20 @@ select * from facility_info_detail;
     approval  VARCHAR2(2)   --담당자 승인여부
     );
    
-   select * from reservation_info;
-    
    INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, dDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, participant_id4, status, approval) 
 VALUES (2, TO_DATE('2023-06-21','YYYY-MM-DD'), TO_DATE('2023-06-22','YYYY-MM-DD'), TO_DATE('2023-06-25','YYYY-MM-DD'), 1200, 'userId', 'Main Gym', 'Football', 4, 'participant1', 'participant2', 'participant3', 'participant4', 1, 'Y');
  
   COMMIT;
     
-    
+DROP SEQUENCE member_no_seq;
+
+CREATE SEQUENCE member_no_seq
+  START WITH 0
+  MINVALUE 0
+  INCREMENT BY 1;
+  
+select member_no_seq.nextval from dual;
+
 --회원정보테이블
 CREATE TABLE MEMBER
    ( MEMBER_NO NUMBER, 
@@ -926,12 +930,7 @@ CREATE TABLE MEMBER
     POINT NUMBER,
     REPORT_COUNT NUMBER default 0
    );
-   
-   CREATE SEQUENCE member_no_seq
-  START WITH 1
-  INCREMENT BY 1;
-  
-select member_no_seq.nextval from dual;
+
 --게시판테이블
 --글번호
 --작성자(아이디)
@@ -941,6 +940,17 @@ select member_no_seq.nextval from dual;
 --추천수
 --신고수
 --조회수
+DROP SEQUENCE board_infos_seq;
+DROP TABLE board_infos;
+
+CREATE SEQUENCE board_infos_seq 
+INCREMENT BY 1 
+START WITH 1 
+MINVALUE 1 
+MAXVALUE 9999999999 
+NOCYCLE
+NOCACHE;
+
 create table board_infos(
     postno number generated always as IDENTITY,
     title varchar2(150),
@@ -954,17 +964,7 @@ create table board_infos(
     constraint board_infos PRIMARY key(postno)
 );
 
-DROP TABLE board_infos;
-
 ALTER TABLE board_infos MODIFY(postno GENERATED AS IDENTITY (START WITH 1));
-
-CREATE SEQUENCE board_infos_seq 
-INCREMENT BY 1 
-START WITH 1 
-MINVALUE 1 
-MAXVALUE 9999999999 
-NOCYCLE
-NOCACHE;
 
 select * from board_infos;
 

@@ -1,7 +1,7 @@
 package com.fc.dto.board;
 
 
-public class PageMakerDto {
+public class PageMakerDTO {
 
 	/* 시작 페이지 */
 	private int startPage;
@@ -19,7 +19,7 @@ public class PageMakerDto {
 	private Criteria cri;	
 	
 	/* 생성자 */
-	public PageMakerDto(Criteria cri, int total) {
+	public PageMakerDTO(Criteria cri, int total) {
 		
 		this.cri = cri;
 		this.total = total;
