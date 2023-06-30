@@ -32,45 +32,19 @@ public class ReplyController {
 	@Autowired
 	ReplyService replyService;
 
-//	@GetMapping("/reply")
-//	public String insertContents() {
-//		log.info(" 댓글 작성 페이지 진입");
-//
-//
-//		return "board/reply";	
-//
-//	}
-
 	@PostMapping("/reply")
 	public String insertContents_process(@ModelAttribute ReplyDto replyDto, @RequestParam int postno, HttpSession session, Model model) {
 		
-		String userId = (String ) session.getAttribute("userId");
-		replyDto.setReplywriter(userId);
+		String userId = (String) session.getAttribute("loginId");
+		replyDto.setReplyUserID(userId);
 		replyDto.setPostno(postno);
+		System.out.println(replyDto.toString());
 		int result = replyService.replyInsert(replyDto);
 		System.out.println(result);
 		
 		return "redirect:/detail?postno=" + postno;
 	}
 	
-	
-	@RequestMapping("/listreply")
-	public String list(int replynumber,Model model) {
-		
-		List<ReplyDto> list=replyService.list(replynumber);
-
-		model.addAttribute("list",list);
-		
-		return "board/reply";
-	}
-	
-	
-	/*
-	 * @RequestMapping("list_json.do") public List<ReplyDto> list_json(int postno){
-	 * return replyService.list(postno);
-	 * 
-	 * }
-	 */
 	@PostMapping("/replylikes")
 	public String likesUp(@RequestParam("postno") int postno , Model model, HttpSession session) {
 		Map<String, String> likeInfo = new HashMap<String, String>();

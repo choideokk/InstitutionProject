@@ -12,8 +12,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{content},#{writer})
 	</insert>
 	
-	<insert id="insert_likes_info" parameterType="HashMap">
-		insert into board_likes (postno, login_id) values (#{likePostNo}, #{likeUserId})
+	<insert id="insert_opinion_info" parameterType="HashMap">
+		insert into board_opinions (postno, opinion_type, login_id) values (#{targetPostNo}, #{type}, #{sendUserId})
 	</insert>
 
 
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		postno,title,writer,
 		updatedate,changedate,viewcnt
 		from board_infos
-
+		ORDER BY updatedate DESC
 	</select>
 
 	<select id="list_view" resultType="BoardDto">
@@ -66,15 +66,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</otherwise>
 		</choose>
 	</select>
+	
+	<select id="pageCount" resultType="int">
+		select count(*) from board_infos
+	</select>
+	
+	<select id="searchedPageCount" parameterType="SearchDto" resultType="int">
+		select count(*) from (
+		select
+		postno, title, writer, updatedate, changedate, viewcnt
+		from
+		board_infos
+		<choose>
+			<when test="isChecked == 'on'">
+					<if test='searchKeyword == "T"'>
+						where title like '%'||#{searchTxt}||'%'
+					</if>
+					<if test='searchKeyword == "W"'>
+						where writer like '%'||#{searchTxt}||'%'
+					</if>
+					<if test='searchKeyword == "TW"'>
+						where title like '%'||#{searchTxt}||'%' OR writer like
+						'%'||#{searchTxt}||'%'
+					</if>
+			</when>
+			<otherwise>
+					<if test='searchKeyword == "T"'>
+						where LOWER(title) like '%'||LOWER(#{searchTxt})||'%'
+					</if>
+					<if test='searchKeyword == "W"'>
+						where LOWER(writer) like '%'||LOWER(#{searchTxt})||'%'
+					</if>
+					<if test='searchKeyword == "TW"'>
+						where LOWER(title) like '%'||LOWER(#{searchTxt})||'%' OR LOWER(writer) like
+						'%'||#{searchTxt}||'%'
+					</if>
+			</otherwise>
+		</choose>
+		)
+	</select>
+	
 
 	<update id="list_count" parameterType="int">
 		UPDATE board_infos SET
 		viewcnt = viewcnt + 1 WHERE postno = #{postno}
 	</update>
 	
-	<update id="update_board_likesUp" parameterType="HashMap">
+	<update id="update_board_infoCount" parameterType="HashMap">
 		UPDATE board_infos SET
-		recommend = recommend + 1 WHERE postno = #{likePostNo}
+		<if test='type == "1"'>
+			recommend = recommend + 1 
+		</if>
+		<if test='type == "2"'>
+			report = report + 1
+		</if>
+		WHERE postno = #{targetPostNo}
 	</update>
 
 	<update id="list_update" parameterType="BoardDto">

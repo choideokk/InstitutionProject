@@ -84,7 +84,7 @@ public class MemberController {
 	}
 
 	// 로그아웃 요청
-	@PostMapping("/logout")
+	@GetMapping("/logout")
 	public ModelAndView logout(HttpSession session, ModelAndView mav) {
 		memberService.logout(session);
 		mav.setViewName("redirect:/login");

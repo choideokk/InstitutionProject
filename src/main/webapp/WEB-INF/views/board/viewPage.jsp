@@ -121,9 +121,9 @@ textarea {
 
 	<div>
 		<h1>조회 페이지</h1>
-		<form method="POST" action="${path}/likes?postno=${viewPage.postno}">
-			<button type="submit">추천수 테스트</button>
-			<button type="submit">신고 테스트</button>
+		<form method="POST" action="" name="opinionForm" id="opinionForm">
+			<button type="button" class="likesBtn">추천하기</button>
+			<button type="button" class="reportBtn">신고하기</button>
 		</form>
 		<form id="updateForm" action="/update" method="post">
 			<div class="input_wrap">
@@ -172,9 +172,7 @@ textarea {
 			<label for="replytext">댓글</label>
 			<textarea id="replytext" name="replytext" rows="4" required></textarea>
 			<button type="submit">제출</button>
-			<input type="submit" value="댓글 작성" id="reply">
 			<button type="button" id="chochun">댓글 추천</button>
-			
 			<button type="button" id="singo">댓글 신고</button>
 		</form>
 
@@ -184,6 +182,7 @@ textarea {
 					<tr>
 						<th class="created-at"><a>댓글번호 </a></th>
 						<th class="user-id"><a>작성자</a></th>
+						<th class="user-id"><a>내용</a></th>
 						<th class="created-at"><a>작성일</a></th>
 						<th class="created-at"><a>수정일</a></th>
 						<th class="created-at"><a>추천수</a></th>
@@ -196,9 +195,7 @@ textarea {
 					<c:forEach items="${list}" var="comment">
 						<tr>
 							<td><c:out value="${comment.replynumber}" /></td>
-							<c:if test="${sessionScope.loginId != null}">
-								<label for="userid">작성자: ${sessionScope.loginId}</label>
-							</c:if>
+							<td><c:out value="${comment.replyUserID}" /></td>
 							<td><c:out value="${comment.replytext}" /></td>
 							<td><fmt:formatDate pattern="yyyy/MM/dd"
 									value="${comment.updatedate}" /> <td>
@@ -214,7 +211,7 @@ textarea {
     </div>
   </div>
   
-  <script type="text/javascript" src="${path}/js/manageInfo.js"></script>
+<script type="text/javascript" src="${path}/js/manageInfo.js"></script>
 <script>
 
 	var path = '${path}';
@@ -225,7 +222,7 @@ textarea {
 	$("#list_btn").on("click", function(e){
 		var chk = confirm("목록 페이지로 가시겠습니까?");
 	    if (chk) {
-        location.href='boardlist';
+        location.href= path +'boardlist?pageNo=1';
 			}
 
 	});
@@ -248,19 +245,10 @@ textarea {
 		  form.attr("method", "post");
 		  var chk = confirm("삭제 진짜 페이지로 가시겠습니까?");
 		  if (chk) {
-	   	 form.submit(); 
-		   
+	   	  	form.submit(); 
 		  }
 		});
 
-	
-	// $("#reply").on("click", function(e){
-	//	mform.attr("action", "/viewPage");
-	//	var chk = confirm("글 작성?");
-	 //   if (chk) {
-     //   location.href="/detail?postno="; 
-	//		}
-	//});	 
 	
 	$(".likesBtn").on("click", function() {
 		fn_opinionChk("1", "추천")

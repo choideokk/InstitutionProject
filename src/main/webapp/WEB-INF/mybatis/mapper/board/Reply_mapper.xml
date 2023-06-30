@@ -19,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="Reply_mapper">
 
      <insert id="insert_Reply">
-        insert into reply (replynumber,postno,replytext) values
-        ( reply_seq.nextval, #{postno}, #{replytext} )
+        insert into reply (replynumber, postno, replytext, replyuserid) values
+        (reply_seq.nextval, #{postno}, #{replytext}, #{replyUserID} )
     </insert>
     
 	<insert id="Reply_insert_info" parameterType="HashMap">
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="list_Reply" parameterType="int" resultType="ReplyDto">
 
-       SELECT  r.replytext, r.recommend ,r.report,
+       SELECT  r.replyNumber, r.replytext, r.replyUserID, r.recommend ,r.report,
        		r.changedate, r.updatedate    
       	FROM board_infos b
 		JOIN reply r ON b.postno = r.postno

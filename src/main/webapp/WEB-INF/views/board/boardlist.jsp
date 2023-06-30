@@ -14,8 +14,6 @@
  %>
 
 <!DOCTYPE html>
-
-
 <html>
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -106,7 +104,7 @@
 }
 
     </style>
-    <link href="${path}css/stars.css" rel="stylesheet" type="text/css" />
+    <link href="${path}/css/stars.css" rel="stylesheet" type="text/css" />
     
 </head>
 
@@ -152,7 +150,7 @@
 			</tr>
 		</c:if>
             <tbody>
-     <c:forEach items="${boardList}" var="boardList">
+     <c:forEach items="${currentPageInfo.content}" var="boardList">
 			<tr>
 				<td><c:out value="${boardList.postno}"/></td>
 				<td>

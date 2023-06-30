@@ -994,3 +994,32 @@ select * from board_infos;
 
 
 commit;
+
+--댓글테이블
+create table reply(
+             replynumber number not null primary key, 
+			 postno number , --  board_infos랑 연결할 거
+			 replytext varchar2(1000)  ,
+			 replyname varchar2(20)  ,
+			 replyUserID varchar2(50)  ,
+			 secretreply number(2)  ,
+             recommend number default 0,
+               report number default 0,
+			 changedate date default sysdate, 
+			 updatedate date default sysdate,
+    FOREIGN KEY (postno) REFERENCES board_infos (POSTNO) 
+);
+
+
+DROP TABLE board_opinions CASCADE CONSTRAINTS;
+
+create table board_opinions (
+    postno number,
+    opinion_type number,
+    login_id VARCHAR2(30 BYTE) NOT NULL,
+    constraint boatd_likes_PK primary key(postno, opinion_type, login_id),
+    foreign key (postno)
+    references board_infos(postno)
+);
+
+select * from board_opinions;

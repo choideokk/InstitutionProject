@@ -51,15 +51,15 @@ String loginId = null;
 				<ul class="d-flex">
 							<li><a href="${path}/login">로그인</a></li>
 							<li><a href="${path}/register">회원가입</a></li>
-						</ul>	
 				<%
 				} else{
 				%>
 					<li class="nav-item"><a class="nav-link text-primary" href="${path}/logout">로그아웃</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">마이페이지</a></li>
+					<li class="nav-item"><a class="nav-link" href="${path}/memberInfo">마이페이지</a></li>
 				<%
 				}
 				%>	
+						</ul>	
 			</div>
 		</div>
 	</nav>

@@ -1011,73 +1011,15 @@ create table reply(
 );
 
 
---레슨테이블1
-CREATE TABLE LESSON (
-  student_number NUMBER(10) PRIMARY KEY NOT NULL,  --학생번호
-  lesson_start DATE, --레슨 시작일
-  lesson_end DATE, --레슨 종료일
-  student_id VARCHAR2(40), --학생 아이디
- 	 CONSTRAINT student_fk FOREIGN KEY (student_id) REFERENCES LESSON_STUDENT_PROFILE(student_id)
- 		ON DELETE SET NULL,
-  lesson_id NUMBER(5), -- 레슨 아이디
-  	CONSTRAINT teacher_fk  FOREIGN KEY (lesson_id) REFERENCES TEACHER_PROFILE(teacher_id) 
-		ON DELETE SET NULL,
-  possible VARCHAR2(10) DEFAULT '예약가능' -- 예약 가능한 날
+DROP TABLE board_opinions CASCADE CONSTRAINTS;
+
+create table board_opinions (
+    postno number,
+    opinion_type number,
+    login_id VARCHAR2(30 BYTE) NOT NULL,
+    constraint boatd_likes_PK primary key(postno, opinion_type, login_id),
+    foreign key (postno)
+    references board_infos(postno)
 );
 
-select *
-from LESSON;
-
-
---레슨테이블2
-
-CREATE TABLE MUSICLESSON (
-  lesson_id NUMBER(5) PRIMARY KEY,--레슨 아이디
-  student_id NUMBER(10), --학생 아이디
-  teacher_id NUMBER(5),--선생 아이디
-  lesson_statr_date DATE, --레슨 시작일
-  lesson_end_date DATE,--레슨 종료일
-  start_time TIME, -- 시작 시간
-  end_time TIME,  --끝나는 시간
-  lesson_department VARCHAR2(50),-- 레슨 분야
-  lesson_pay INT, --레슨 비용
-  CONSTRAINT student_fk FOREIGN KEY (student_id) REFERENCES LESSON_STUDENT_PROFILE(student_id) ON DELETE SET NULL,
-  CONSTRAINT teacher_fk FOREIGN KEY (teacher_id) REFERENCES LESSON_TEACHER_PROFILE(teacher_id) ON DELETE SET NULL
-);
---학생정보
-CREATE TABLE LESSON_STUDENT_PROFILE (
-  student_id VARCHAR2(20) PRIMARY KEY,
-  pw VARCHAR2(30) NOT NULL,
-  gender VARCHAR2(4),
-  interest VARCHAR2(20),
-  name VARCHAR2(10) NOT NULL,
-  level NUMBER(2),
-  email VARCHAR2(50) NOT NULL,
-  age INTEGER NOT NULL,
-  address VARCHAR2(20) NOT NULL,
-  phone INTEGER
-);
---선생정보
-CREATE TABLE LESSON_TEACHER_PROFILE (
-  teacher_id VARCHAR2(20) PRIMARY KEY,
-  pw VARCHAR2(30) NOT NULL,
-  name VARCHAR2(10) NOT NULL,
-  gender VARCHAR2(4),
-  email VARCHAR2(50) NOT NULL,
-  age INTEGER NOT NULL,
-  address VARCHAR2(30) NOT NULL,
-  phone INTEGER NOT NULL,
-  department VARCHAR2(10) NOT NULL  -- 선생 파트
-);
-
---공간 미정
-CREATE TABLE facility (
-
-);
-
---회원등급
-CREATE TABLE STUDENT_GRADE (
- student_id VARCHAR2(20) PRIMARY KEY, --학생 아이디
- grade_gift VARCHAR2(200),-- 혜택
- grade_name  VARCHAR2(50), --등급이름 골드,플래티넘 등등
-);
+select * from board_opinions;
