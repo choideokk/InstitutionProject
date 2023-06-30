@@ -104,6 +104,7 @@ public class BoardController {
 		return "board/viewPage";
 	}
 	
+	/*
 	@PostMapping("/likes")
 	public String likesUp(@RequestParam("postno") int postno , Model model, HttpSession session) {
 		Map<String, String> likeInfo = new HashMap<String, String>();
@@ -120,6 +121,7 @@ public class BoardController {
 		// 좋아요 취소 기능..쩝
 		return "redirect:/detail?postno=" + postno;
 	}
+	*/
 	
 	// 게시글 수정
 	@GetMapping("/update")

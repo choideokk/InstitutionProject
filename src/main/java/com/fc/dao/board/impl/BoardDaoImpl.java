@@ -141,6 +141,24 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSessionTemplate.selectOne("searchedPageCount");
 	}
 
+	@Override
+	public int insertBoardLike(Map<String, String> infoMap) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int pageCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<BoardDto> ListPage(int displayArticle, int articleNum) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 		

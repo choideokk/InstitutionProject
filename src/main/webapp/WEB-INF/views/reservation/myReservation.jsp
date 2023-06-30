@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,6 +83,7 @@
     }
 </script>
 <script>
+var path = '${path}';
 $(document).ready(function() {
     $(".bStatus").click(function(event) {
         event.preventDefault(); // Prevent the default form submission
@@ -96,12 +98,12 @@ $(document).ready(function() {
         var jidthree = row.find("td:eq(6)").text(); // Extract the third participant
         var status = row.find("td:eq(7)").text(); // Extract the status
 
-        var url = "/FacilitiesProject/clearMyReservation";
+        var url = path + "/clearMyReservation";
         console.log("Request URL:", window.location.origin + url); // Print full request URL
 
         // Send the data to the server
         $.ajax({
-            url: "/FacilitiesProject/clearMyReservation",
+            url: path+ "/clearMyReservation",
             method: "POST",
             data: JSON.stringify({
                 rsvtNo: rsvtNo,
@@ -116,7 +118,7 @@ $(document).ready(function() {
             success: function(response) {
                 // 새로고침
                 alert("취소되었습니다");
-            	window.location.href = "/FacilitiesProject/myReservation";
+            	window.location.href = path + "/myReservation";
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error("AJAX request failed: ", textStatus, ", Detail: ", errorThrown);

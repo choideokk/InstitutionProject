@@ -340,5 +340,6 @@ box-sizing: border-box;
 			  </ul>
         </div>
     </div>
+    </div>
 </body>
 </html>
