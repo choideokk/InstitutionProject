@@ -88,7 +88,7 @@ public class MemberController {
 	public ModelAndView logout(HttpSession session, ModelAndView mav) {
 		memberService.logout(session);
 		mav.setViewName("redirect:/login");
-		mav.addObject("message", "logout");
+		//mav.addObject("message", "logout");
 		return mav;
 	}
 
