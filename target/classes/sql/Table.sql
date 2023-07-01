@@ -989,7 +989,6 @@ CREATE TABLE board_infos (
     CONSTRAINT pk_board_infos PRIMARY KEY (postno)
 );
 
-
 ALTER TABLE board_infos MODIFY(postno GENERATED AS IDENTITY (START WITH 1));
 
 select * from board_infos;

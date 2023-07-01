@@ -4,15 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="../header.jsp"%>
+
     <title>Page Layout</title>
     <style>
-    
-    * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-
     .hahaContainer{
     height:50px;
     width:100%;
@@ -76,7 +71,7 @@ box-sizing: border-box;
         }
     	
     	
-        .container {
+        .container1 {
             display: flex;
         }
 
@@ -275,6 +270,8 @@ box-sizing: border-box;
     </script>
 </head>
 <body>
+
+
 <c:if test="${not empty errorMessage}">
     <script>
         alert("${errorMessage}");
@@ -296,7 +293,7 @@ box-sizing: border-box;
 		</div>
 	</div>
 </div>
-    <div class="container">
+    <div class="container1">
         <div class="left">
             <div class="top">
                 <!-- 이미지 추가 -->

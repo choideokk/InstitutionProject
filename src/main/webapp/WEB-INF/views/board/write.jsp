@@ -32,7 +32,7 @@
 
  <div class="container">
   <h2>게시판 글쓰기 페이지입니당.</h2>
-  <form action="/write"  method="post">
+  <form action="${path}/write"  method="post">
    <div class="form-group">
       <label for="writer">닉네임</label>
       <input type="text" class="form-control" id="writer"
@@ -121,6 +121,7 @@
 <script>
 /* let form = $("#infoForm");		
 let mForm = $("#updateForm");
+
 
 $("#save_btn").on("click", function(e){
 	form.attr("action", "/write");

@@ -4,16 +4,33 @@
   <html>
   <head>
       <style>
-		.container {
+      
+      * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+   form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 95%;
+        
+    }
+
+
+		.container2 {
               display: flex;
               justify-content: center;
               align-items: center;
               height: 700px;
-              margin: 0;
-              padding: 0;
+              width: 100%;
           }
 
-          .outer-box {
+          .outer-boxx {
               display: flex;
               flex-direction: column;
               /* 세로 정렬 */
@@ -21,18 +38,35 @@
               /* 한 열로 정렬 */
               align-items: center;
               /* 가운데 정렬 */
-              width: 220px;
+              width: 100%;
               /* 박스 너비 조절 */
           }
 
-          .inner-box {
-              border: 1px solid black;
-              margin: 10px;
-              padding: 10px;
-              width: 200px;
-              height: 10%;
-              box-sizing: border-box;
-          }
+
+
+      .inner-boxx2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 90%;
+    height: 85px;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    margin-bottom: 10px;
+    transition: 0.2s; /* 애니메이션 효과를 위한 전환 시간 설정 */
+}
+
+.inner-boxx2:hover {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); /* 호버 상태에서 그림자를 더 크게 만듭니다 */
+    cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+}
+
+.inner-boxx2:active {
+    box-shadow: none; /* 클릭 중일 때 그림자를 없앱니다 */
+    transform: scale(0.98); /* 클릭 중일 때 박스를 약간 축소 */
+}
 
           .rsvtNo,
           .status,
@@ -47,14 +81,28 @@
           
              .status-1 { background-color: skyblue; }
     .status-2 { background-color: initial; }
+    
+        .totalPeopleCnt {
+        text-align: center;
+    }
+    
+    #rsvtTime, #totalPeopleCnt, #status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
       </style>
      
   </head>
 
 
 <body>
-  <div class="container">
-    <div class="outer-box">
+
+
+
+  <div class="container2">
+    <div class="outer-boxx">
       <form action="Calendar3" method="post" id="reservationForm">
         <!-- Hidden fields -->
         <input type="hidden" id="rsvtTime" name="rsvtTime">
@@ -67,36 +115,27 @@
           <c:set var="keyName" value="key${i}" />
           <c:set var="currentValue" value="${values[keyName]}" />
 
-          <div class="inner-box ${currentValue.totalPeopleCnt == 4 ? 'gray-background' : ''}" data-key-name="${keyName}" data-total-people-cnt="${currentValue.totalPeopleCnt}" onclick="boxClick(event);">
+          <div class="inner-boxx2 ${currentValue.totalPeopleCnt == 4 ? 'gray-background' : ''}" data-key-name="${keyName}" data-total-people-cnt="${currentValue.totalPeopleCnt}" onclick="boxClick(event);">
             <div id="rsvtTime">
               <strong>${10 + (i - 1)}:00 ~ ${10 + i}:00 </strong>
-             <div class="totalPeopleCnt">${currentValue.totalPeopleCnt != null ? currentValue.totalPeopleCnt : 0}</div> 
             </div>
+             <div class="totalPeopleCnt">${currentValue.totalPeopleCnt != null ? currentValue.totalPeopleCnt : 0}명</div> 
+            
             <div class="status" style="display: none;">${currentValue.status != null ? currentValue.status : 0}</div>
             <c:choose>
               <c:when test="${currentValue.status == null}">
-                <p>예약가능</p>
+                예약가능
               </c:when>
               <c:when test="${currentValue.status == '1'}">
-                <p>참가 가능</p>
+                참가 가능
               </c:when>
               <c:when test="${currentValue.status == '2'}">
-                <p>마감 관리자 승인 대기중</p>
+                마감 관리자 승인 대기중
               </c:when>
             </c:choose>
           </div>
         </c:forEach>
-
-        <div>
-          <button type="submit">예약&참가</button>
-        </div>
-        </form>
-        
-        
-
-      <form>
-        <button>목록</button>
-      </form>
+      <button type="submit">예약&참가</button>
     </div>
   </div>
 
@@ -140,7 +179,15 @@
 	        // 폼 액션 변경
 	        var status = selectedBox.getElementsByClassName('status')[0].innerText;
 	        var totalPeopleCnt = selectedBox.getElementsByClassName('totalPeopleCnt')[0].innerText;
-
+	        totalPeopleCnt = totalPeopleCnt.replace(/\D/g, "");
+	        
+	        var isConfirmed = window.confirm("참가하시겠습니까?");
+	        if (!isConfirmed) {
+	            // 'Cancel'을 클릭했다면 폼 제출을 취소합니다.
+	            event.preventDefault();
+	            return;
+	        }
+	        
 	        switch (status) {
 	            case "":
 	            case "0":
