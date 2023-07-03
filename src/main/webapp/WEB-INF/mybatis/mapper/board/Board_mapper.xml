@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insert_contents" parameterType="BoardDto">
 		insert into
-		board_infos(title, content, writer) values (#{title},
-		#{content},#{writer})
+		board_infos(title, content, writer,hashtag) values (#{title},
+		#{content},#{writer} , #{hashtag})
 	</insert>
 	
 	<insert id="insert_opinion_info" parameterType="HashMap">
@@ -135,12 +135,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<delete id="list_delete" parameterType="BoardDto">
 		DELETE
-		FROM board_infos
-		WHERE postno = #{postno}
+		FROM board_infos a
+		WHERE exists
+		(select 1 from reply b 
+		where a.postno= b.postno)
 	</delete>
 
 
-
+ <!--   SELECT  r.replyNumber, r.replytext, r.replyUserID, r.recommend ,r.report,
+       		r.changedate, r.updatedate    
+      	FROM board_infos b
+		JOIN reply r ON b.postno = r.postno
+		WHERE b.postno = #{postno} -->
 
 
 

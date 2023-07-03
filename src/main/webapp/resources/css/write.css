@@ -1,0 +1,181 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding:0;
+	box-sizing: border-box;
+	
+}
+
+  body{
+  	font-weight:bold;
+  	background-color: #f3f3f3;
+ 
+  }
+	.wrap{
+	background-color :  white;
+	width:1100px;
+	margin:0 auto;
+		
+	}
+	#header{
+	background-color :  white;
+	width:100%;
+	height:250px;
+	}
+	#header-top{
+	height:100px;
+	border: 1px solid pink;
+	margin:15px 0;
+	}
+	
+
+/* 	#nav{
+		width:100%;
+		height:80px;
+		border: 1px solid pink;
+		margin-top: 20px;
+	} */
+	.container{
+		height:1500px;
+		margin-top:20px;
+		display:flex;
+	}
+	
+	#main{
+	
+	width:100%;
+	border: 3px solid pink;
+	border-radius:10%;
+	padding:30px;
+	}
+	
+	#notice_box{
+	
+	font-family:sans-serif;
+	width:98%;
+	height:170px;
+	font-weight: bold;
+	border: 3px solid pink;
+	margin: 20px 10px;
+	line-height: 145%;
+	padding:13px 20px;
+	
+	
+	}
+	
+	.btn btn-dark {
+		
+		margin:20px;
+	
+	}
+	
+
+	
+	.sidenav{
+	width:80%;
+	height:300px;
+		
+	}
+	
+	
+	#area{
+	width:98%;
+	line-height: 120%;
+	border-radius:5%;
+	border: 3px solid pink;	margin: 40px 10px;
+	padding:20px 20px;
+	
+	}
+	
+	
+	#footer{
+	width:100%;
+	border: 1px solid pink;
+	margin-top: 20px;
+	}
+	
+	/* 미디어쿼리 */
+	/* CSS code before media queries */
+
+@media screen and (max-width: 1200px) {
+  .wrap {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .wrap {
+    width: 95%;
+  }
+  
+  #main {
+    width: 100%;
+    margin-left: 0;
+  }
+  
+  #aside {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #header {
+    height: 200px;
+  }
+  
+  #header-bottom {
+    height: 100px;
+  }
+  
+  #notice_box {
+    height: 130px;
+    padding: 10px 15px;
+  }
+  
+  #area {
+    height: 800px;
+    padding: 15px 15px;
+  }
+  
+
+  
+}
+
+@media screen and (max-width: 400px) {
+  #header {
+    height: 180px;
+  }
+  
+  #header-bottom {
+    height: 80px;
+  }
+  
+  #notice_box {
+    height: 110px;
+    padding: 8px 12px;
+  }
+  
+  #area {
+    height: 600px;
+    padding: 12px 12px;
+  }
+  
+  
+}
+
+/* CSS code after media queries */
+	
+	
+	
+	/*  움직이는 아이콘 */
+
+	
+	
+	/*  시계  디자인 */
+	
+
+	
+	
+	
+	

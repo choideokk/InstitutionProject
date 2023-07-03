@@ -18,163 +18,313 @@
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title> 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-
- <style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+ <!-- JavaScript Bundle with Popper -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  
- *{
- 	margin:0;
- 	padding:0;
- 	box-sizing: border-box;
- }
- .rowtable{
- 	margin-top: 40px;
- 	
- }
-  .search-form {
-  width: 80%;
+    <style>     
+      html {
+  line-height: 1.7;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Main Column Typography */
+.main-area h2 {
+  font-size: 165%;
+  font-weight: normal;
+}
+
+.container {
+  max-width: 1200px;
   margin: 0 auto;
-  margin-top: 1rem;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+@media screen and (max-width: 480px){
+  .container{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media screen and (min-width: 1300px){
+
+body{
+  font-size: 17px;
 }
 
-.search-form input {
-  height: 100%;
-  background: transparent;
-  border: 0;
+.container{
+  max-width: 1200px;
+}
+}
+
+header {
+  padding-top: 20px;
+  color: #fff;
+  background-color: #bfa8e4;
+}
+
+header h1 {
+  margin: 0;
+  font-weight: normal;
+  font-size: 165%;
+}
+
+header p {
+  font-size: 90%;
+  margin: 0;
+}
+
+/* Site Navigation */
+.site-nav {
+  margin-top: 20px;
+}
+@media screen and (max-width: 700px) {
+.site-nav li{
+width: 33.332%;
+margin-right: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .site-nav li{
+    width: 100% /* 절반! */
+  }
+}
+.site-nav a{
+padding: 15px 0;
+margin-right: 5px;
+margin-bottom: 5px;
+text-align: center;
+}
+}
+
+
+.site-nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav li {
+  list-style: none;
+  float: left;
+  margin-right: 5px;
+}
+
+.site-nav a {
   display: block;
-  width: 100%;
-  padding: 1rem;
-  height: 100%;
-  font-size: 1rem;
+  color: #fff;
+  padding: 10px 20px;
+  background-color: #dc9aec;
 }
 
-.search-form select {
-  background: transparent;
-  border: 0;
-  padding: 1rem;
-  height: 100%;
-  font-size: 1rem;
+.site-nav a:hover {
+  background-color: #010201;
 }
 
-.search-form select:focus {
-  border: 0;
-}
+/* End Site Navigation */
 
-.search-form button {
-  height: 100%;
-  width: 100%;
-  font-size: 1rem;
+.content-area {
+  background-color: #f7f7f7;
+  padding-bottom: 40px;
+  padding-top: 40px;
 }
-
-.search-form button svg {
-  width: 24px;
-  height: 24px;
-}
-
-.card-margin {
-  margin-bottom: 1.875rem;
-}
-
-@media (min-width: 992px) {
-  .col-lg-2 {
-    flex: 0 0 16.66667%;
-    max-width: 16.66667%;
+@media screen and (max-width: 480px){
+  .content-area{
+    padding-top: 20px;
   }
 }
 
-.card {
-  border: 0;
-  box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-  -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
+.main-area {
+  width: 100%;
+  height: 950px;
+  float: left;
+  padding-right: 40px;
 }
 
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #ffffff;
-  background-clip: border-box;
-  border: 1px solid #e6e4e9;
-  border-radius: 8px;
+@media screen and (max-width: 700px){
+  .main-area,
+  .sidebar{
+    width: auto;
+    margin-left: 20px;
+    float: none;
+  }
+
+  .main-area{
+    padding-right: 0;
+  }
 }
 
+.sidebar {
+  width: 34%;
+  float: left;
+  background-color: #e9e4ec;
+  margin-top: 20px;
+  padding: 20px 40px;
+  box-sizing: border-box;
+  font-size: 85%;
+}
+@media screen and(max-width:700px){
+    .main-area,
+    .sidebar{
+        width: auto;
+        float: none;
+    }
+}
+
+.info-box {
+     width: 100%;
+  background-color: #d7d2ec;
+  border: 5px solid #baa3dd;
+  padding: 20px 40px 7px 40px;
+  margin-bottom: 1em;
+}
+@media screen and (max-width: 480px){
+  .hide-small{
+    display: none;
+  }
+}
+
+footer {
+  text-align: center;
+  font-size: 85%;
+  color: #fff;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+
+.group:after {
+  clear: both;
+}
+
+.group {
+  zoom: 1;
+}
+.table>:not(caption)>*>*{
+    padding: 5px;
+}
+#boardlist{
+    margin-top: 30px;
+}
+.form-control{
+display:inline-block;
+text-align: center;
+}
     </style>
-    <link href="${path}/css/stars.css" rel="stylesheet" type="text/css" />
-    
 </head>
 
 <body>
-<h1>목록페이지입니다.</h1>
-<c:if test="${loginId != null}">
-	<p>${loginId}님반갑습니다</p>
-	<a href="${path}/logout">로그아웃</a>
-</c:if>
 
-<div class="collapse" id="navbarToggleExternalContent">
-  <div class="bg-dark p-4">
-    <h5 class="text-white h4"> content</h5>
-    <span class="text-muted">nav</span>
-  </div>
-</div>
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </div>
-</nav>
 
-    <div class="rowtable">
-        <table class="table" id="article-table">
-            <thead>
-            <tr>
-            <th class="created-at"><a>번호</a></th>
-                <th class="title col-3"><a>제목</a></th>
-                <th class="user-id"><a>작성자</a></th>
-                <th class="created-at"><a>작성일</a></th>
-                <th class="created-at"><a>수정일</a></th>
-                 <th class="created-at"><a>조회수</a></th>
-                <th class="created-at"><a>추천수</a></th>
-            </tr>
-            </thead>
-         <c:if test="${fn:length(boardList) == 0}">
-			<tr>
-				<td>검색 결과가 없습니다!</td>
-			</tr>
-		</c:if>
-            <tbody>
-     <c:forEach items="${currentPageInfo.content}" var="boardList">
-			<tr>
-				<td><c:out value="${boardList.postno}"/></td>
-				<td>
-					<a class="move" href='<c:out value="${path}/detail?postno=${boardList.postno}"/>'>
-						<c:out value="${boardList.title}"/>
-					</a>
-				</td>
-				<td><c:out value="${boardList.writer}"/></td>
-                <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${boardList.updatedate}"/>
-                <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${boardList.changedate}"/>             
-					<td><c:out value="${boardList.viewcnt}"/></td>
-			</tr>			
-		</c:forEach>	
-            </tbody>
-        </table>
-    </div>
-
-    <div class="row">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<!-- <button type="button" class="btn btn-outline-success">글쓰기</button> -->
-	<a href="${path}/write" class="top_btn">게시판 등록</a>
-
+    <header>
+      <h3> 추가했다 이부분</h3>
+        <!-- container -->
+        <div class="container">
+          <h1>3조</h1>
+          <p class="hide-small">Website slogan included here.</p>
+          <nav class="site-nav">
+            <ul class="group">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Portfolio</a></li>
+        
+              <li><a href="#">Portfolio</a></li>
+              <li class="hide-small"><a href="#">FAQs</a></li>
+              <li class="hide-small"><a href="#">Links</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </nav>
         </div>
-    </div>
+        <!-- /container -->
+      
+      </header>
 
+   
+      
+      <div class="content-area group">
+        <!-- container -->
+        <div class="container">
+          <div class="main-area">
+            <c:if test="${loginId != null}">
+              <p>${loginId}님반갑습니다</p>
+              <a href="${path}/logout">로그아웃</a>
+            </c:if>
+            
+            <!-- info-box -->
+            <div class="info-box hide-small" id="">
 
+            </div>
+            <!-- /info-box -->
+
+            <div class="main">
+                <div class="alert alert-danger" role="alert"><strong>주의!</strong> 상대방을 비방하는 글을 작성시 게시글 삭제 및 계정 무단 삭제가 될 수 있습니다..</div>
+                
+                <nav class="navbar bg-light">
+                  <a class="btn btn-success"  href="${path}/write" target="_blank">게시글 작성</a>
+                
+                  </nav>
+                <table id="boardlist" class="table table-striped table-bordered" cellspacing="0" 
+                style="text-align: center";>
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>등록일</th>
+                            <th>조회수</th>
+                            <th>추천수</th>
+                            <th>신고수</th>
+                     
+                        </tr>
+                    </thead>
+                    <c:if test="${fn:length(boardList) == 0}">
+                      <tr>
+                        <td>검색 결과가 없습니다!</td>
+                      </tr>
+                    </c:if>
+                    <tbody>
+                      <c:forEach items="${currentPageInfo.content}" var="boardList">
+                        <tr>
+                          <td><c:out value="${boardList.postno}"/></td>
+                          <td>
+                            <a class="move" href='<c:out value="${path}/detail?postno=${boardList.postno}"/>'>
+                              <c:out value="${boardList.title}"/>
+                            </a>
+                          </td>
+                          
+                          <td><c:out value="${boardList.writer}"/></td>
+                                  <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${boardList.updatedate}"/>
+                                  <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${boardList.changedate}"/>             
+                            <td><c:out value="${boardList.viewcnt}"/></td>
+                              <td><c:out value="${boardList.recommend}"/></td>
+                            
+                        </tr>			
+                      </c:forEach>	
+                        <thead>
+                    </tbody>
+
+                </table>
+      
 <div class="row">
   <form class="search_wrap" method="POST" action="${path}/searchBoard?pageNo=1">
     <div class="search_area">
@@ -194,90 +344,50 @@
   </form>
 </div>
             
-           
-             
-    <ul class="pagination">
-			<!-- Previous 시작 -->
-			<li
-				class="paginate_button page-item previous <c:if test='${currentPageInfo.startPage<6}'>disabled</c:if>"
-				id="dataTable_previous"><a
-				href="${path}/boardlist?pageNo=${currentPageInfo.startPage-5}"
-				aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-				class="page-link">Previous</a></li>
-			<!-- Previous 끝 -->
-			<!-- Page번호 시작, 컨트롤러에서 list에 페이징 객체를 넣었으므로 list.변수명으로 불러옴 -->
-			<c:forEach var="pNo" begin="${currentPageInfo.startPage}" end="${currentPageInfo.endPage}"
-				step="1">
-				<li
-					class="paginate_button page-item <c:if test='${param.pageNo eq pNo}'>active</c:if>"><a
-					href="${path}/boardlist?pageNo=${pNo}" aria-controls="dataTable"
-					data-dt-idx="1" tabindex="0" class="page-link">${pNo}</a></li>
-			</c:forEach>
-			<!-- Page번호 끝 -->
-			<!-- Next 시작 -->
-			<li
-				class="paginate_button page-item next <c:if test='${currentPageInfo.endPage>=currentPageInfo.totalPages}'>disabled</c:if>"
-				id="dataTable_next"><a
-				href="${path}/boardlist?pageNo=${currentPageInfo.startPage+5}"
-				aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-				class="page-link">Next</a></li>
-			<!-- Next 끝 -->
-			<!-- 페이징 처리 끝 -->
-		</ul>
+    
+            </div>
+    
+            <ul class="pagination">
+                <!-- Previous 시작 -->
+                <li
+                    class="paginate_button page-item previous <c:if test='${currentPageInfo.startPage<6}'>disabled</c:if>"
+                    id="dataTable_previous"><a
+                    href="${path}/boardlist?pageNo=${currentPageInfo.startPage-5}"
+                    aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+                    class="page-link">Previous</a></li>
+                <!-- Previous 끝 -->
+                <!-- Page번호 시작, 컨트롤러에서 list에 페이징 객체를 넣었으므로 list.변수명으로 불러옴 -->
+                <c:forEach var="pNo" begin="${currentPageInfo.startPage}" end="${currentPageInfo.endPage}"
+                    step="1">
+                    <li
+                        class="paginate_button page-item <c:if test='${param.pageNo eq pNo}'>active</c:if>"><a
+                        href="${path}/boardlist?pageNo=${pNo}" aria-controls="dataTable"
+                        data-dt-idx="1" tabindex="0" class="page-link">${pNo}</a></li>
+                </c:forEach>
+                <!-- Page번호 끝 -->
+                <!-- Next 시작 -->
+                <li
+                    class="paginate_button page-item next <c:if test='${currentPageInfo.endPage>=currentPageInfo.totalPages}'>disabled</c:if>"
+                    id="dataTable_next"><a
+                    href="${path}/boardlist?pageNo=${currentPageInfo.startPage+5}"
+                    aria-controls="dataTable" data-dt-idx="7" tabindex="0"
+                    class="page-link">Next</a></li>
+                <!-- Next 끝 -->
+                <!-- 페이징 처리 끝 -->
+            </ul>
+    
+            
+          </div>
+      
+        </div>
+        <!-- /container -->
+      
+      </div>
+      
+      <footer>
+       푸터 예정
+      </footer>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
-<div class="stars">
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-  <div class="star"></div>
-</div>
 </body>
 </html>

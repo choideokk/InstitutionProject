@@ -6,6 +6,7 @@
 --인원수
 --예약자정보
 --결제 포인트
+select * from member;
 
 --시설정보테이블
 DROP TABLE facility_info CASCADE CONSTRAINTS;
@@ -26,7 +27,7 @@ SET DEFINE OFF;
 
  INSERT INTO facility_info VALUES(
       'DF16N2654325',
-       '야외운동기구',
+        '야외운동기구',
        '31058',
        '충남 천안시 서북구 입장면 호당리 235-3',
        '일원',
@@ -902,7 +903,7 @@ DROP TABLE reservation_info;
     approval  VARCHAR2(2)   --담당자 승인여부
     );
     
-INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, toDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, participant_id1, participant_id2, participant_id3, status, approval)
+INSERT INTO reservation_info (rsvtNo, rgsrDate, deadDate, toDate, rsvtTime, rsrcId, rsvfNm, category, totalPeopleCnt, jidone, jidtwo, jidthree, status, approval)
 VALUES (
     1, -- 예약번호
     TO_DATE('2023-06-29', 'YYYY-MM-DD'), -- 등록일
@@ -936,15 +937,12 @@ CREATE SEQUENCE member_no_seq
   
 select member_no_seq.nextval from dual;
 
-DROP TABLE MEMBER;
-
 --회원정보테이블
 CREATE TABLE MEMBER
    ( MEMBER_NO NUMBER, 
    LOGIN_ID VARCHAR2(30 BYTE), 
    PASSWORD VARCHAR2(30 BYTE), 
    MEMBER_NAME VARCHAR2(30 BYTE),
-   BIRTH DATE,
    EMAIL VARCHAR2(50 BYTE),
    PHONE_NUM VARCHAR2(22 BYTE), 
    JOIN_DATE DATE DEFAULT SYSDATE,
@@ -952,7 +950,7 @@ CREATE TABLE MEMBER
     POINT NUMBER,
     REPORT_COUNT NUMBER default 0
    );
-
+select * from board_infos;
 select * from member;
 
 --게시판테이블
@@ -967,6 +965,8 @@ select * from member;
 DROP SEQUENCE board_infos_seq;
 DROP TABLE board_infos;
 
+select *from member;
+
 CREATE SEQUENCE board_infos_seq 
 INCREMENT BY 1 
 START WITH 1 
@@ -977,27 +977,44 @@ NOCACHE;
 
 CREATE TABLE board_infos (
     postno NUMBER(10) GENERATED ALWAYS AS IDENTITY,
-    num NUMBER(10),
-    title VARCHAR2(150),
-    content VARCHAR2(2000) not null,
+    title VARCHAR2(150) not null,
+    content VARCHAR2(2000),
     writer VARCHAR2(50),
     updatedate DATE DEFAULT SYSDATE,
     changedate DATE DEFAULT SYSDATE,
-    recommend NUMBER,
-    report NUMBER,
+    recommend NUMBER default 0,
+    report NUMBER default 0,
     viewCnt NUMBER DEFAULT 0,
     CONSTRAINT pk_board_infos PRIMARY KEY (postno)
 );
+select * from member;
 
+select *from board_infos;
+
+drop table board_infos;
+drop table reply;
 
 ALTER TABLE board_infos MODIFY(postno GENERATED AS IDENTITY (START WITH 1));
 
 select * from board_infos;
+select *from member;
 
-
-
+    DELETE
+    FROM reply a
+    WHERE exists
+    (select 1 from board_infos b 
+    where a.postno= b.postno);
+    
+    
+     SELECT  r.replyNumber, r.replytext, r.replyUserID, r.recommend ,r.report,
+       		r.changedate, r.updatedate    
+      	FROM board_infos b
+		JOIN reply r ON b.postno = r.postno
+		WHERE b.postno = postno
+        
 commit;
-
+select * from member;
+select * from board_infos;
 --댓글테이블
 create table reply(
              replynumber number not null primary key, 
@@ -1014,15 +1031,73 @@ create table reply(
 );
 
 
-DROP TABLE board_opinions CASCADE CONSTRAINTS;
-
-create table board_opinions (
-    postno number,
-    opinion_type number,
-    login_id VARCHAR2(30 BYTE) NOT NULL,
-    constraint boatd_likes_PK primary key(postno, opinion_type, login_id),
-    foreign key (postno)
-    references board_infos(postno)
+--레슨테이블1
+CREATE TABLE LESSON (
+  student_number NUMBER(10) PRIMARY KEY NOT NULL,  --학생번호
+  lesson_start DATE, --레슨 시작일
+  lesson_end DATE, --레슨 종료일
+  student_id VARCHAR2(40), --학생 아이디
+ 	 CONSTRAINT student_fk FOREIGN KEY (student_id) REFERENCES LESSON_STUDENT_PROFILE(student_id)
+ 		ON DELETE SET NULL,
+  lesson_id NUMBER(5), -- 레슨 아이디
+  	CONSTRAINT teacher_fk  FOREIGN KEY (lesson_id) REFERENCES TEACHER_PROFILE(teacher_id) 
+		ON DELETE SET NULL,
+  possible VARCHAR2(10) DEFAULT '예약가능' -- 예약 가능한 날
 );
 
-select * from board_opinions;
+select *
+from LESSON;
+
+
+--레슨테이블2
+
+CREATE TABLE MUSICLESSON (
+  lesson_id NUMBER(5) PRIMARY KEY,--레슨 아이디
+  student_id NUMBER(10), --학생 아이디
+  teacher_id NUMBER(5),--선생 아이디
+  lesson_statr_date DATE, --레슨 시작일
+  lesson_end_date DATE,--레슨 종료일
+  start_time TIME, -- 시작 시간
+  end_time TIME,  --끝나는 시간
+  lesson_department VARCHAR2(50),-- 레슨 분야
+  lesson_pay INT, --레슨 비용
+  CONSTRAINT student_fk FOREIGN KEY (student_id) REFERENCES LESSON_STUDENT_PROFILE(student_id) ON DELETE SET NULL,
+  CONSTRAINT teacher_fk FOREIGN KEY (teacher_id) REFERENCES LESSON_TEACHER_PROFILE(teacher_id) ON DELETE SET NULL
+);
+--학생정보
+CREATE TABLE LESSON_STUDENT_PROFILE (
+  student_id VARCHAR2(20) PRIMARY KEY,
+  pw VARCHAR2(30) NOT NULL,
+  gender VARCHAR2(4),
+  interest VARCHAR2(20),
+  name VARCHAR2(10) NOT NULL,
+  level NUMBER(2),
+  email VARCHAR2(50) NOT NULL,
+  age INTEGER NOT NULL,
+  address VARCHAR2(20) NOT NULL,
+  phone INTEGER
+);
+--선생정보
+CREATE TABLE LESSON_TEACHER_PROFILE (
+  teacher_id VARCHAR2(20) PRIMARY KEY,
+  pw VARCHAR2(30) NOT NULL,
+  name VARCHAR2(10) NOT NULL,
+  gender VARCHAR2(4),
+  email VARCHAR2(50) NOT NULL,
+  age INTEGER NOT NULL,
+  address VARCHAR2(30) NOT NULL,
+  phone INTEGER NOT NULL,
+  department VARCHAR2(10) NOT NULL  -- 선생 파트
+);
+
+--공간 미정
+CREATE TABLE facility (
+
+);
+
+--회원등급
+CREATE TABLE STUDENT_GRADE (
+ student_id VARCHAR2(20) PRIMARY KEY, --학생 아이디
+ grade_gift VARCHAR2(200),-- 혜택
+ grade_name  VARCHAR2(50), --등급이름 골드,플래티넘 등등
+);

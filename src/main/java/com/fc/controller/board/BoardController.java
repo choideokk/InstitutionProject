@@ -38,6 +38,20 @@ public class BoardController {
 	@Autowired
 	ReplyService replyService;
 
+
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
+
+	@PostMapping("/test")
+	public String test2() {
+
+
+		return "test";
+	}
+
+	
 	// 게시글 작성
 	@GetMapping("/write")
 	public String insertContents() {
@@ -45,14 +59,21 @@ public class BoardController {
 	}
 
 	@PostMapping("/write")
-	public String insertContents_process(@ModelAttribute BoardDto boardDto) {
+	public String insertContents_process(@ModelAttribute BoardDto boardDto,HttpSession session) {
+		
+		String currentUser = (String)session.getAttribute("loginId");
+		
+		boardDto.setWriter(currentUser);
+		
 		boardService.boardInsert(boardDto);
+		
+
 		return "redirect:/boardlist?pageNo=1";
 	}
 
 	// 전체 글 목록
 	@GetMapping("/boardlist")
-	public String boardList(Model model, @RequestParam int pageNo, @ModelAttribute SearchDto searchObj) {
+	public String boardList(Model model, @RequestParam (defaultValue = "1") int pageNo, @ModelAttribute SearchDto searchObj) {
 		// public String boardList(Model model, @RequestParam(name = "postNo", required
 		// = false) String postNo, @ModelAttribute SearchDto searchObj) {
 
@@ -115,15 +136,17 @@ public class BoardController {
 	// 게시글 수정
 	@GetMapping("/update")
 	public String updateView(BoardDto boardDto, Model model) {
+		System.out.println("여기니?");
 		model.addAttribute("viewPage", boardDto);
 		return "board/updateView";
 	}
 
 	@PostMapping("/update")
-	public String update2(@ModelAttribute BoardDto boardDto, Model model) {
+	public String update2(BoardDto boardDto, Model model) {
+		System.out.println(boardDto.toString());
 		BoardDto dto = boardService.getdetail(boardDto.getPostno());
 		model.addAttribute("viewPage", dto);
-		boardService.boardUpdate(boardDto);
+		//boardService.boardUpdate(boardDto);
 		return "board/updateView";
 	}
 

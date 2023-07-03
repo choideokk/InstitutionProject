@@ -28,13 +28,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
     <select id="list_Reply" parameterType="int" resultType="ReplyDto">
-
        SELECT  r.replyNumber, r.replytext, r.replyUserID, r.recommend ,r.report,
        		r.changedate, r.updatedate    
       	FROM board_infos b
 		JOIN reply r ON b.postno = r.postno
 		WHERE b.postno = #{postno}
-    
 	</select>
 	
 	<!-- 			<td><c:out value="${list.replynumber}"/></td>

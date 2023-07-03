@@ -29,6 +29,8 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int boardInsert(BoardDto boardDto) {
 		
+		 System.out.println(boardDto.toString());
+		 
 		int result = sqlSessionTemplate.insert("board_mapper.insert_contents", boardDto);
 		
 		return result;
@@ -95,6 +97,8 @@ public class BoardDaoImpl implements BoardDao {
 	public void update(BoardDto boardDto) {
 		// TODO Auto-generated method stub
 		
+		
+
 		sqlSessionTemplate.update("board_mapper.list_update",boardDto);
 	}
 

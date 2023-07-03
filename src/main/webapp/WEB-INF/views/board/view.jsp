@@ -91,6 +91,7 @@ textarea{
 		<label>게시판 수정일</label>
 		<input readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${viewPage.changedate}"/>' >
 	</div>							
-	
+
+
 	</body>
 </html>

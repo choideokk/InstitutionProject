@@ -37,10 +37,9 @@ public interface BoardDao {
     public int insertBoardLike(Map<String, String> infoMap);
 
 
+    
 
 	public int pageCount();
-
-
 
 	List<BoardDto> ListPage(int displayArticle, int articleNum);
     public int insertBoardOpinion(Map<String, String> infoMap);
