@@ -37,7 +37,7 @@ $(document).ready(function() {
 		$(".current").removeClass("current");
 		$(this).addClass("current");
 		$(".table-body").css({
-			"transform" : "translateY(-50%)",
+			"transform" : "translateY(0%)",
 			"height" : "100px",
 			"position" : "relative",
 			"z-index" : "-1"
@@ -48,7 +48,7 @@ $(document).ready(function() {
 		$(".current").removeClass("current");
 		$(this).addClass("current");
 		$(".table-body").css({
-			"transform" : "translateY(0%)",
+			"transform" : "translateY(-50%)",
 			"height" : "100px",
 			"position" : "relative",
 			"z-index" : "-1"

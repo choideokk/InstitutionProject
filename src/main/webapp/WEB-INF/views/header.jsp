@@ -47,7 +47,7 @@ String loginId = null;
 
 <body>
 	<!-- Navigation menu section -->
-	<div class="navbar-wraaper" style="background-color: black;">
+	<div class="navbar-wraaper" style="background-color: black; position: relative; z-index: 15;">
 		<nav class="navbar navbar-expand-md navbar-dark">
 			<a class="navbar-brand" href="${path}/main" style="padding-left:20px;">Floorz</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -72,7 +72,7 @@ String loginId = null;
 					} else {
 					%>
 					<li class="nav-item last" style="position:absolute;right: 20px !important;">
-					<p style="color:white; font-size:16px; font-weight: 500; line-height: 30px;">${memberName}님</p></li>
+					<a class="nav-link " style="color:white; font-size:16px; font-weight: 500;">${memberName}님</a></li>
 					<li class="nav-item last" style="position:absolute;right: -158px !important;">
 					<a class="nav-link" href="${path}/logout">로그아웃</a></li>
 					<li class="nav-item last" style="position:absolute;right: -78px !important;">
@@ -84,3 +84,4 @@ String loginId = null;
 			</div>
 		</nav>
 	</div>
+	

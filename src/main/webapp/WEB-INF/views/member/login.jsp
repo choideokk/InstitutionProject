@@ -9,7 +9,7 @@
 	<!--회원가입 -->
 	<div class="container" id="container">
 		<div class="form-container sign-up-container">
-			<form action="" method="post" id="regForm">
+			<form action="${path}/register" method="post" id="regForm">
 				<h1>Create Account</h1>
 				<div class="registerId-wrapper">
 					<input class="registerId" type="text" id="loginId" name="loginId"

@@ -79,6 +79,7 @@ public class MemberController {
 			mav.setViewName("redirect:/mypage"); // 뷰의 경로
 			session.getAttribute("loginId");
 			session.getAttribute("memberName");
+			mav.addObject("message", "success");
 		} else { // 로그인 실패 시
 			mav.setViewName("member/login");
 			mav.addObject("message", "error");
@@ -106,7 +107,6 @@ public class MemberController {
 	// 화원정보 불러오기
 	@GetMapping("/mypage")
 	public String memberInfo(HttpSession session, Model model) {
-
 		// 세션 객체 안에 있는 ID정보 저장
 		String id = (String) session.getAttribute("loginId");
 

@@ -13,15 +13,8 @@
 <link rel="stylesheet" href="${path}/css/main.css" />
 <link rel="stylesheet" href="${path}/css/main2.css" />
 <link href="${path}/css/map.css" rel="stylesheet" type="text/css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-<style>
-	* {
-	font-family: 'Nanum Gothic', sans-serif;
-	}
-</style>
+
 </head>
 
 <body>
@@ -152,16 +145,7 @@
 						</tr>
 					</thead>
 					<tbody class="table-body">
-						<c:forEach var="board" items="${latestBoardList}" begin="1"
-							end="4" step="1">
-							<tr>
-								<td><a href="${path}/detail?postno=${board.postno}">
-										${board.title}</a></td>
-								<td>${board.writer}</td>
-								<td>${board.updatedate}</td>
-							</tr>
-						</c:forEach>
-						<c:forEach var="board" items="${cntBoardList}" begin="1" end="4"
+						<c:forEach var="board" items="${cntBoardList}" begin="0" end="${fn:length(cntBoardList)}"
 							step="1">
 							<tr>
 								<td><a href="${path}/detail?postno=${board.postno}">
@@ -170,6 +154,33 @@
 								<td>${board.updatedate}</td>
 							</tr>
 						</c:forEach>
+						<c:if test="${fn:length(cntBoardList) < 4}">
+							<c:forEach var="empty" begin="1" end="${4-fn:length(cntBoardList)}" step="1">
+							<tr>
+								<td style="height: 44.73px;"></td>
+								<td style="height: 44.73px;"></td>
+								<td style="height: 44.73px;"></td>
+							</tr>
+							</c:forEach>
+						</c:if>
+						<c:forEach var="board" items="${latestBoardList}" begin="0"
+							end="${fn:length(latestBoardList)}" step="1">
+							<tr>
+								<td><a href="${path}/detail?postno=${board.postno}">
+										${fn:length(latestBoardList)} ${board.title}</a></td>
+								<td>${board.writer}</td>
+								<td>${board.updatedate}</td>
+							</tr>
+						</c:forEach>
+						<c:if test="${fn:length(latestBoardList) < 4}">
+							<c:forEach var="empty" begin="1" end="${4-fn:length(latestBoardList)}" step="1">
+							<tr>
+								<td style="height: 44.73px;"></td>
+								<td style="height: 44.73px;"></td>
+								<td style="height: 44.73px;"></td>
+							</tr>
+							</c:forEach>
+						</c:if>
 					</tbody>
 				</table>
 			</div>
@@ -216,5 +227,4 @@
 						displayMarker(parsedList[i], path);
 					}	
 				</script>
-</body>
-</html>
+<%@ include file="./footer.jsp"%>

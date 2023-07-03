@@ -22,9 +22,6 @@ $(document).ready(function() {
 	});
 
 
-});
-
-$(document).ready(function() {
 	$('#hidePw2').on('click', function() {
 		$('input').toggleClass('active');
 		if ($('input').hasClass('active')) {
@@ -37,49 +34,14 @@ $(document).ready(function() {
 	});
 
 
-});
-
-$(function() {
-	$("#btnLogin").click(function() {
-		var userid = $("#loginId1").val();
-		var passwd = $("#password1").val();
-		if (userid == "") {
-			alert("아이디를 입력하세요");
-			$("#loginId1").focus(); //입력포커스 이동
-
-			return false; //함수 종료
-		}
-		if (passwd == "") {
-			alert("비밀번호를 입력하세요");
-			$("#password1").focus();
-			return false;
-		}
-
-	});
-});
-
-$(document).ready(function() {
-
 	$("#memberUpdateBtn").on("click", function() {
 		location.href = path + "/memberInfo";
 	});
-
-});
-
-
-
-
-
-$(document).ready(function() {
 
 	$("#logout").on("click", function() {
 		alert("로그아웃 되었습니다.");
 	});
 
-});
-
-$(document).ready(function() {
-	// 취소
 	$(".cancle").on("click", function() {
 
 		location.href = path + "/register";
@@ -160,7 +122,32 @@ $(document).ready(function() {
 		$("#regForm").submit();
 	});
 
-})
+
+});
+
+
+
+$(function() {
+	$("#btnLogin").click(function() {
+		var userid = $("#loginId1").val();
+		var passwd = $("#password1").val();
+		if (userid == "") {
+			alert("아이디를 입력하세요");
+			$("#loginId1").focus(); //입력포커스 이동
+
+			return false; //함수 종료
+		}
+		if (passwd == "") {
+			alert("비밀번호를 입력하세요");
+			$("#password1").focus();
+			return false;
+		}
+
+	});
+});
+
+
+
 
 function fn_idChk() {
 	// 그 전에 아이디가 숫자와 영어로 6-14자인지 먼저 체크하고, 안되면 중복확인조차 못하게
