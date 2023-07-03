@@ -68,9 +68,11 @@
     transform: scale(0.98); /* 클릭 중일 때 박스를 약간 축소 */
 }
 
-.rsvtNo, .status, .rsrcId {
-	margin-bottom: 10px;
-}
+          .rsvtNo,
+          .status,
+          .rsrcId {
+              margin-bottom: 10px;
+          }
 
           .gray-background {
               background-color: #808080;
@@ -109,6 +111,9 @@
         <input type="hidden" id="rsvfNm" name="rsvfNm" value="${rsvfNm}">
         
 
+        <c:forEach var="i" begin="1" end="6">
+          <c:set var="keyName" value="key${i}" />
+          <c:set var="currentValue" value="${values[keyName]}" />
 
           <div class="inner-boxx2 ${currentValue.totalPeopleCnt == 4 ? 'gray-background' : ''}" data-key-name="${keyName}" data-total-people-cnt="${currentValue.totalPeopleCnt}" onclick="boxClick(event);">
             <div id="rsvtTime">
@@ -134,15 +139,7 @@
     </div>
   </div>
 
-
-
-			<form>
-				<button>목록</button>
-			</form>
-		</div>
-	</div>
-
-	<script>
+  <script>
   // 기존의 코드
   var keyToTimeMap = {
     key1: 1000,

@@ -25,7 +25,9 @@
     <script type="text/javascript" src="${path}/ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="${path}/ckeditor/config.js"></script>
     
+<!--
 <link href="${path}/css/stars.css" rel="stylesheet" type="text/css" />
+  -->
 
 </head>
 <body>
