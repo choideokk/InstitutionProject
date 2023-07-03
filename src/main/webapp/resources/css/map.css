@@ -1,43 +1,158 @@
 @charset "UTF-8";
 
+.olWrapper {
+	position: relative;
+	background: white;
+	border: none;
+	border-radius: 10px;
+	width: 200px;
+	height: 100%;
+	overflow: hidden;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06)
+		0px 0px 0px 1px;
+}
+
+.olWrapper .closeBtn {
+	width: 50%;
+	background: none;
+	border: none;
+}
+
+.olWrapper .olFcNameTxt {
+	width: 200px;
+	padding: 8px;
+	text-align: center;
+	margin-bottom: 0;
+	color: white;
+	background: black;
+	overflow: hidden;
+	text-overflow: ellipsis; /* 말줄임 css */
+	white-space: nowrap; /*글자를 한줄로 모아준다*/
+}
+
+.mainWrapper {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+}
+
 .closeSideBtn {
 	position: absolute;
-    top: 50%;
-    left: -25px;
-    z-index: 0;
-    display: block;
-    width: 25px;
-    height: 50px;
-    background: #fff;
-    border: 0;
-    border-radius: 5px 0 0 5px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.38);
-    cursor: pointer;
+	top: 50%;
+	left: -25px;
+	z-index: 0;
+	display: block;
+	width: 25px;
+	height: 50px;
+	background: #fff;
+	border: 0;
+	border-radius: 5px 0 0 5px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.38);
+	cursor: pointer;
 }
 
 .closeSideBtn:before {
 	content: "";
-    margin-left: -4px;
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border: 2px solid #006aee;
-    border-left: 0px;
-    border-top: 0px;
-    transform: rotate(-45deg);
-    transition: transform 0.3s;
+	margin-left: -4px;
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border: 2px solid #FF4B2B;
+	border-left: 0px;
+	border-top: 0px;
+	transform: rotate(-45deg);
+	transition: transform 0.3s;
 }
 
 .closeSideBtn.closed:before {
 	transform: rotate(135deg);
-    margin-left: 4px;
+	margin-left: 4px;
+}
+
+.rsvtBtn {
+	width: 50%;
+	background: lightgrey;
+	border: none;
+	padding: 6px;
 }
 
 .rightSideAreas {
 	position: absolute;
 	width: 350px;
-	background: lightgrey;
+	height: 100%;
+	padding-top: 60px;
+	background: #F8F9FA;
 	right: 0;
 	top: 0;
 	z-index: 10;
+}
+
+.rightSideAreas .rightInner {
+	height: 100%;
+	overflow-y: hidden;
+}
+
+.searchInput {
+	padding-right: 20px;
+	width: 238px;
+}
+
+.searchBtn {
+	width: 318px;
+	margin-top: 5px;
+	margin-left: 1px;
+	border: none;
+	padding: 5px 10px;
+	color: #FF4B2B;
+	background: black;
+	color: white;
+}
+
+.txtResetBtn {
+	position: absolute;
+	top: 32px;
+	font-size: 20px;
+	right: 4px;
+	border: none;
+	background: none;
+}
+
+.fcItem {
+	position: relative;
+	margin-bottom: 10px;
+	height: 100%;
+}
+
+.fcItem button {
+	width: 100%;
+	background: white;
+	border: 0;
+	border-radius: 5px;
+	min-height: 100px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.txtAreas {
+	position: relative;
+	right: 0;
+	width: 220px;
+	overflow: hidden;
+	padding: 6px;
+	border-top-left-radius: 12px;
+}
+
+.txtAreas p {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* 라인수 */
+	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	line-height: 18px;
+	height: 36px; /* height = line-height * 줄수 : 비wekkit 계열 */
 }

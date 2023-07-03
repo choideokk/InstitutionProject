@@ -1,5 +1,6 @@
 package com.fc.dto.board;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //페이징 처리를 위한 클래스
@@ -66,10 +67,11 @@ public class ArticlePage {
 				endPage = totalPages;
 			}
 		}
+		
 		if (((currentPage-1)*7) + size > total) {
-			this.content = content.subList((currentPage-1)*size, total);
-		} else if (((currentPage-1)*7) + size <= total) {
-			this.content = content.subList((currentPage-1)*size, currentPage*size);			
+			this.content = new ArrayList<BoardDto>(content.subList((currentPage-1)*size, total));
+		} else if ((((currentPage-1)*7) + size ) <= total) {
+			this.content = new ArrayList<BoardDto>(content.subList((currentPage-1)*size, currentPage*size));		
 		}
 
 	}

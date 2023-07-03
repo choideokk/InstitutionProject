@@ -16,6 +16,9 @@ public interface BoardService {
 
 	List<BoardDto> getBoardList();
 
+	List<BoardDto> getBoardListByViewCnt();
+
+	
 	List<BoardDto> findBoardListBySearchKeywordMap(Map<String, String> map);
 
 	List<BoardDto> findBoardListBySearchKeywordMap2(Map<String, String> map);

@@ -1,158 +1,159 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Page Layout</title>
-    <style>
-    
-    * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+<title>Page Layout</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-    .hahaContainer{
-    height:50px;
-    width:100%;
-    display:flex;
-    }
-    
-    	.haha{
-    	height:100%;
-    	width:60%;
-    	}
-    	.haha2{
-    	height:100%;
-    	width:40%;
-    	display:flex;
-    	}
-    	
-    	.haha2_left{
-    	height:100%;
-    	width:50%;
-    	  font-size: 16px;
-  text-align: center;
-  border: 1px solid black;
-    	}
-    	
-    	.haha2_right{
-    	height:100%;
-    	width:50%;
-    	  font-size: 16px;
-  text-align: center;
-  border: 1px solid black;
-    	}
-    	
-    .haha2_left, .haha2_right {
-    transition: all 0.3s;  /* Change this line for a smooth transition */
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);  /* Add this line */
+.hahaContainer {
+	height: 50px;
+	width: 100%;
+	display: flex;
 }
-    	
-    	    .right select {
-            padding: 8px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: white;
-            color: #555;
-            width: 200px;
-        }
 
-        .right select:hover {
-            border-color: #888;
-        }
+.haha {
+	height: 100%;
+	width: 60%;
+}
 
-        .right select:focus {
-            border-color: dodgerblue;
-            box-shadow: 0 0 0 2px dodgerblue;
-            outline: none;
-        }
+.haha2 {
+	height: 100%;
+	width: 40%;
+	display: flex;
+}
 
-        .right select option {
-            background-color: white;
-            color: #555;
-        }
-    	
-    	
-        .container {
-            display: flex;
-        }
+.haha2_left {
+	height: 100%;
+	width: 50%;
+	font-size: 16px;
+	text-align: center;
+	border: 1px solid black;
+}
 
-        .left {
-            width: 60%;
-            box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
-                 display: flex;
-            flex-direction: column;
-        }
-        
-        .right{
-        	height: 700px;
-        	width: 40%;
-            box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
-        }
-        
-                .right2{
-        	height: 700px;
-        	width: 40%;
-            box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
-        }
+.haha2_right {
+	height: 100%;
+	width: 50%;
+	font-size: 16px;
+	text-align: center;
+	border: 1px solid black;
+}
 
-        .top  {
-            height: 300px;
-        }
-        
-        .bottom{
-        	height: 400px;
-        	 overflow: auto;
-        }
+.haha2_left, .haha2_right {
+	transition: all 0.3s; /* Change this line for a smooth transition */
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1); /* Add this line */
+}
 
-        /* 테두리 추가 */
-        .top, .bottom, .right {
-            border: 1px solid black;
-        }
-        
-        .top img {
-                    width: 95%;
-            height: 95%;
-            object-fit: cover; /* 이미지가 div를 넘치지 않도록 설정 */
-        }
-        
-    /* FullCalendar에 적용할 스타일 */
-       #calendar {
-            width: 100%;  /* 달력의 너비를 조금 줄임 */
-            height: 100%; /* 달력의 높이를 조금 줄임 */
-        }
-        
+.right select {
+	padding: 8px;
+	font-size: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: white;
+	color: #555;
+	width: 200px;
+}
+
+.right select:hover {
+	border-color: #888;
+}
+
+.right select:focus {
+	border-color: dodgerblue;
+	box-shadow: 0 0 0 2px dodgerblue;
+	outline: none;
+}
+
+.right select option {
+	background-color: white;
+	color: #555;
+}
+
+.container {
+	display: flex;
+}
+
+.left {
+	width: 60%;
+	box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
+	display: flex;
+	flex-direction: column;
+}
+
+.right {
+	height: 700px;
+	width: 40%;
+	box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
+}
+
+.right2 {
+	height: 700px;
+	width: 40%;
+	box-sizing: border-box; /* 테두리의 너비가 총 너비에 포함되도록 설정 */
+}
+
+.top {
+	height: 300px;
+}
+
+.bottom {
+	height: 400px;
+	overflow: auto;
+}
+
+/* 테두리 추가 */
+.top, .bottom, .right {
+	border: 1px solid black;
+}
+
+.top img {
+	width: 95%;
+	height: 95%;
+	object-fit: cover; /* 이미지가 div를 넘치지 않도록 설정 */
+}
+
+/* FullCalendar에 적용할 스타일 */
+#calendar {
+	width: 100%; /* 달력의 너비를 조금 줄임 */
+	height: 100%; /* 달력의 높이를 조금 줄임 */
+}
 
 .unavailable {
-  color: red;
-  background-color: lightgray;
+	color: red;
+	background-color: lightgray;
 }
 
 .available {
-  color: green;
+	color: green;
 }
 
-.unavailable,
-.available {
-  font-size: 12px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+.unavailable, .available {
+	font-size: 12px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 }
-        
-    </style>
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    
-    <script>
+</style>
+
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css"
+	rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+<script>
     window.onload = function() {
         var leftDiv = document.querySelector(".haha2_left");
         var rightDiv = document.querySelector(".haha2_right");
@@ -275,59 +276,62 @@ box-sizing: border-box;
     </script>
 </head>
 <body>
-<c:if test="${not empty errorMessage}">
-    <script>
+	<c:if test="${not empty errorMessage}">
+		<script>
         alert("${errorMessage}");
     </script>
-</c:if>
+	</c:if>
 
 
-<div class="hahaContainer">
-	<div class="haha">
-	<input type="hidden" id="rsvfNm" value="${currentFc.rsrcNm}" />
-		<p>${currentFc.rsrcNm} ${currentFc.rsrcClsNm}</p>
-	</div>
-	<div class="haha2">
-		<div class="haha2_left">
-			<p>조회 및 예약</p>
+	<div class="hahaContainer">
+		<div class="haha">
+			<input type="hidden" id="rsvfNm" value="${currentFc.rsrcNm}" />
+			<p>${currentFc.rsrcNm}${currentFc.rsrcClsNm}</p>
 		</div>
-		<div class="haha2_right">
-			<p>예약정보</p>		
+		<div class="haha2">
+			<div class="haha2_left">
+				<p>조회 및 예약</p>
+			</div>
+			<div class="haha2_right">
+				<p>예약정보</p>
+			</div>
 		</div>
 	</div>
-</div>
-    <div class="container">
-        <div class="left">
-            <div class="top">
-                <!-- 이미지 추가 -->
-                <img src="${path}/image/facilities/${currentFc.rsrcNo}.jpg" width="100px" height="100px" />
-            </div>
-            <div class="bottom">
-                <!-- FullCalendar 추가 -->
-                <div id='calendar'></div>
-            </div>
-        </div>
+	<div class="container">
+		<div class="left">
+			<div class="top">
+				<!-- 이미지 추가 -->
+				<img src="${path}/image/facilities/${currentFc.rsrcNo}.jpg"
+					width="100px" height="100px" />
+			</div>
+			<div class="bottom">
+				<!-- FullCalendar 추가 -->
+				<div id='calendar'></div>
+			</div>
+		</div>
 
-        <div class="right">
-	       		<!-- content -->
-	           <div style="display: flex; justify-content: center; align-items: center;">
-	           <label>조회할 시설을 선택해주세요.</label><br/>
-	           <select id="category">
-	           <option value="" disabled selected hidden>선택해주세요</option>
-	               <option value="${currentFc.rsrcClsNm}">${currentFc.rsrcClsNm}</option>
-	           </select>
-	           </div>
-	
-	           <div id="contentArea" style="display: flex; justify-content: center; align-items: center;">
-	           	
-	           </div> 
-        </div>
-        
-        <div class="right2">
-	       		<!-- content -->
-	           <div style="display: flex; justify-content: center; align-items: center;">
-	           
-	           <ul>
+		<div class="right">
+			<!-- content -->
+			<div
+				style="display: flex; justify-content: center; align-items: center;">
+				<label>조회할 시설을 선택해주세요.</label><br /> <select id="category">
+					<option value="" disabled selected hidden>선택해주세요</option>
+					<option value="${currentFc.rsrcClsNm}">${currentFc.rsrcClsNm}</option>
+				</select>
+			</div>
+
+			<div id="contentArea"
+				style="display: flex; justify-content: center; align-items: center;">
+
+			</div>
+		</div>
+
+		<div class="right2">
+			<!-- content -->
+			<div
+				style="display: flex; justify-content: center; align-items: center;">
+
+				<ul>
 					<li>장소 : ${currentFc.rsrcNm}</li>
 					<li>종목 : ${currentFc.rsrcClsNm}</li>
 					<li>주소 : ${currentFc.addr}${currentFc.daddr}</li>
@@ -336,10 +340,10 @@ box-sizing: border-box;
 					<li>모집정원 : 4명</li>
 					<li>취소기간 : 이용일 1일 전까지</li>
 					<li>예약방법 : 인터넷</li>
-					<li>문의전화 : </li>
-			  </ul>
-        </div>
-    </div>
-    </div>
+					<li>문의전화 :</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

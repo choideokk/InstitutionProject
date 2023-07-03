@@ -18,10 +18,6 @@ import com.fc.dto.facility.SearchDto;
 @Repository
 public class BoardDaoImpl implements BoardDao {
 
-//	protected Log log = LogFactory.getLog(BoardDaoImpl.class);
-
-
-    
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
@@ -142,21 +138,15 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int insertBoardLike(Map<String, String> infoMap) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int pageCount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public List<BoardDto> ListPage(int displayArticle, int articleNum) {
+	public List<BoardDto> selectBoardListByViewCnt() {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectList("search_boardList_by_viewCnt");
 	}
 
 

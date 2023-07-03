@@ -15,6 +15,8 @@ public interface BoardDao {
 
 	
 	List<BoardDto> selectBoardList();
+	
+	List<BoardDto> selectBoardListByViewCnt();
 
 	List<BoardDto> selectBoardListByNumber(BoardDto boardDto);
 
@@ -34,15 +36,8 @@ public interface BoardDao {
 	
     public void delete(int postno) ;
     
-    public int insertBoardLike(Map<String, String> infoMap);
-
-
-
 	public int pageCount();
 
-
-
-	List<BoardDto> ListPage(int displayArticle, int articleNum);
     public int insertBoardOpinion(Map<String, String> infoMap);
     
     public int selectTotalBoardsCount();

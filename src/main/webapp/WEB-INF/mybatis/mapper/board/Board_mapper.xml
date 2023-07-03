@@ -32,6 +32,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from board_infos
 		where postno=#{postno}
 	</select>
+	
+	<select id="search_boardList_by_viewCnt" resultType="BoardDto">
+		select
+		postno,title,writer,content,
+		updatedate,changedate
+		from board_infos
+		order by viewCnt DESC
+	</select>
 
 	<select id="search_boardList_by_searchDto"
 		parameterType="SearchDto" resultType="BoardDto">
@@ -65,6 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					</if>
 			</otherwise>
 		</choose>
+		ORDER BY updatedate DESC
 	</select>
 	
 	<select id="pageCount" resultType="int">
@@ -104,6 +113,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</otherwise>
 		</choose>
 		)
+		ORDER BY updatedate DESC
 	</select>
 	
 
