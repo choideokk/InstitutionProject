@@ -12,6 +12,7 @@
  if(request.getProtocol().equals("HTTP/1.1"))
      response.setHeader("Cache-Control","no-cache");
  %>
+ <c:set var="path" value="${pageContext.request.contextPath}"></c:set>
 
 <!DOCTYPE html>
 <html>

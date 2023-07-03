@@ -20,5 +20,6 @@ public class ReservationCalendarDto {
 	String jidthree;
 	int status;
 	String approval;
+	String loginId;
 	
 }

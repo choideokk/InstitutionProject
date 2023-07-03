@@ -16,11 +16,14 @@ public interface ReservationCalendarService  {
 	;
 	public boolean checkMyReservation(String loginId);
 	
+	public boolean checkMyReservation2(String loginId);
+	
 	public int createReservation(ReservationCalendarDto reservationCalendarDto);
 	
 	public int updateReservation(ReservationCalendarDto reservationCalendarDto);
 	
 	public int clearReservation(ReservationCalendarDto reservationCalendarDto);
+	public int clearReservation2(ReservationCalendarDto reservationCalendarDto, String loginId);
 	
 	public List<ReservationCalendarDto> myReservation(String loginId);
 	
