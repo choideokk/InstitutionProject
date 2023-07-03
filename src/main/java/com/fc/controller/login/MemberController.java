@@ -100,11 +100,9 @@ public class MemberController {
 		int result = memberService.member_id_check(loginId);
 
 		return result;
-
 	}
 	
-	
-	//화원정보 불러오기 
+	//회원정보 불러오기 
 	@GetMapping("/memberInfo")
 	public String memberInfo(HttpSession session,Model model) {
 		

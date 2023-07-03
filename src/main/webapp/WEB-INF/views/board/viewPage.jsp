@@ -122,8 +122,8 @@ textarea {
 	<div>
 		<h1>조회 페이지</h1>
 		<form method="POST" action="" name="opinionForm" id="opinionForm">
-			<button type="button" class="likesBtn">추천하기</button>
-			<button type="button" class="reportBtn">신고하기</button>
+			<button type="button" class="likesBtn" <c:if test="${sessionScope.loginId == null}">disabled</c:if>>추천하기</button>
+			<button type="button" class="reportBtn" <c:if test="${sessionScope.loginId == null}">disabled</c:if>>신고하기</button>
 		</form>
 		<form id="updateForm" action="/update" method="post">
 			<div class="input_wrap">
@@ -158,9 +158,9 @@ textarea {
 			<div class="btn_wrap">
 				<a class="btn" id="list_btn">목록 페이지</a>
 				 <button type="submit" onclick="return submit2(this.form)" 
-				 class="btn" id="update_btn" value="수정하기">수정</button>
+				 class="btn" id="update_btn" value="수정하기" <c:if test="${viewPage.writer ne sessionScope.loginId}">disabled</c:if>>수정</button>
 				 
-			 <a class="btn" id="delete_btn">삭제</a>
+			 <button type="button" class="btn" id="delete_btn" <c:if test="${viewPage.writer ne sessionScope.loginId}">disabled</c:if>>삭제</button>
 			</div>
 		</form>
 
@@ -171,9 +171,9 @@ textarea {
 		<form method="POST" action="${path}/reply?postno=${viewPage.postno}">
 			<label for="replytext">댓글</label>
 			<textarea id="replytext" name="replytext" rows="4" required></textarea>
-			<button type="submit">제출</button>
-			<button type="button" id="chochun">댓글 추천</button>
-			<button type="button" id="singo">댓글 신고</button>
+			<button type="submit" <c:if test="${sessionScope.loginId == null}">disabled</c:if>>제출</button>
+			<button type="button" id="chochun" <c:if test="${sessionScope.loginId == null}">disabled</c:if>>댓글 추천</button>
+			<button type="button" id="singo" <c:if test="${sessionScope.loginId == null}">disabled</c:if>>댓글 신고</button>
 		</form>
 
 		<div class="rowtable">

@@ -539,21 +539,12 @@ INSERT INTO facility_info_detail VALUES(
 );
 
 
-
-
 INSERT INTO facility_info_detail VALUES(
     'CC26M2604476','010505','풋살장','B552815','천안시시설관리공단',
     'Y', 'N', '<p><br></p>', '<p><br></p>',
     '', '', '2021-03-26', 'https://www.eshare.go.kr/UserPortal/Upv/56388/fileDetail.do?file_sn=1',
     'N','Y','44133','N','LC006311','천안축구센터'
 );
-
-
-
-
-
-
-
 
 
 
@@ -995,6 +986,9 @@ ALTER TABLE board_infos MODIFY(postno GENERATED AS IDENTITY (START WITH 1));
 select * from board_infos;
 
 
+select count(*) from board_infos;
+
+
 
 commit;
 
@@ -1026,3 +1020,13 @@ create table board_opinions (
 );
 
 select * from board_opinions;
+
+
+select count(*) from (
+		select
+		postno, title, writer, updatedate, changedate, viewcnt
+		from
+		board_infos
+		where LOWER(title) like '%f%'
+		)
+		ORDER BY updatedate DESC;

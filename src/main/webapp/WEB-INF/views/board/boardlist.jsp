@@ -17,94 +17,16 @@
 <html>
 <head>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title> 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+	integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+	crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-
- <style>
- 
- *{
- 	margin:0;
- 	padding:0;
- 	box-sizing: border-box;
- }
- .rowtable{
- 	margin-top: 40px;
- 	
- }
-  .search-form {
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 1rem;
-}
-
-.search-form input {
-  height: 100%;
-  background: transparent;
-  border: 0;
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  height: 100%;
-  font-size: 1rem;
-}
-
-.search-form select {
-  background: transparent;
-  border: 0;
-  padding: 1rem;
-  height: 100%;
-  font-size: 1rem;
-}
-
-.search-form select:focus {
-  border: 0;
-}
-
-.search-form button {
-  height: 100%;
-  width: 100%;
-  font-size: 1rem;
-}
-
-.search-form button svg {
-  width: 24px;
-  height: 24px;
-}
-
-.card-margin {
-  margin-bottom: 1.875rem;
-}
-
-@media (min-width: 992px) {
-  .col-lg-2 {
-    flex: 0 0 16.66667%;
-    max-width: 16.66667%;
-  }
-}
-
-.card {
-  border: 0;
-  box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-  -ms-box-shadow: 0px 0px 10px 0px rgba(82, 63, 105, 0.1);
-}
-
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #ffffff;
-  background-clip: border-box;
-  border: 1px solid #e6e4e9;
-  border-radius: 8px;
-}
-
-    </style>
+    <link href="${path}/css/board.css" rel="stylesheet" type="text/css" /> 
+    <!-- 
     <link href="${path}/css/stars.css" rel="stylesheet" type="text/css" />
+     -->
     
 </head>
 
@@ -142,9 +64,12 @@
                 <th class="created-at"><a>추천수</a></th>
             </tr>
             </thead>
-         <c:if test="${fn:length(boardList) == 0}">
+         <c:if test="${fn:length(currentPageInfo.content) == 0}">
 			<tr>
-				<td>검색 결과가 없습니다!</td>
+				<td colspan="7" style="text-align: center">검색 결과가 없습니다!</td>
+			</tr>
+			<tr>
+				<td colspan="7" style="text-align: center"><a href="${path}/boardlist?pageNo=1">전체 게시글 목록으로 돌아가기</a></td>
 			</tr>
 		</c:if>
             <tbody>
@@ -159,7 +84,8 @@
 				<td><c:out value="${boardList.writer}"/></td>
                 <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${boardList.updatedate}"/>
                 <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${boardList.changedate}"/>             
-					<td><c:out value="${boardList.viewcnt}"/></td>
+				<td><c:out value="${boardList.viewcnt}"/></td>
+				<td><c:out value="${boardList.recommend}"/></td>
 			</tr>			
 		</c:forEach>	
             </tbody>
@@ -176,7 +102,7 @@
 
 
 <div class="row">
-  <form class="search_wrap" method="POST" action="${path}/searchBoard?pageNo=1">
+  <form class="search_wrap" method="POST" action="${path}/boardlist?pageNo=1">
     <div class="search_area">
       <label> 대소문자 구분 <input type="checkbox" name="isChecked"
         <c:if test="${searchObj.isChecked == 'on'}">checked</c:if> />
@@ -193,38 +119,51 @@
     </div>
   </form>
 </div>
-            
-           
-             
-    <ul class="pagination">
+            <c:if test='${searchObj.searchTxt eq "" ||  searchObj.searchTxt eq null}'>
+            <ul class="pagination">
+    		<c:set var="pagePath" value="boardlist"></c:set>
 			<!-- Previous 시작 -->
 			<li
 				class="paginate_button page-item previous <c:if test='${currentPageInfo.startPage<6}'>disabled</c:if>"
-				id="dataTable_previous"><a
-				href="${path}/boardlist?pageNo=${currentPageInfo.startPage-5}"
-				aria-controls="dataTable" data-dt-idx="0" tabindex="0"
-				class="page-link">Previous</a></li>
+				id="dataTable_previous">
+				<button data-path="${path}/${pagePath}?pageNo=${currentPageInfo.startPage-5}" 
+				aria-controls="dataTable" data-dt-idx="${currentPageInfo.startPage-5}" tabindex="0"
+				class="page-link">
+				Previous
+				</button>
+				</li>
 			<!-- Previous 끝 -->
 			<!-- Page번호 시작, 컨트롤러에서 list에 페이징 객체를 넣었으므로 list.변수명으로 불러옴 -->
 			<c:forEach var="pNo" begin="${currentPageInfo.startPage}" end="${currentPageInfo.endPage}"
 				step="1">
 				<li
-					class="paginate_button page-item <c:if test='${param.pageNo eq pNo}'>active</c:if>"><a
-					href="${path}/boardlist?pageNo=${pNo}" aria-controls="dataTable"
-					data-dt-idx="1" tabindex="0" class="page-link">${pNo}</a></li>
+					class="paginate_button page-item <c:if test='${param.pageNo eq pNo}'>active</c:if>">
+					<button data-path="${path}/${pagePath}?pageNo=${pNo}" aria-controls="dataTable"
+					data-dt-idx="${pNo}" tabindex="0" class="page-link">${pNo}</button>
+				</li>
 			</c:forEach>
 			<!-- Page번호 끝 -->
 			<!-- Next 시작 -->
 			<li
 				class="paginate_button page-item next <c:if test='${currentPageInfo.endPage>=currentPageInfo.totalPages}'>disabled</c:if>"
-				id="dataTable_next"><a
-				href="${path}/boardlist?pageNo=${currentPageInfo.startPage+5}"
-				aria-controls="dataTable" data-dt-idx="7" tabindex="0"
-				class="page-link">Next</a></li>
+				id="dataTable_next">
+				<button data-path="${path}/${pagePath}?pageNo=${currentPageInfo.startPage+5}"
+				aria-controls="dataTable" data-dt-idx="${currentPageInfo.startPage+5}" tabindex="0"
+				class="page-link">
+				Next
+				</button>
+			</li>
 			<!-- Next 끝 -->
 			<!-- 페이징 처리 끝 -->
 		</ul>
-
+	</c:if>
+<script>
+var path = '${path}';
+var isChecked = '${searchObj.isChecked}';
+var searchTxt = '${searchObj.searchTxt}';
+var searchKeyword = '${searchObj.searchKeyword}';
+</script>
+<script src="${path}/js/board.js" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
 <div class="stars">

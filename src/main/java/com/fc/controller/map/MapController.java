@@ -52,7 +52,6 @@ public class MapController {
 		
 		try {
 			// list를 JSON으로
-			System.out.println(fcList);
 			jsonList = mapper.writeValueAsString(fcList);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block

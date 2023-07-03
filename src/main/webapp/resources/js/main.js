@@ -1,5 +1,62 @@
+$(document).ready(function() {
+	$('.center').slick({
+		centerMode: true,
+		centerPadding: '106px',
+		slidesToShow: 3,
+		autoplay: true,
+		dots: true,
+		autoplaySpeed: 3000,
+		responsive: [
+			{
+				breakpoint: 768,
+				settings: {
+					arrows: false,
+					centerMode: true,
+					centerPadding: '40px',
+					slidesToShow: 3
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					arrows: false,
+					centerMode: true,
+					centerPadding: '40px',
+					slidesToShow: 1
+				}
+			}
+		]
+	});
+	
+	$(".option").click(function() {
+		$(".option").removeClass("active");
+		$(this).addClass("active");
+	});
+	
+	$(".viewBtn").click(function() {
+		$(".current").removeClass("current");
+		$(this).addClass("current");
+		$(".table-body").css({
+			"transform" : "translateY(-50%)",
+			"height" : "100px",
+			"position" : "relative",
+			"z-index" : "-1"
+		})
+	})
+	
+	$(".recentBtn").click(function() {
+		$(".current").removeClass("current");
+		$(this).addClass("current");
+		$(".table-body").css({
+			"transform" : "translateY(0%)",
+			"height" : "100px",
+			"position" : "relative",
+			"z-index" : "-1"
+		})
+	})
+});
 
-var clickedOverlay = null;
+	var clickedOverlay = null;
 
 // 지도에 마커를 표시하고 오버레이를 만들고 창을 닫는 이벤트를 등록하는 함수
 function displayMarker(parsedData, path) {
@@ -81,65 +138,3 @@ function displayMarker(parsedData, path) {
 	// 클러스터러에 마커들을 추가합니다
 	clusterer.addMarker(marker);
 }
-const eachPosBtns = document.querySelectorAll(".eachPosBtn");
-
-eachPosBtns.forEach((btn) => {
-	btn.addEventListener('click', () => {
-		map.setCenter(new kakao.maps.LatLng(btn.dataset.lot, btn.dataset.lat));
-		map.setLevel(4);
-	});
-});
-
-const rightSideAreas = document.querySelector(".rightSideAreas");
-const sideBtn = document.querySelector(".closeSideBtn");
-sideBtn.addEventListener('click', () => {
-	if (rightSideAreas.style.right === "-350px") {
-		rightSideAreas.style.right = "0px";
-		sideBtn.classList.remove("closed");
-	} else {
-		sideBtn.classList.add("closed");
-		rightSideAreas.style.right = "-350px";
-	}
-})
-
-const searchInput = document.searchForm.searchTxt;
-const keywordSelector = document.searchForm.searchKeyword;
-keywordSelector.addEventListener('change', (e) => {
-	if (e.target.value == 'addr') {
-		searchInput.placeholder = "도로명 주소지를 입력해주세요";
-	} else {
-		searchInput.placeholder = "체육시설 명을 입력해주세요";
-	}
-});
-
-
-const resetBtn = document.querySelector(".resetBtn");
-resetBtn.addEventListener('click', () => {
-	window.location.href = path + "/map";
-})
-
-const txtResetBtn = document.querySelector(".txtResetBtn");
-txtResetBtn.addEventListener('click', () => {
-	searchInput.value = "";
-	if (keywordSelector.value == 'addr') {
-		searchInput.placeholder = "도로명 주소지를 입력해주세요";
-	} else {
-		searchInput.placeholder = "체육시설 명을 입력해주세요";
-	}
-});
-
-searchInput.addEventListener('change', (e) => {
-	if (e.target.value == "") {
-		txtResetBtn.style.display = "none";
-	} else {
-		txtResetBtn.style.display = "block";
-	}
-});
-
-searchInput.addEventListener('keyup', (e) => {
-	if (e.target.value == "") {
-		txtResetBtn.style.display = "none";
-	} else {
-		txtResetBtn.style.display = "block";
-	}
-});

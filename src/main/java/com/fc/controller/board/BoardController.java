@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
@@ -52,26 +53,52 @@ public class BoardController {
 
 	// 전체 글 목록
 	@GetMapping("/boardlist")
-	public String boardList(Model model, @RequestParam int pageNo, @ModelAttribute SearchDto searchObj) {
+	public String boardList(Model model, @RequestParam(defaultValue="1") int pageNo, @ModelAttribute SearchDto searchObj) {
 		// public String boardList(Model model, @RequestParam(name = "postNo", required
 		// = false) String postNo, @ModelAttribute SearchDto searchObj) {
-
-		List<BoardDto> boardList;
-
-		boardList = boardService.getBoardList();
-
-		int totalPage = boardService.getTotalPage();
+		List<BoardDto> boardList = new ArrayList<BoardDto>();
+		System.out.println(searchObj.toString());
+		int totalPage = 0;
+		
+		if (searchObj.getSearchTxt() == "" || searchObj.getSearchTxt() == null) {
+			boardList = boardService.getBoardList();
+			totalPage = boardService.getTotalPage();
+		} else {
+			boardList = boardService.findBoardListBySearchDto(searchObj);
+			totalPage = boardList.size();
+		}
+		
 		ArticlePage currentPageInfo = new ArticlePage(totalPage, (int) pageNo, 7, 5, boardList);
-
+		
 		model.addAttribute("currentPageInfo", currentPageInfo);
-		model.addAttribute("totalPage", totalPage);
 
+		if (totalPage != 0 && pageNo > (int)Math.ceil(totalPage / 7.0)) {
+			return "redirect:/boardlist";
+		}
+		
 		return "board/boardlist";
 	}
-
-	// 게시글 검색 (수정중..)
+	
+	@PostMapping("/boardlist") // 1
+	public String postSearchedList(SearchDto searchDto, @RequestParam int pageNo, Model model) {
+		// checkbox 체크되면 on, 아니면 null값으로 들어옴
+		List<BoardDto> searchedList = boardService.findBoardListBySearchDto(searchDto);
+		int totalPage = searchedList.size();
+		
+		ArticlePage currentPageInfo = new ArticlePage(totalPage, (int) pageNo, 7, 5, searchedList);
+		model.addAttribute("currentPageInfo", currentPageInfo);
+		model.addAttribute("searchObj", searchDto);
+		
+		if (totalPage != 0 && pageNo > (int)Math.ceil(totalPage / 7.0)) {
+			return "redirect:/boardlist";
+		}
+		
+		return "board/boardlist";
+	}
+	
+	
 	@PostMapping("/searchBoard")
-	public String getSearchedList(SearchDto searchDto, @RequestParam int pageNo, Model model) {
+	public String postSearchedList2(SearchDto searchDto, @RequestParam int pageNo, Model model) {
 		// checkbox 체크되면 on, 아니면 null값으로 들어옴
 		List<BoardDto> searchedList = boardService.findBoardListBySearchDto(searchDto);
 		int totalPage = boardService.getSearchedTotalPage();
@@ -83,6 +110,38 @@ public class BoardController {
 		return "board/boardlist";
 	}
 
+
+	/*
+	// 게시글 검색 (수정중..)
+	@GetMapping("/searchBoard")
+	public String getSearchedList(@ModelAttribute SearchDto searchDto, @RequestParam int pageNo, Model model) {
+		// checkbox 체크되면 on, 아니면 null값으로 들어옴
+		System.out.println(searchDto.toString());
+		List<BoardDto> searchedList = boardService.findBoardListBySearchDto(searchDto);
+		int totalPage = boardService.getSearchedTotalPage();
+
+		ArticlePage currentPageInfo = new ArticlePage(totalPage, (int) pageNo, 7, 5, searchedList);
+
+		model.addAttribute("currentPageInfo", currentPageInfo);
+		model.addAttribute("searchObj", searchDto);
+		return "board/boardlist";
+	}
+	
+	// 게시글 검색 (수정중..)
+	@PostMapping("/searchBoard")
+	public String postSearchedList(SearchDto searchDto, @RequestParam int pageNo, Model model) {
+		// checkbox 체크되면 on, 아니면 null값으로 들어옴
+		List<BoardDto> searchedList = boardService.findBoardListBySearchDto(searchDto);
+		int totalPage = boardService.getSearchedTotalPage();
+
+		ArticlePage currentPageInfo = new ArticlePage(totalPage, (int) pageNo, 7, 5, searchedList);
+
+		model.addAttribute("currentPageInfo", currentPageInfo);
+		model.addAttribute("searchObj", searchDto);
+		return "board/boardlist";
+	}
+	 */
+	
 	// 게시판 상세보기 페이지
 	@GetMapping("/detail")
 	public String getdetail(@RequestParam("postno") int postno, Model model) {

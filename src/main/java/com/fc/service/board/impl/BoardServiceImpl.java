@@ -33,6 +33,8 @@ public class BoardServiceImpl implements BoardService {
 				
 		return list;
 	}
+	
+	
 
 	@Override
 	public List<BoardDto> getBoardListbyBoardNumber(BoardDto boardDto) {
@@ -116,6 +118,13 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return boardDao.selectTotalSearchedBoardsCount();
 	}
+
+	@Override
+	public List<BoardDto> getBoardListByViewCnt() {
+		// TODO Auto-generated method stub
+		return boardDao.selectBoardListByViewCnt();
+	}
+
 
 }
 	

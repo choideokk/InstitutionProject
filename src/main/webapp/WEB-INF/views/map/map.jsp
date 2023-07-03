@@ -13,54 +13,57 @@
 <title>Insert title here</title>
 <link href="${path}/css/reset.css" rel="stylesheet" type="text/css" />
 <link href="${path}/css/map.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+	* {
+		font-family: 'Nanum Gothic', sans-serif;
+	}
+</style>
 </head>
 
 <body>
 	<%@ include file="../header.jsp"%>
-	<div
-		style="position: absolute; top: 0; width: 100%; height: 100%; overflow-x: hidden;">
+	<div class="mainWrapper">
 		<div id="map" style="width: 100%; height: 100%;"></div>
-		<div class="rightSideAreas"
-			style="right: 0px; height: 100%; padding: 15px; padding-top: 30px;">
-			<div style="height: 100%; overflow-y: hidden;">
-				<p>천안시 체육시설 목록..</p>
-				<div style="margin-bottom: 15px;">
-					<p>체육시설 검색</p>
+		<div class="rightSideAreas">
+			<div class="rightInner">
+				<div style="padding-bottom: 15px; position: relative; margin: 15px; border-bottom: 1px solid gray;">
+					<h4 style="text-align: center; font-weight: 700;">천안시 체육시설 검색</h4>
 					<form method="POST" name="searchForm">
-						<select name="searchKeyword">
+						<select name="searchKeyword" style="padding: 2px;">
 							<option value="rsrcNm"
 								<c:if test="${searchDto.searchKeyword == 'rsrcNm'}">selected</c:if>>시설명</option>
 							<option value="addr"
 								<c:if test="${searchDto.searchKeyword == 'addr'}">selected</c:if>>주소지</option>
 						</select> <input type="text" name="searchTxt" placeholder="체육시설명을 입력해주세요"
-							required value="${searchDto.searchTxt}" />
-						<button type="submit">검색</button>
-						<button type="button" class="txtResetBtn" style="display: block;">초기화</button>
+							required value="${searchDto.searchTxt}" class="searchInput" />
+						<button type="submit" class="searchBtn">검색</button>
+						<button type="button" class="txtResetBtn" <c:if test='${searchDto.searchTxt eq "" || searchDto.searchTxt eq null}'>style="display: none;"</c:if>>x</button>
 					</form>
 				</div>
-				<button type="button" class="resetBtn" style="border: 0; padding: 0; background: none; position: relative; right: -60%;">검색 결과 초기화</button>
+				<button type="button" class="resetBtn" style="border: 0; padding: 0; background: none; position: relative; right: -68%;">검색 초기화</button>
 				<ul
-					style="height: 80%; overflow-y: scroll; margin-bottom: 20px; padding: 0;">
+					style="height: 80%; overflow-y: scroll; margin: 5px 0 20px; padding: 0 10px;">
 					<c:if test="${fn:length(fcList) == 0}">
-						<li style="margin-bottom: 10px;">검색 결과가 없습니다.</li>
+						<li style="margin-bottom: 10px; text-align: center; font-size: 18px; color: #FF416C;">검색 결과가 없습니다.</li>
 					</c:if>
 					<c:forEach var='data' items="${fcList}">
-						<li style="margin-bottom: 10px;">
+						<li class="fcItem" style="margin-bottom: 10px; height: 100px;">
 							<button
-								style="width: 100%; background: white; border: 0; display: flex;"
 								type="button" data-lot="${data.lot}" data-lat="${data.lat}"
 								class="eachPosBtn">
-								<div>
-									<img src="${path}/image/facilities/${data.rsrcNo}.jpg"
-										width="100px" height="100px" />
+								<div class="imgWrapper" style="height: 75px; width: 75px; background: linear-gradient(to right, #FF4B2B, #FF416C); border-radius: 50%;">
+									<img src="${path}/image/facilities/${data.rsrcNo}.jpg" style="border-radius: 50%; margin-top: 2px;"
+										width="70px" height="70px" />
 								</div>
-								<div>
+								<div class="txtAreas">
 									<strong>${data.rsrcNm}</strong>
-									<p>${data.addr}${data.daddr}</p>
+									<p>${data.addr} ${data.daddr}</p>
 								</div>
 							</button> 
-							<a href="${path}/Calendar2?no=${data.rsrcNo}"
-							style="width: 100%; text-decoration: none; display: block; text-align: center; background: #0d6efd; color: white; padding: 10px;">예약하기</a>
 						</li>
 					</c:forEach>
 				</ul>

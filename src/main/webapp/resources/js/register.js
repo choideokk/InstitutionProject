@@ -7,7 +7,6 @@ $(document).ready(function() {
 	})
 
 	$("#submit").on("click", function(e) {
-	console.log("엥");
 
 		if ($("#loginId").val() == "") {
 			alert("아이디를 입력해주세요.");
