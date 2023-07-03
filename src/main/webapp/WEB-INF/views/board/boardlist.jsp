@@ -67,11 +67,13 @@
             </thead>
          <c:if test="${fn:length(currentPageInfo.content) == 0}">
 			<tr>
-				<td colspan="7" style="text-align: center">검색 결과가 없습니다!</td>
+				<td colspan="7" style="text-align: center">게시글이 없습니다!</td>
 			</tr>
-			<tr>
-				<td colspan="7" style="text-align: center"><a href="${path}/boardlist?pageNo=1">전체 게시글 목록으로 돌아가기</a></td>
-			</tr>
+			<c:if test='${searchObj.searchTxt ne null}'>
+				<tr>
+					<td colspan="7" style="text-align: center"><a href="${path}/boardlist?pageNo=1">전체 게시글 목록으로 돌아가기</a></td>
+				</tr>
+			</c:if>
 		</c:if>
             <tbody>
      <c:forEach items="${currentPageInfo.content}" var="boardList">

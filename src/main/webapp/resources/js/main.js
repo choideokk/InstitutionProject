@@ -34,6 +34,12 @@ $(document).ready(function() {
 	});
 	
 	$(".viewBtn").click(function() {
+		if ($(this).hasClass("notMove")) {
+			$(".current").removeClass("current");
+			$(this).addClass("current");
+			return;
+		}
+		
 		$(".current").removeClass("current");
 		$(this).addClass("current");
 		$(".table-body").css({
@@ -45,6 +51,11 @@ $(document).ready(function() {
 	})
 	
 	$(".recentBtn").click(function() {
+			if ($(this).hasClass("notMove")) {
+			$(".current").removeClass("current");
+			$(this).addClass("current");
+			return;
+		}
 		$(".current").removeClass("current");
 		$(this).addClass("current");
 		$(".table-body").css({

@@ -133,7 +133,7 @@
 			<a href="${path}/boardlist?pageNo=1" style="position: absolute; right: 0; line-height: 36px;">바로가기 ></a>
 		</div>
 			<ul style="position: relative; padding-left: 0; margin-bottom: 0px;">
-				<li style="display: inline-block; width: 50%;"><button type="button" class="viewBtn current">조회순</button></li><li style="display: inline-block; width: 50%;"><button type="button" class="recentBtn">최신순</button></li>
+				<li style="display: inline-block; width: 50%;"><button type="button" class="viewBtn current <c:if test="${fn:length(cntBoardList) == 0}">notMove</c:if>">조회순</button></li><li style="display: inline-block; width: 50%;"><button type="button" class="recentBtn <c:if test="${fn:length(cntBoardList) == 0}">notMove</c:if>">최신순</button></li>
 			</ul>
 			<div style="width: 100%; overflow: hidden; height: 240px;" class="container">
 				<table class="board-table">
@@ -145,6 +145,11 @@
 						</tr>
 					</thead>
 					<tbody class="table-body">
+						<c:if test="${fn:length(cntBoardList) == 0}">
+							<tr>
+								<td colspan="3">게시글이 등록되지 않았습니다</td>
+							</tr>
+						</c:if>
 						<c:forEach var="board" items="${cntBoardList}" begin="0" end="${fn:length(cntBoardList)}"
 							step="1">
 							<tr>
@@ -167,7 +172,7 @@
 							end="${fn:length(latestBoardList)}" step="1">
 							<tr>
 								<td><a href="${path}/detail?postno=${board.postno}">
-										${fn:length(latestBoardList)} ${board.title}</a></td>
+										${board.title}</a></td>
 								<td>${board.writer}</td>
 								<td>${board.updatedate}</td>
 							</tr>
