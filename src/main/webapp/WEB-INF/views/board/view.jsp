@@ -13,7 +13,6 @@
   crossorigin="anonymous"></script>
  
 
-  <style>
 <style type="text/css">
 .input_wrap{
 	padding: 5px 20px;

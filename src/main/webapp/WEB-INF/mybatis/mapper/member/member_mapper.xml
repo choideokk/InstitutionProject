@@ -42,6 +42,7 @@
 		UPDATE MEMBER SET
 		PASSWORD = #{password},
 		EMAIL=#{email},
+		BIRTH=#{birth},
 		MEMBER_NAME=#{memberName},
 		PHONE_NUM=#{phoneNum}
 		WHERE LOGIN_ID =#{loginId}

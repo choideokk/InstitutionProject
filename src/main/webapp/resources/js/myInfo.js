@@ -1,3 +1,44 @@
+// 화면 전환
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () =>
+	container.classList.add('right-panel-active'));
+
+signInButton.addEventListener('click', () =>
+	container.classList.remove('right-panel-active'));
+
+$(document).ready(function() {
+	$('#hidePw').on('click', function() {
+		$('input').toggleClass('active');
+		if ($('input').hasClass('active')) {
+			$(this).attr('class', "fa fa-eye-slash fa-lg")
+				.prev('input').attr('type', "text");
+		} else {
+			$(this).attr('class', "fa fa-eye fa-lg")
+				.prev('input').attr('type', 'password');
+		}
+	});
+
+
+});
+
+$(document).ready(function() {
+	$('#hidePw2').on('click', function() {
+		$('input').toggleClass('active');
+		if ($('input').hasClass('active')) {
+			$(this).attr('class', "fa fa-eye-slash fa-lg")
+				.prev('input').attr('type', "text");
+		} else {
+			$(this).attr('class', "fa fa-eye fa-lg")
+				.prev('input').attr('type', 'password');
+		}
+	});
+
+
+});
+
 $(document).ready(function() {
 		// 취소
 		$(".cancle").on("click", function() {
