@@ -64,6 +64,7 @@ public class ReservationCalendarServiceImpl implements ReservationCalendarServic
 		
 		return result;
 	}
+	
 
 
 	@Override
@@ -72,7 +73,19 @@ public class ReservationCalendarServiceImpl implements ReservationCalendarServic
 		 return reservationCalendarDao.checkMyReservation(loginId);
 			}
 
+	@Override
+	public boolean checkMyReservation2(String loginId) {
+		// TODO Auto-generated method stub
+		 return reservationCalendarDao.checkMyReservation2(loginId);
+			}
 
+
+	@Override
+	public int clearReservation2(ReservationCalendarDto reservationCalendarDto, String loginId) {
+		int result = reservationCalendarDao.clearReservation2(reservationCalendarDto, loginId);
+		
+		return result;
+	}
 
 
 

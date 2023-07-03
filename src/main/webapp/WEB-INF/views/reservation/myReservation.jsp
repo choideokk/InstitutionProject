@@ -32,22 +32,58 @@ height:45px;
     cursor: pointer; /* 마우스 커서를 버튼 위로 가져갔을 때, 손가락 모양으로 바뀌게 만들어 줍니다. */
 }
     
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
+      table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
         
-        .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh;
-        text-align: center;
-    }
+       .container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
         .button {
         display:flex;
         }
         
+            .th-width-1 {
+        width: 80px; 
+    }
+    
+    .th-width-2 {
+        width: 400px; 
+    }
+    
+    .th-width-3 {
+        width: 100px; 
+    }
+    .th-width-4 {
+        width: 100px; 
+    }
+    .th-width-5 {
+        width: 80px; 
+    }
+     .inner-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+table {
+    width: 1200px;
+    height: auto;
+
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
     </style>
     
@@ -59,25 +95,28 @@ height:45px;
     </script>
 </c:if>
 
-<div class="container">
-<h1>나의 예약 현황 페이지</h1>
-<div class="button">
-<button id="showPastReservations">지난 예약 보기</button>
-<button id="showNowReservations">현재 예약 보기</button>
+<div class="center-container">
+    <h1>나의 예약 현황 페이지</h1>
+    <div class="button">
+        <button id="showPastReservations">지난 예약 보기</button>
+        <button id="showNowReservations">현재 예약 보기</button>
+    </div>
 </div>
 
+<div class="container3">
+<div class="inner-container">
     <table>
         <thead>
             <tr>
-                <th>예약 번호</th>
-                <th>시설명</th>
-                <th>예약 날짜</th>
-                 <th>예약 시간</th>
-                <th>개설자</th>
-                <th>참가자1</th>
-                <th>참가자2</th>
-                <th>참가자3</th>
-                <th>상태</th>
+            <th class="th-width-1">예약 번호</th>
+        <th class="th-width-2">시설명</th>
+        <th class="th-width-3">예약 날짜</th>
+                 <th class="th-width-4">예약 시간</th>
+                <th class="th-width-5">개설자</th>
+                <th class="th-width-5">참가자1</th>
+                <th class="th-width-5">참가자2</th>
+                <th class="th-width-5">참가자3</th>
+                <th class="th-width-6">상태</th>
                 <th>예약취소</th>
             </tr>
         </thead>
@@ -100,6 +139,7 @@ height:45px;
             </c:forEach>
         </tbody>
     </table>
+    </div>
     </div>
     
    
@@ -130,28 +170,61 @@ height:45px;
 <script>
 var path = '${path}';
 $(document).ready(function() {
-	$("#showNowReservations").click(function() {
-        location.reload();
-    });
-	
-	 $("#showPastReservations").click(function() {
-	        $("tbody tr").each(function() {
-	            var row = $(this);
-	            var toDate = new Date(row.find("td:eq(2)").text());
+	  $("tbody tr").each(function() {
+	        var row = $(this);
+	        var toDate = new Date(row.find("td:eq(2)").text());
 
-	            // Get today's date
-	            var today = new Date();
-	            today.setHours(0,0,0,0);
+	        // Get today's date
+	        var today = new Date();
+	        today.setHours(0,0,0,0);
 
-	            // If the toDate is in the past, show the row, otherwise hide it
-	            if (toDate.getTime() < today.getTime()) {
-	                row.show();
-	            } else {
-	                row.hide();
-	            }
-	        });
+	        // If the toDate is in the future, show the row, otherwise hide it
+	        if (toDate.getTime() >= today.getTime()) {
+	            row.show();
+	        } else {
+	            row.hide();
+	        }
 	    });
 	
+	
+	
+	$("#showNowReservations").click(function() {
+        $("tbody tr").each(function() {
+            var row = $(this);
+            var toDate = new Date(row.find("td:eq(2)").text());
+
+            // Get today's date
+            var today = new Date();
+            today.setHours(0,0,0,0);
+
+            // If the toDate is in the future, show the row, otherwise hide it
+            if (toDate.getTime() >= today.getTime()) {
+                row.show();
+            } else {
+                row.hide();
+            }
+        });
+    });
+	
+	$("#showPastReservations").click(function() {
+	    $("tbody tr").each(function() {
+	        var row = $(this);
+	        var toDate = new Date(row.find("td:eq(2)").text());
+
+	        // Get today's date
+	        var today = new Date();
+	        today.setHours(0,0,0,0);
+
+	        // If the toDate is in the past, show the row, otherwise hide it
+	        if (toDate.getTime() < today.getTime()) {
+	            row.show();
+	            row.find(".bStatus").hide();
+	        } else {
+	            row.hide();
+	        }
+	    });
+	});
+
 	
     $(".bStatus").click(function(event) {
     	 var row = $(this).closest("tr"); // Find the row
@@ -162,30 +235,23 @@ $(document).ready(function() {
          today.setHours(0,0,0,0);
 
          // If the toDate is not in the past, prevent the form submission and alert the user
-         if (toDate.getTime() >= today.getTime()) {
+         if (toDate.getTime() <= today.getTime()) {
              event.preventDefault(); // Prevent the default form submission
-             alert("오늘 이후의 예약은 취소할 수 없습니다.");
+             alert("오늘이전 예약은 취소할 수 없습니다.");
              return;
          }
          
 
         var row = $(this).closest("tr"); // Find the row
         var rsvtNo = row.find("td:eq(0)").text(); // Extract the Reservation No.
-        var toDate = row.find("td:eq(1)").text(); // Extract the Date
-        var rsvtTime = row.find("td:eq(2)").text(); // Extract the Reservation Time
-        var rsrcId = row.find("td:eq(3)").text(); // Extract the Resource Id
-        var jidone = row.find("td:eq(4)").text(); // Extract the first participant
-        var jidtwo = row.find("td:eq(5)").text(); // Extract the second participant
-        var jidthree = row.find("td:eq(6)").text(); // Extract the third participant
-        var status = row.find("td:eq(7)").text(); // Extract the status
-        
-        
-        
-        
- 
-
-        
-        
+        var rsvfNm = row.find("td:eq(1)").text(); // Extract the Reservation No.
+        var toDate = row.find("td:eq(2)").text(); // Extract the Date
+        var rsvtTime = row.find("td:eq(3)").text(); // Extract the Reservation Time
+        var rsrcId = row.find("td:eq(4)").text(); // Extract the Resource Id
+        var jidone = row.find("td:eq(5)").text(); // Extract the first participant
+        var jidtwo = row.find("td:eq(6)").text(); // Extract the second participant
+        var jidthree = row.find("td:eq(7)").text(); // Extract the third participant
+        var status = row.find("td:eq(8)").text(); // Extract the status
         
         var url = path + "/clearMyReservation";
         console.log("Request URL:", window.location.origin + url); // Print full request URL

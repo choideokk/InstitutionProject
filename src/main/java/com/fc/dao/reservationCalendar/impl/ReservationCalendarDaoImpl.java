@@ -65,12 +65,24 @@ public class ReservationCalendarDaoImpl implements ReservationCalendarDao{
 		return result;
 	}
 	
+	
 	@Override
 	public boolean checkMyReservation(String loginId) {
 	    int count = sqlSessionTemplate.selectOne("reservationCalendar_mapper.check_my_reservation_list", loginId);
 	    return count > 0;
 	}
 
-	
+	@Override
+	public boolean checkMyReservation2(String loginId) {
+	    int count = sqlSessionTemplate.selectOne("reservationCalendar_mapper.check_my_reservation_list2", loginId);
+	    return count > 0;
+	}
+
+	@Override
+	public int clearReservation2(ReservationCalendarDto reservationCalendarDto, String loginId) {
+	    reservationCalendarDto.setLoginId(loginId);
+	    int result = sqlSessionTemplate.delete("reservationCalendar_mapper.delete_reservation2", reservationCalendarDto);
+	    return result;
+	}
 	
 }

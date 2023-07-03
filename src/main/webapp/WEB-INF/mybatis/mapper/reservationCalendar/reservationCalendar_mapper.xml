@@ -34,11 +34,29 @@
 <delete id="delete_reservation" parameterType="ReservationCalendarDto">
     delete from reservation_info where rsvtNo = #{rsvtNo}
 </delete>
+<update id="delete_reservation2" parameterType="map">
+    UPDATE reservation_info
+    SET jidone = CASE WHEN jidone = #{loginId} THEN '' ELSE jidone END,
+        jidtwo = CASE WHEN jidtwo = #{loginId} THEN '' ELSE jidtwo END,
+        jidthree = CASE WHEN jidthree = #{loginId} THEN '' ELSE jidthree END,
+        totalPeopleCnt = totalPeopleCnt - 1
+    WHERE rsvtNo = #{rsvtNo} 
+</update>
+
+
 
 <select id="check_my_reservation_list" resultType="int">
     SELECT COUNT(*)      
     FROM reservation_info
     WHERE rsrcId = #{loginId}
+</select>
+
+<select id="check_my_reservation_list2" resultType="int">
+    SELECT COUNT(*)      
+    FROM reservation_info
+    WHERE jidone = #{loginId}
+    OR jidtwo = #{loginId}
+    OR jidthree = #{loginId}
 </select>
 
 
@@ -62,13 +80,15 @@
 </select>
 
 <select id="count_duplicate_id" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM reservation_info
-        WHERE rsrcId = #{loginId}
-            OR jidone = #{loginId}
-            OR jidtwo = #{loginId}
-            OR jidthree = #{loginId}
-    </select>
-
+    SELECT COUNT(*) 
+    FROM reservation_info
+    WHERE (rsrcId = #{loginId}
+        OR jidone = #{loginId}
+        OR jidtwo = #{loginId}
+        OR jidthree = #{loginId})
+        AND toDate = #{toDate}
+        AND rsvfNm = #{rsvfNm}
+</select>
 
 	
 </mapper>
