@@ -105,7 +105,7 @@ rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGL
 </div>
  
 		<!--  에디터 폼 -->
-		  <textarea class="form-control" required id="content" name="content">${viewPage.content}</textarea>
+		  <textarea class="form-control"  id="content" name="content">${viewPage.content}</textarea>
 	<div class="input-group mb-3" >
   	<span class="input-group-text" id="inputGroup-sizing-default">해시태그</span>
   	<input type="text"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
@@ -174,34 +174,30 @@ let form = $("#infoForm");	// 페이지 이동 form(리스트 페이지 이동, 
 let mForm = $("#saveForm");	// 페이지 데이터 수정 from
 
 
-$("#update_btn").on("click", function(e){
-	
-	var title = document.form1.title.value;
-    var content = document.form1.content.value;
-    var hashtag = document.form1.hashtag.value;
-    
-    
-    if(title == ""){
-        alert("제목을 입력하세요");
-        document.form1.title.focus();
-        return false;
-    }
-     if(hashtag == ""){
-        alert("해시태그를 입력하세요");
-        document.form1.name.focus();
-        return false;
-     }
+$("#update_btn").on("click", function(e) {
+  var title = mForm.find('input[name="title"]').val();
+  var hashtag = mForm.find('input[name="hashtag"]').val();
 
-	
-	var chk = confirm("저장하시겠습니까?");
-    if (chk) {
-        alert("게시글 작성이 완료되었습니다.");
+  if (title === "") {
+    alert("제목을 입력하세요");
+    mForm.find('input[name="title"]').focus();
+    return false;
+  }
+  
+  if (hashtag === "") {
+    alert("해시태그를 입력하세요");
+    mForm.find('input[name="hashtag"]').focus();
+    return false;
+  }
 
-        mForm.submit();
-   		
-   		
-   				}
+  var chk = confirm("저장하시겠습니까?");
+  if (chk) {
+    alert("게시글 수정이 완료되었습니다.");
+
+    mForm.submit();
+  }
 });
+
 
 $("#delete_btn").on("click", function(e){
 	mForm.attr("method", "post");
@@ -212,43 +208,6 @@ $("#delete_btn").on("click", function(e){
 	}
 	mForm.submit();	
 }); 
-
-$("#cancel_btn").on("click", function(e){
-	form.attr("action", "/boardlist?postno=1");
-	form.submit();
-	var chk = confirm("수정을 취소하시겠습니까?");
-    if (chk) {
-    location.href="detail?postno=${viewPage.postno}";
-		}
-});	
-
-
-
-$("#update_btn").click(function(){
-    
-	var title = document.form1.title.value;
-    var content = document.form1.content.value;
-    var name = document.form1.name.value;
-    
-    
-    if(title == ""){
-        alert("제목을 입력하세요");
-        document.form1.title.focus();
-        return false;
-    }
-     if(name == ""){
-        alert("해시태그를 입력하세요");
-        document.form1.name.focus();
-        return false;
-     }
-     alert("게시글 작성이 완료되었습니다.");
-    document.form1.action="${path}/write";
-    document.form1.submit();
-    
-});
-
-
-
 
 
 
@@ -261,9 +220,6 @@ CKEDITOR.replace('content', {
    });
 });
 config.fillEmptyBlocks = false;
-
-
-
 
 
 </script>

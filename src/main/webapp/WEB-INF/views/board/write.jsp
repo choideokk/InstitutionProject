@@ -188,7 +188,7 @@ $(document).ready(function(){
      
    		var title = document.form1.title.value;
         var content = document.form1.content.value;
-        var name = document.form1.name.value;
+        var name = document.form1.hashtag.value;
         
         
         if(title == ""){
@@ -198,7 +198,7 @@ $(document).ready(function(){
         }
          if(name == ""){
             alert("해시태그를 입력하세요");
-            document.form1.name.focus();
+            document.form1.hashtag.focus();
             return false;
          }
          alert("게시글 작성이 완료되었습니다.");
@@ -208,16 +208,7 @@ $(document).ready(function(){
     });
 });
 
-$("#CancelDelete").on("click", function(e){
-	form.attr("method", "post");
-	var chk = confirm("게시물을 삭제하시겠습니까?");
-    if (chk) {
-	form.attr("action", "/boardlist?pageNo=1");
-	}
-	form.submit();	
-	
-  
-}); 
+
 	
 </script>
 
