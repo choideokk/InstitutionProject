@@ -45,28 +45,28 @@
             <hr/>
             <div class="row">
                 <div class="col-md-12">
-                 <form method="POST" action="" name="opinionForm" id="opinionForm">
+                 <form method="POST"  name="opinionForm" id="opinionForm">
 				<button type="button" class="likesBtn">추천하기</button>
 				<button type="button" class="reportBtn">신고하기</button>
 					</form>
 					
-                    <form id="updateForm"  method="post">
+                    <form id="updateForm" method="post">
                     <table class="table table-condensed">
                         <thead>
                             <tr>
-   							  <th width="10%" name="postno">${viewPage.postno}</th>
-                             <th width="60%" name="title">${viewPage.title}</th>
+                               <th width="10%" ><input type="text" name="postno" value="${viewPage.postno}" readOnly/></th>
+                               <th width="60%"><input name="title" value="${viewPage.title}" readOnly/></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr>                     
                                 <td>작성일
                                 </td>
-                                
-                                <td><span style='float:right'>조회수 : ${viewPage.viewcnt}</span>
+                                <td>						
               	<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${viewPage.changedate}"/> / 수정일  
                  <fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${viewPage.updatedate}"/>  
-                                </td>
+                               <span style="float:right">조회수 : ${viewPage.viewcnt} </span>
+                                </td>							                              
                             </tr>
                             <tr>
                                 <td>작성자
@@ -75,8 +75,8 @@
                           <c:if test="${sessionScope.loginId != null}">
 				<label for="userid">${sessionScope.loginId}</label>
 							</c:if>                        
-                                <span style='float:right'>추천수 : 0</span>
-                                     <span style='float:right; margin-right: 10px;'>신고수 : 0</span>
+                                <span style='float:right'>추천수 : </span>
+                                     <span style='float:right; margin-right: 10px;'>신고수 : </span>
                                 </td>
                             </tr>
                             <tr>
@@ -87,17 +87,19 @@
                         </tbody>
                     </table>
                     
-                    <table id="commentTable" class="table table-condensed"></table>
-                   
+       
                     <table class="table table-condensed">
-                   
                         <tr>
                             <td>
                                 <span class="form-inline" role="form">
                                      <button type="button" id="list_btn" class="btn btn-default">목록</button>
                                        <button type="button" id="update_btn" class="btn btn-default">수정</button>
-                                       <button type="button" id="delete_btn" class="btn btn-default">삭제</button>           
-                                </form>
+                                       <button type="button" id="delete_btn" class="btn btn-default">삭제</button>   
+                                       </span>
+                                  </td>
+                                  </tr>
+                                  </table>        
+                     </form>
 		<div class="rowtable">
 			<table class="table" id="article-table">
 				<thead>
@@ -189,13 +191,11 @@
 
 	
 	$("#update_btn").on("click", function(e) {
-		  var form = $("form"); // 
-		  form.attr("action", "/update");
-		  form.attr("method", "post");
+		  mForm.attr("action", "/update");
+		  mForm.attr("method", "post");
 		  var chk = confirm("수정 페이지로 가시겠습니까?");
 		  if (chk) {
-	    form.submit(); 
-		   
+	    	mForm.submit();  
 		  }
 		});
 

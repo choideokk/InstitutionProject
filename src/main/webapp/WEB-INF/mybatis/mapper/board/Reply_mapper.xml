@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="Reply_mapper">
 
      <insert id="insert_Reply">
-        insert into reply (replynumber, postno, replytext, replyuserid) values
+          insert into reply (replynumber, postno, replytext, replyuserid) values
         (reply_seq.nextval, #{postno}, #{replytext}, #{replyUserID} )
     </insert>
     

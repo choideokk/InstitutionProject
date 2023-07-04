@@ -979,6 +979,7 @@ CREATE TABLE board_infos (
     postno NUMBER(10) GENERATED ALWAYS AS IDENTITY,
     title VARCHAR2(150) not null,
     content VARCHAR2(2000),
+    hashtag VARCHAR2(100),
     writer VARCHAR2(50),
     updatedate DATE DEFAULT SYSDATE,
     changedate DATE DEFAULT SYSDATE,
@@ -987,34 +988,14 @@ CREATE TABLE board_infos (
     viewCnt NUMBER DEFAULT 0,
     CONSTRAINT pk_board_infos PRIMARY KEY (postno)
 );
-select * from member;
 
-select *from board_infos;
-
-drop table board_infos;
-drop table reply;
 
 ALTER TABLE board_infos MODIFY(postno GENERATED AS IDENTITY (START WITH 1));
 
-select * from board_infos;
-select *from member;
 
-    DELETE
-    FROM reply a
-    WHERE exists
-    (select 1 from board_infos b 
-    where a.postno= b.postno);
-    
-    
-     SELECT  r.replyNumber, r.replytext, r.replyUserID, r.recommend ,r.report,
-       		r.changedate, r.updatedate    
-      	FROM board_infos b
-		JOIN reply r ON b.postno = r.postno
-		WHERE b.postno = postno
-        
+ 
 commit;
-select * from member;
-select * from board_infos;
+
 --댓글테이블
 create table reply(
              replynumber number not null primary key, 
@@ -1028,76 +1009,6 @@ create table reply(
 			 changedate date default sysdate, 
 			 updatedate date default sysdate,
     FOREIGN KEY (postno) REFERENCES board_infos (POSTNO) 
+      ON DELETE CASCADE
 );
 
-
---레슨테이블1
-CREATE TABLE LESSON (
-  student_number NUMBER(10) PRIMARY KEY NOT NULL,  --학생번호
-  lesson_start DATE, --레슨 시작일
-  lesson_end DATE, --레슨 종료일
-  student_id VARCHAR2(40), --학생 아이디
- 	 CONSTRAINT student_fk FOREIGN KEY (student_id) REFERENCES LESSON_STUDENT_PROFILE(student_id)
- 		ON DELETE SET NULL,
-  lesson_id NUMBER(5), -- 레슨 아이디
-  	CONSTRAINT teacher_fk  FOREIGN KEY (lesson_id) REFERENCES TEACHER_PROFILE(teacher_id) 
-		ON DELETE SET NULL,
-  possible VARCHAR2(10) DEFAULT '예약가능' -- 예약 가능한 날
-);
-
-select *
-from LESSON;
-
-
---레슨테이블2
-
-CREATE TABLE MUSICLESSON (
-  lesson_id NUMBER(5) PRIMARY KEY,--레슨 아이디
-  student_id NUMBER(10), --학생 아이디
-  teacher_id NUMBER(5),--선생 아이디
-  lesson_statr_date DATE, --레슨 시작일
-  lesson_end_date DATE,--레슨 종료일
-  start_time TIME, -- 시작 시간
-  end_time TIME,  --끝나는 시간
-  lesson_department VARCHAR2(50),-- 레슨 분야
-  lesson_pay INT, --레슨 비용
-  CONSTRAINT student_fk FOREIGN KEY (student_id) REFERENCES LESSON_STUDENT_PROFILE(student_id) ON DELETE SET NULL,
-  CONSTRAINT teacher_fk FOREIGN KEY (teacher_id) REFERENCES LESSON_TEACHER_PROFILE(teacher_id) ON DELETE SET NULL
-);
---학생정보
-CREATE TABLE LESSON_STUDENT_PROFILE (
-  student_id VARCHAR2(20) PRIMARY KEY,
-  pw VARCHAR2(30) NOT NULL,
-  gender VARCHAR2(4),
-  interest VARCHAR2(20),
-  name VARCHAR2(10) NOT NULL,
-  level NUMBER(2),
-  email VARCHAR2(50) NOT NULL,
-  age INTEGER NOT NULL,
-  address VARCHAR2(20) NOT NULL,
-  phone INTEGER
-);
---선생정보
-CREATE TABLE LESSON_TEACHER_PROFILE (
-  teacher_id VARCHAR2(20) PRIMARY KEY,
-  pw VARCHAR2(30) NOT NULL,
-  name VARCHAR2(10) NOT NULL,
-  gender VARCHAR2(4),
-  email VARCHAR2(50) NOT NULL,
-  age INTEGER NOT NULL,
-  address VARCHAR2(30) NOT NULL,
-  phone INTEGER NOT NULL,
-  department VARCHAR2(10) NOT NULL  -- 선생 파트
-);
-
---공간 미정
-CREATE TABLE facility (
-
-);
-
---회원등급
-CREATE TABLE STUDENT_GRADE (
- student_id VARCHAR2(20) PRIMARY KEY, --학생 아이디
- grade_gift VARCHAR2(200),-- 혜택
- grade_name  VARCHAR2(50), --등급이름 골드,플래티넘 등등
-);

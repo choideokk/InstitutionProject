@@ -291,9 +291,10 @@ text-align: center;
                             <th>제목</th>
                             <th>작성자</th>
                             <th>등록일</th>
-                            <th>조회수</th>
+                            <th>수정일</th>
                             <th>추천수</th>
                             <th>신고수</th>
+                               <th>조회수</th>
                      
                         </tr>
                     </thead>
@@ -315,8 +316,9 @@ text-align: center;
                           <td><c:out value="${boardList.writer}"/></td>
                                   <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${boardList.updatedate}"/>
                                   <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${boardList.changedate}"/>             
-                            <td><c:out value="${boardList.viewcnt}"/></td>
                               <td><c:out value="${boardList.recommend}"/></td>
+                              <td><c:out value="${boardList.report}"/> </td>
+                            <td><c:out value="${boardList.viewcnt}"/></td>
                             
                         </tr>			
                       </c:forEach>	
@@ -375,6 +377,8 @@ text-align: center;
                 <!-- Next 끝 -->
                 <!-- 페이징 처리 끝 -->
             </ul>
+            
+            
     
             
           </div>

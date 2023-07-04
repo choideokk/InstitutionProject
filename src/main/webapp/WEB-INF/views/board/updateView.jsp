@@ -63,7 +63,7 @@ rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGL
 <div class="wrap">
 	
 	
-	  <form name="saveForm" action="/updateView" method="post">
+	<form id="saveForm" action="/updateView" method="post">
 	<div class="container">
 	
 		
@@ -78,8 +78,7 @@ rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGL
 		
 		</div>	
 		
-	<c:if test="${sessionScope.loginId != null}">
-			
+	<c:if test="${sessionScope.loginId != null}">	
 	<div class="row">
   <div class="col">
     <input type="text" class="form-control" readonly="readonly" value="환영합니다.ID : ${sessionScope.loginId} 님." aria-label="First name" style="width:300px; margin-bottom: 20px;">
@@ -102,20 +101,20 @@ rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGL
     <div class="input-group mb-3" >
   	<span class="input-group-text" id="inputGroup-sizing-default">제목</span>
   	<input type="text"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-  	 id="title" name="title"  maxlength="100" value='<c:out value="${viewPage.title }"/>'>
+  	 id="title" name="title"  maxlength="100" required value='<c:out value="${viewPage.title }"/>'>
 </div>
  
 		<!--  에디터 폼 -->
-		  <textarea class="form-control" id="content" name="content">${viewPage.content}</textarea>
+		  <textarea class="form-control" required id="content" name="content">${viewPage.content}</textarea>
 	<div class="input-group mb-3" >
   	<span class="input-group-text" id="inputGroup-sizing-default">해시태그</span>
   	<input type="text"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-  	 id="name" placeholder="#해시태그" name="name"  maxlength="100" >
+  	 id="name" placeholder="#해시태그" name="hashtag" maxlength="100" value="${viewPage.hashtag}">
 </div> 
   
-<button  class="btn btn-dark"  type="submit" id="update_btn" style=" clear =both;">저장하기</button>
-<button  class="btn btn-dark" type="button" id="cancel_btn" style=" clear =both;">수정 취소</button>
-<button  class="btn btn-dark" type="button" id="delete_btn" style=" clear =both;">게시물 삭제</button>
+<button  class="btn btn-dark"  type="submit" id="update_btn">저장하기</button>
+<button  class="btn btn-dark" type="button" id="cancel_btn" >수정 취소</button>
+<button  class="btn btn-dark" type="button" id="delete_btn">게시물 삭제</button>
 	
 		    					
 
@@ -177,24 +176,41 @@ let mForm = $("#saveForm");	// 페이지 데이터 수정 from
 
 $("#update_btn").on("click", function(e){
 	
+	var title = document.form1.title.value;
+    var content = document.form1.content.value;
+    var hashtag = document.form1.hashtag.value;
+    
+    
+    if(title == ""){
+        alert("제목을 입력하세요");
+        document.form1.title.focus();
+        return false;
+    }
+     if(hashtag == ""){
+        alert("해시태그를 입력하세요");
+        document.form1.name.focus();
+        return false;
+     }
+
+	
 	var chk = confirm("저장하시겠습니까?");
     if (chk) {
-   		// 수정한 내용이 담긴 폼을 updateView라는 링크로 post를 한다
+        alert("게시글 작성이 완료되었습니다.");
+
         mForm.submit();
    		
    		
-   		// 업데이트가 완료되면 /detail?postno=어찌구 로 리다이렉트한다
    				}
 });
 
 $("#delete_btn").on("click", function(e){
-	form.attr("method", "post");
+	mForm.attr("method", "post");
 	var chk = confirm("게시물을 삭제하시겠습니까?");
     if (chk) {
-	form.attr("action", "/delete?postno=${viewPage.postno}");
+	mForm.attr("action", "/delete?postno=${viewPage.postno}");
     //location.href="/delete?postno=${viewPage.postno}"
 	}
-	form.submit();	
+	mForm.submit();	
 }); 
 
 $("#cancel_btn").on("click", function(e){
@@ -206,6 +222,36 @@ $("#cancel_btn").on("click", function(e){
 		}
 });	
 
+
+
+$("#update_btn").click(function(){
+    
+	var title = document.form1.title.value;
+    var content = document.form1.content.value;
+    var name = document.form1.name.value;
+    
+    
+    if(title == ""){
+        alert("제목을 입력하세요");
+        document.form1.title.focus();
+        return false;
+    }
+     if(name == ""){
+        alert("해시태그를 입력하세요");
+        document.form1.name.focus();
+        return false;
+     }
+     alert("게시글 작성이 완료되었습니다.");
+    document.form1.action="${path}/write";
+    document.form1.submit();
+    
+});
+
+
+
+
+
+
 CKEDITOR.replace('content'
         , {height: 500 ,
          });
@@ -215,6 +261,9 @@ CKEDITOR.replace('content', {
    });
 });
 config.fillEmptyBlocks = false;
+
+
+
 
 
 </script>

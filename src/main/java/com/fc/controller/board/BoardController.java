@@ -146,7 +146,7 @@ public class BoardController {
 		System.out.println(boardDto.toString());
 		BoardDto dto = boardService.getdetail(boardDto.getPostno());
 		model.addAttribute("viewPage", dto);
-		//boardService.boardUpdate(boardDto);
+		boardService.boardUpdate(boardDto);
 		return "board/updateView";
 	}
 

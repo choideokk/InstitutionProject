@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list_contents" resultType="BoardDto">
 		select
 		postno,title,writer,
-		updatedate,changedate,viewcnt
+		updatedate,changedate,viewcnt,hashtag,recommend,report
 		from board_infos
 		ORDER BY updatedate DESC
 	</select>
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list_view" resultType="BoardDto">
 		select
 		postno,title,writer,content,
-		updatedate,changedate
+		updatedate,changedate,viewCnt,hashtag,recommend,report
 		from board_infos
 		where postno=#{postno}
 	</select>
@@ -132,13 +132,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE postno
 		= #{postno}
 	</update>
-
+	
 	<delete id="list_delete" parameterType="BoardDto">
-		DELETE
-		FROM board_infos a
-		WHERE exists
-		(select 1 from reply b 
-		where a.postno= b.postno)
+	     DELETE
+        FROM board_infos
+        WHERE postno = #{postno}
 	</delete>
 
 
