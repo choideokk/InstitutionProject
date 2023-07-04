@@ -25,7 +25,10 @@
 
 
 					<style>
-
+						#postno,
+						#title {
+							border: none;
+						}
 					</style>
 
 
@@ -33,9 +36,6 @@
 				</head>
 
 				<body>
-
-
-
 					<div class="container">
 						<hr />
 						<div class="row">
@@ -53,6 +53,8 @@
 														value="${viewPage.postno}" readOnly /></th>
 												<th width="60%"><input name="title" value="${viewPage.title}"
 														readOnly /></th>
+												<th width="10%">제목 - <input id="title" name="title" value="${viewPage.title}" readOnly/></th>
+                               					<th width="50%">글번호 :<input id="postno" type="text"  name="postno" value=" ${viewPage.postno}" readOnly/></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -74,8 +76,8 @@
 													<c:if test="${sessionScope.loginId != null}">
 														<label for="userid">${sessionScope.loginId}</label>
 													</c:if>
-													<span style='float:right'>추천수 : </span>
-													<span style='float:right; margin-right: 10px;'>신고수 : </span>
+													 <span style='float:right'>추천수 :${viewPage.recommend} </span>
+                                   					 <span style='float:right; margin-right: 10px;'>신고수 : ${viewPage.report} </span>
 												</td>
 											</tr>
 											<tr>

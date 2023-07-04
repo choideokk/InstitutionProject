@@ -216,7 +216,7 @@
 
 											var title = document.form1.title.value;
 											var content = document.form1.content.value;
-											var name = document.form1.name.value;
+											var name = document.form1.hashtag.value;
 
 
 											if (title == "") {
@@ -226,7 +226,7 @@
 											}
 											if (name == "") {
 												alert("해시태그를 입력하세요");
-												document.form1.name.focus();
+												document.form1.hashtag.focus();
 												return false;
 											}
 											alert("게시글 작성이 완료되었습니다.");
@@ -244,6 +244,7 @@
 										}
 										form.submit();
 									});
+								});
 							</script>
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 							<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
