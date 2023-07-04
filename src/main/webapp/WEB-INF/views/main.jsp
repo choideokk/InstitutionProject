@@ -135,7 +135,7 @@
 			<ul style="position: relative; padding-left: 0; margin-bottom: 0px;">
 				<li style="display: inline-block; width: 50%;"><button type="button" class="viewBtn current <c:if test="${fn:length(cntBoardList) == 0}">notMove</c:if>">조회순</button></li><li style="display: inline-block; width: 50%;"><button type="button" class="recentBtn <c:if test="${fn:length(cntBoardList) == 0}">notMove</c:if>">최신순</button></li>
 			</ul>
-			<div style="width: 100%; overflow: hidden; height: 240px;" class="container">
+			<div style="width: 100%; overflow: hidden; height: 240px; padding: 0;" class="container">
 				<table class="board-table">
 					<thead style="background: white;">
 						<tr>

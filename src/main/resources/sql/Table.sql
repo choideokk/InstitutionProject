@@ -1782,7 +1782,7 @@ create table reply(
     report number default 0,
 	changedate date default sysdate, 
 	updatedate date default sysdate,
-    FOREIGN KEY (postno) REFERENCES board_infos (POSTNO) 
+    FOREIGN KEY (postno) REFERENCES board_infos (POSTNO)
     ON DELETE CASCADE
 );
 

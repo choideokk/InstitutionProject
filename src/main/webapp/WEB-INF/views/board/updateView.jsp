@@ -101,7 +101,7 @@ rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGL
     <div class="input-group mb-3" >
   	<span class="input-group-text" id="inputGroup-sizing-default">제목</span>
   	<input type="text"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
-  	 id="title" name="title"  maxlength="100" required value='<c:out value="${viewPage.title }"/>'>
+  	 id="title" name="title"  maxlength="100" required value='<c:out value="${viewPage.title}"/>'>
 </div>
  
 		<!--  에디터 폼 -->
@@ -112,7 +112,7 @@ rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGL
   	 id="name" placeholder="#해시태그" name="hashtag" maxlength="100" value="${viewPage.hashtag}">
 </div> 
   
-<button  class="btn btn-dark"  type="submit" id="update_btn">저장하기</button>
+<button  class="btn btn-dark"  type="button" id="update_btn">저장하기</button>
 <button  class="btn btn-dark" type="button" id="cancel_btn" >수정 취소</button>
 <button  class="btn btn-dark" type="button" id="delete_btn">게시물 삭제</button>
 	
@@ -175,8 +175,8 @@ let mForm = $("#saveForm");	// 페이지 데이터 수정 from
 
 
 $("#update_btn").on("click", function(e) {
-  var title = mForm.find('input[name="title"]').val();
-  var hashtag = mForm.find('input[name="hashtag"]').val();
+  const title = mForm.find('input[name="title"]').val();
+  const hashtag = mForm.find('input[name="hashtag"]').val();
 
   if (title === "") {
     alert("제목을 입력하세요");
@@ -190,7 +190,7 @@ $("#update_btn").on("click", function(e) {
     return false;
   }
 
-  var chk = confirm("저장하시겠습니까?");
+  const chk = confirm("저장하시겠습니까?");
   if (chk) {
     alert("게시글 수정이 완료되었습니다.");
 
@@ -198,15 +198,20 @@ $("#update_btn").on("click", function(e) {
   }
 });
 
+$("#cancel_btn").on("click", function(e){
+	const chk = confirm("수정을 취소하시겠습니까?");
+    if (chk) {
+    location.href= "${path}/detail?postno=${viewPage.postno}";
+	}
+});	
 
 $("#delete_btn").on("click", function(e){
 	mForm.attr("method", "post");
-	var chk = confirm("게시물을 삭제하시겠습니까?");
+	const chk = confirm("게시물을 삭제하시겠습니까?");
     if (chk) {
-	mForm.attr("action", "/delete?postno=${viewPage.postno}");
-    //location.href="/delete?postno=${viewPage.postno}"
+		mForm.attr("action", "/delete?postno=${viewPage.postno}");
+		mForm.submit();	
 	}
-	mForm.submit();	
 }); 
 
 

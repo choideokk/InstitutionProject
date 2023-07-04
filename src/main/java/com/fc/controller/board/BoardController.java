@@ -39,20 +39,6 @@ public class BoardController {
 	@Autowired
 	ReplyService replyService;
 
-
-	@GetMapping("/test")
-	public String test() {
-		return "test";
-	}
-
-	@PostMapping("/test")
-	public String test2() {
-
-
-		return "test";
-	}
-
-	
 	// 게시글 작성
 	@GetMapping("/write")
 	public String insertContents() {
@@ -173,7 +159,7 @@ public class BoardController {
 		System.out.println(boardDto.toString());
 		BoardDto dto = boardService.getdetail(boardDto.getPostno());
 		model.addAttribute("viewPage", dto);
-		boardService.boardUpdate(boardDto);
+		//boardService.boardUpdate(boardDto);
 		return "board/updateView";
 	}
 

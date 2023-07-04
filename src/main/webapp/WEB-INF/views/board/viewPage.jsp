@@ -20,10 +20,6 @@
 					<link href="${path}/css/bootstrap.css" rel="stylesheet" type="text/css" />
 					<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
 					<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-
-
-
-
 					<style>
 						#postno,
 						#title {
@@ -36,7 +32,8 @@
 				</head>
 
 				<body>
-					<div class="container">
+				<%@ include file="../header.jsp"%>
+					<div class="container" style="font-size: 16px;">
 						<hr />
 						<div class="row">
 							<div class="col-md-12">
@@ -49,10 +46,6 @@
 									<table class="table table-condensed">
 										<thead>
 											<tr>
-												<th width="10%"><input type="text" name="postno"
-														value="${viewPage.postno}" readOnly /></th>
-												<th width="60%"><input name="title" value="${viewPage.title}"
-														readOnly /></th>
 												<th width="10%">제목 - <input id="title" name="title" value="${viewPage.title}" readOnly/></th>
                                					<th width="50%">글번호 :<input id="postno" type="text"  name="postno" value=" ${viewPage.postno}" readOnly/></th>
 											</tr>
@@ -73,11 +66,9 @@
 												<td>작성자
 												</td>
 												<td>
-													<c:if test="${sessionScope.loginId != null}">
-														<label for="userid">${sessionScope.loginId}</label>
-													</c:if>
-													 <span style='float:right'>추천수 :${viewPage.recommend} </span>
-                                   					 <span style='float:right; margin-right: 10px;'>신고수 : ${viewPage.report} </span>
+													<label for="userid">${viewPage.writer}</label>
+													 <span style='float:right'>추천수 : ${viewPage.recommend} </span>
+                                   					 <span style='float:right; margin-right: 10px;'>신고수 : ${viewPage.report}</span>
 												</td>
 											</tr>
 											<tr>
@@ -96,9 +87,9 @@
 													<button type="button" id="list_btn"
 														class="btn btn-default">목록</button>
 													<button type="button" id="update_btn"
-														class="btn btn-default">수정</button>
+														class="btn btn-default" <c:if test="${viewPage.writer ne sessionScope.loginId}">disabled</c:if>>수정</button>
 													<button type="button" id="delete_btn"
-														class="btn btn-default">삭제</button>
+														class="btn btn-default" <c:if test="${viewPage.writer ne sessionScope.loginId}">disabled</c:if>>삭제</button>
 												</span>
 											</td>
 										</tr>
@@ -142,7 +133,7 @@
 														<c:out value="${comment.recommend}" />
 													</td>
 													<td>
-														<c:out value="${comment.report}" />1
+														<c:out value="${comment.report}" />
 													</td>
 												</tr>
 											</c:forEach>
@@ -153,7 +144,7 @@
 
 								</div>
 								<p>
-								<div class="form-group">
+								<div class="form-group" style="font-size: 16px;">
 									<input type="text" id="commentParentName" name="commentParentName"
 										class="form-control col-lg-2" data-rule-required="true" placeholder="작성자 : "
 										maxlength="10" value="아이디 : ${sessionScope.loginId} 님" readonly>
@@ -167,13 +158,13 @@
 									</td>
 									</tr>
 									</table>
-									<table class="table table-condensed">
+									<table class="table table-condensed" >
 										<thead>
 											<tr>
 												<td>
 													<span style='float:right'>
 
-														<button type="submit" class="btn btn-default">댓글쓰기</button>
+														<button type="submit" class="btn btn-default" <c:if test="${sessionScope.loginId eq null ||  sessionScope.loginId eq ''}">disabled</c:if>>댓글쓰기</button>
 														<button type="button" id="chochun" class="btn btn-default">댓글 추천
 														</button>
 														<button type="button" id="singo" class="btn btn-default">댓글
