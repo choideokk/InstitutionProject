@@ -1006,6 +1006,7 @@ create table reply(
     FOREIGN KEY (postno) REFERENCES board_infos (POSTNO) 
 );
 
+drop table reply;
 
 DROP TABLE board_opinions CASCADE CONSTRAINTS;
 
@@ -1020,12 +1021,3 @@ create table board_opinions (
 
 select * from board_opinions;
 
-
-select count(*) from (
-		select
-		postno, title, writer, updatedate, changedate, viewcnt
-		from
-		board_infos
-		where LOWER(title) like '%f%'
-		)
-		ORDER BY updatedate DESC;
