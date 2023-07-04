@@ -154,7 +154,7 @@
 						</c:if>
 						<c:forEach var="board" items="${cntBoardList}" begin="0" end="${fn:length(cntBoardList)}"
 							step="1">
-							<tr>
+							<tr style="height: 44.73px;">
 								<td><a href="${path}/detail?postno=${board.postno}">
 										${board.title} </a></td>
 								<td>${board.writer}</td>
@@ -173,7 +173,7 @@
 						<c:forEach var="board" items="${latestBoardList}" begin="0"
 							end="${fn:length(latestBoardList)}" step="1">
 							<tr>
-								<td><a href="${path}/detail?postno=${board.postno}">
+								<td><a href="${path}/detail?postno=${board.postno}" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 50px;">
 										${board.title}</a></td>
 								<td>${board.writer}</td>
 								<td>${board.updatedate}</td>

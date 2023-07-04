@@ -1651,38 +1651,6 @@ CREATE TABLE reservation_info (
     approval       VARCHAR2(2)   --담당자 승인여부
 );
 
-INSERT INTO reservation_info (
-    rsvtno,
-    rgsrdate,
-    deaddate,
-    todate,
-    rsvttime,
-    rsrcid,
-    rsvfnm,
-    category,
-    totalpeoplecnt,
-    participant_id1,
-    participant_id2,
-    participant_id3,
-    status,
-    approval
-) VALUES (
-    1, -- 예약번호
-    TO_DATE('2023-06-29', 'YYYY-MM-DD'), -- 등록일
-    TO_DATE('2023-06-30', 'YYYY-MM-DD'), -- 마감일
-    TO_DATE(sysdate), -- 사용하는 날짜: 오늘 날짜로 설정
-    2, -- 사용하는 시간
-    '1q2w3e4r', -- 개설자 아이디
-    '시설 A', -- 시설이름
-    '종목 X', -- 종목
-    4, -- 참가 인원 숫자
-    'user1', -- 참가자1
-    'user2', -- 참가자2
-    'user3', -- 참가자3
-    1, -- 상태
-    'Y' -- 담당자 승인여부
-);
-
 CREATE SEQUENCE reservation_info_no_seq START WITH 0 MINVALUE 0 INCREMENT BY 1;
 
 COMMIT;
@@ -1751,7 +1719,9 @@ CREATE TABLE board_infos (
     recommend NUMBER default 0,
     report NUMBER default 0,
     viewCnt NUMBER DEFAULT 0,
-    CONSTRAINT pk_board_infos PRIMARY KEY (postno)
+    CONSTRAINT pk_board_infos PRIMARY KEY (postno),
+    FOREIGN KEY (writer) REFERENCES member (login_id)
+    ON DELETE CASCADE
 );
 
 ALTER TABLE board_infos MODIFY (
@@ -1782,16 +1752,12 @@ create table reply(
     report number default 0,
 	changedate date default sysdate, 
 	updatedate date default sysdate,
-    FOREIGN KEY (postno) REFERENCES board_infos (POSTNO) 
+    FOREIGN KEY (postno) REFERENCES board_infos (POSTNO)
     ON DELETE CASCADE
 );
 
-<<<<<<< HEAD
 -- 신고 추천 정보 테이블
-=======
-drop table reply;
 
->>>>>>> ft-ReservationChoi3
 DROP TABLE board_opinions CASCADE CONSTRAINTS;
 
 CREATE TABLE board_opinions (
