@@ -165,6 +165,11 @@ public class ReservationCalendar {
 	            Model model, HttpSession session) {
 		 
 		 	String loginId = (String) session.getAttribute("loginId");
+		 	
+		 	if (loginId == null || loginId.isEmpty()) {
+		        return "redirect:/login";
+		    }
+		 	
 		    reservationCalendarDto.setRsrcId(loginId);
 		 	
 		    int result = reservationCalendarService.createReservation(reservationCalendarDto);

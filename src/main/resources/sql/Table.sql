@@ -1786,7 +1786,12 @@ create table reply(
     ON DELETE CASCADE
 );
 
+<<<<<<< HEAD
 -- 신고 추천 정보 테이블
+=======
+drop table reply;
+
+>>>>>>> ft-ReservationChoi3
 DROP TABLE board_opinions CASCADE CONSTRAINTS;
 
 CREATE TABLE board_opinions (
@@ -1801,3 +1806,5 @@ CREATE TABLE board_opinions (
 );
 
 commit;
+select * from board_opinions;
+
