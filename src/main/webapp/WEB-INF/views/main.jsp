@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="${path}/css/main2.css" />
 <link href="${path}/css/map.css" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -95,7 +96,7 @@
 			<div class="shadow"></div>
 			<div class="label">
 				<div class="icon">
-					<i class="fas fa-solid fa-baseball"></i>
+					<i class="fa-solid fa-baseball"></i>
 				</div>
 				<div class="info">
 					<div class="main">천안야구장</div>
@@ -138,7 +139,7 @@
 			</ul>
 			<div style="width: 100%; overflow: hidden; height: 240px; padding: 0;" class="container">
 				<table class="board-table">
-					<thead style="background: white;">
+					<thead style="background: white; position: relative; z-index: 10;">
 						<tr>
 							<th scope="col" class="th-num">제목</th>
 							<th scope="col" class="th-title">작성자</th>
