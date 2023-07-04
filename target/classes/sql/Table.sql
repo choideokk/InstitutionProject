@@ -6,6 +6,7 @@
 --인원수
 --예약자정보
 --결제 포인트
+select * from member;
 
 --시설정보테이블
 DROP TABLE facility_info CASCADE CONSTRAINTS;
@@ -1726,20 +1727,31 @@ DROP TABLE board_infos CASCADE CONSTRAINTS;
 --추천수
 --신고수
 --조회수
+DROP SEQUENCE board_infos_seq;
+DROP TABLE board_infos;
+
+select *from member;
+
+CREATE SEQUENCE board_infos_seq 
+INCREMENT BY 1 
+START WITH 1 
+MINVALUE 1 
+MAXVALUE 9999999999 
+NOCYCLE
+NOCACHE;
 
 CREATE TABLE board_infos (
-    postno     NUMBER(10)
-        GENERATED ALWAYS AS IDENTITY,
-    num        NUMBER(10),
-    title      VARCHAR2(150),
-    content    VARCHAR2(2000) NOT NULL,
-    writer     VARCHAR2(50),
-    updatedate DATE DEFAULT sysdate,
-    changedate DATE DEFAULT sysdate,
-    recommend  NUMBER,
-    report     NUMBER,
-    viewcnt    NUMBER DEFAULT 0,
-    CONSTRAINT pk_board_infos PRIMARY KEY ( postno )
+    postno NUMBER(10) GENERATED ALWAYS AS IDENTITY,
+    title VARCHAR2(150) not null,
+    content VARCHAR2(2000),
+    hashtag VARCHAR2(100),
+    writer VARCHAR2(50),
+    updatedate DATE DEFAULT SYSDATE,
+    changedate DATE DEFAULT SYSDATE,
+    recommend NUMBER default 0,
+    report NUMBER default 0,
+    viewCnt NUMBER DEFAULT 0,
+    CONSTRAINT pk_board_infos PRIMARY KEY (postno)
 );
 
 ALTER TABLE board_infos MODIFY (
@@ -1758,19 +1770,20 @@ CREATE SEQUENCE reply_seq INCREMENT BY 1 START WITH 1 MINVALUE 1 MAXVALUE 999999
 
 DROP TABLE reply CASCADE CONSTRAINTS;
 
-CREATE TABLE reply (
-    replynumber NUMBER NOT NULL PRIMARY KEY,
-    postno      NUMBER, --  board_infos랑 연결할 거
-    replytext   VARCHAR2(1000),
-    replyname   VARCHAR2(20),
-    replyuserid VARCHAR2(50),
-    secretreply NUMBER(2),
-    recommend   NUMBER DEFAULT 0,
-    report      NUMBER DEFAULT 0,
-    changedate  DATE DEFAULT sysdate,
-    updatedate  DATE DEFAULT sysdate,
-    FOREIGN KEY ( postno )
-        REFERENCES board_infos ( postno )
+-- 댓글 테이블
+create table reply(
+    replynumber number not null primary key, 
+	postno number , --  board_infos랑 연결할 거
+	replytext varchar2(1000)  ,
+	replyname varchar2(20)  ,
+	replyUserID varchar2(50)  ,
+	secretreply number(2)  ,
+    recommend number default 0,
+    report number default 0,
+	changedate date default sysdate, 
+	updatedate date default sysdate,
+    FOREIGN KEY (postno) REFERENCES board_infos (POSTNO) 
+    ON DELETE CASCADE
 );
 
 -- 신고 추천 정보 테이블
@@ -1787,6 +1800,4 @@ CREATE TABLE board_opinions (
         REFERENCES board_infos ( postno )
 );
 
-
-
-SELECT * FROM board_opinions;
+commit;

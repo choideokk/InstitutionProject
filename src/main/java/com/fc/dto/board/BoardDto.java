@@ -10,7 +10,7 @@ import lombok.Data;
 public class BoardDto {
 	int postno;
 	String writer;
-	int num;
+	String hashtag;
 	Date updatedate;
 	Date changedate;
 	String title;
