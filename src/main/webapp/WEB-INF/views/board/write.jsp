@@ -61,7 +61,6 @@ if (request.getProtocol().equals("HTTP/1.1"))
 				</script>
 			</c:if>
 			<div id="header">
-				<div id="header-top">header top</div>
 				<div class="wrap">
 					<form name="form1" class="newBoardForm" method="post">
 						<div class="container">
