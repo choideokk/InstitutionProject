@@ -8,9 +8,7 @@
 		select rsrcNo,
 		rsrcNm, zip, addr, daddr, lot, lat, instUrlAddr, imgFileUrlAddr
 		from facility_info
-		where rsrcNo NOT IN (select rsrcNo
-							from facility_info_detail
-							where rsvtNdlsYn = 'Y')
+		where rsrcNm != '야외운동기구'
 	</select>
 
 	<select id="select_facility" resultType="FcDetailDto"
@@ -27,12 +25,22 @@
 		select rsrcNo,
 		rsrcNm, zip, addr, daddr, lot, lat, instUrlAddr, imgFileUrlAddr
 		from facility_info
+		where
 		<if test="searchKeyword == 'rsrcNm'">
-			where rsrcNm like '%'||#{searchTxt}||'%' 
+			<foreach collection="splittedKeyword" item="item" separator='OR'>
+				rsrcNm like'%'||#{item}||'%'
+			</foreach>
 		</if>
 		<if test="searchKeyword == 'addr'">
-			where addr like '%'||#{searchTxt}||'%' OR daddr like '%'||#{searchTxt}||'%'
+			<foreach collection="splittedKeyword" item="item" separator='OR'>
+				addr like '%'||#{item}||'%'
+			</foreach>
+			OR
+			<foreach collection="splittedKeyword" item="item" separator='OR'>
+				daddr like '%'||#{item}||'%'
+			</foreach>
 		</if>
+		AND rsrcNm != '야외운동기구'
 	</select>
 
 	<insert id="insert_facility_from_api"

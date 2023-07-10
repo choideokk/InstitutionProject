@@ -44,7 +44,7 @@
 						<button type="button" class="txtResetBtn" <c:if test='${searchDto.searchTxt eq "" || searchDto.searchTxt eq null}'>style="display: none;"</c:if>>x</button>
 					</form>
 				</div>
-				<button type="button" class="resetBtn" style="border: 0; padding: 0; background: none; position: relative; right: -68%;">검색 초기화</button>
+				<button type="button" class="resetBtn" style="border: 0; padding: 3px 10px; border-radius: 4px; color: #F8F9FA; background: #FF4B2B; position: relative; right: -65%;">검색 초기화</button>
 				<ul
 					style="height: 80%; overflow-y: scroll; margin: 5px 0 20px; padding: 0 10px;">
 					<c:if test="${fn:length(fcList) == 0}">
@@ -54,7 +54,7 @@
 						<li class="fcItem" style="margin-bottom: 10px; height: 100px;">
 							<button
 								type="button" data-lot="${data.lot}" data-lat="${data.lat}"
-								class="eachPosBtn">
+								class="eachPosBtn" id="id-${data.rsrcNo}">
 								<div class="imgWrapper" style="height: 75px; width: 75px; background: linear-gradient(to right, #FF4B2B, #FF416C); border-radius: 50%;">
 									<img src="${path}/image/facilities/${data.rsrcNo}.jpg" style="border-radius: 50%; margin-top: 2px;"
 										width="70px" height="70px" />
@@ -63,7 +63,7 @@
 									<strong>${data.rsrcNm}</strong>
 									<p>${data.addr} ${data.daddr}</p>
 								</div>
-							</button> 
+							</button>
 						</li>
 					</c:forEach>
 				</ul>

@@ -71,24 +71,28 @@ function displayMarker(parsedData, path) {
 	overlay.setContent(content);
 
 	kakao.maps.event.addListener(marker, 'click', function() {
+		map.setCenter(new kakao.maps.LatLng(parsedData.lot, parsedData.lat));
 		if (clickedOverlay) {
 			clickedOverlay.setMap(null);
 		}
 		overlay.setMap(map);
 		clickedOverlay = overlay;
 	});
+	
+	document.querySelector("#id-" + parsedData.rsrcNo).addEventListener("click", ()=>{
+		if (clickedOverlay) {
+			clickedOverlay.setMap(null);
+		}
+		overlay.setMap(map);
+		clickedOverlay = overlay;
+		
+		map.setCenter(new kakao.maps.LatLng(parsedData.lot, parsedData.lat));
+		map.setLevel(4, {animate: true});
+	})
 
 	// 클러스터러에 마커들을 추가합니다
 	clusterer.addMarker(marker);
 }
-const eachPosBtns = document.querySelectorAll(".eachPosBtn");
-
-eachPosBtns.forEach((btn) => {
-	btn.addEventListener('click', () => {
-		map.setCenter(new kakao.maps.LatLng(btn.dataset.lot, btn.dataset.lat));
-		map.setLevel(4);
-	});
-});
 
 const rightSideAreas = document.querySelector(".rightSideAreas");
 const sideBtn = document.querySelector(".closeSideBtn");

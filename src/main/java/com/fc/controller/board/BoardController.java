@@ -31,8 +31,6 @@ import com.fc.service.board.ReplyService;
 @Controller
 public class BoardController {
 
-	private static final Logger log = LogManager.getLogger(BoardController.class);
-
 	@Autowired
 	BoardService boardService;
 
@@ -156,21 +154,17 @@ public class BoardController {
 
 	@PostMapping("/update")
 	public String update2(BoardDto boardDto, Model model) {
-		System.out.println(boardDto.toString());
 		BoardDto dto = boardService.getdetail(boardDto.getPostno());
 		model.addAttribute("viewPage", dto);
 		//boardService.boardUpdate(boardDto);
 		return "board/updateView";
 	}
-
+	
+	// 게시글 수정
 	@PostMapping("/updateView")
 	public String update(BoardDto boardDto) {
 		int postno = boardDto.getPostno();
-		System.out.println("여기로!!");
-		log.info("게시물 수정 컨트롤러 시작");
 		boardService.boardUpdate(boardDto);
-		System.out.println("보드값 확인 " + boardDto.getTitle());
-		System.out.println("보드값 확인 " + boardDto.getContent());
 		return "redirect:/detail?postno=" + postno;
 	}
 
